@@ -34,4 +34,12 @@ return array(
     'DEFAULT_AJAX_RETURN'   =>  'JSON',  // 默认AJAX 数据返回格式,可选JSON XML ...
     'DEFAULT_JSONP_HANDLER' =>  'jsonpReturn', // 默认JSONP格式返回的处理方法
     'DEFAULT_FILTER'        =>  'htmlspecialchars', // 默认参数过滤方法 用于I函数..
+    /***************************************程序配置****************************************/
+    // cookie验证hash值
+    'AUTH_KEY'=>'6d_cc_on_board',
+    //每隔一小时验证cookie信息是否与数据库一致
+    'AUTH_TIME'=>3600,
+    'AUTH_CHECKTIME'=>7200,// 间隔AUTH_CHECKTIME时间检查一次cookie信息是否和数据库一至
 );
+
+
