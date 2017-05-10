@@ -430,7 +430,17 @@
                 <input type="text" class="search-input" name="searchValue"  required placeholder="一卡通号/姓名/手机号" value=""/>
                 <input type="submit" value="检索"  class="upbutton" style="margin-right:0;width:80px;"  />
             </form>
+
+
+
+
+
+
+
         </div>
+
+
+
             <table class="table table-striped ctuu" >
                 <tr class="hui_top">
                     <!--<th><input type="checkbox" id="all"></th>-->
