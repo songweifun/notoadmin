@@ -1,0 +1,169 @@
+<!-- left side start-->
+<div class="left-side sticky-left-side">
+
+    <!--logo and iconic logo start-->
+    <div class="logo">
+        <a href="index.html"><img src="__PUBLIC__/images/logo.png" alt=""></a>
+    </div>
+
+    <div class="logo-icon text-center">
+        <a href="index.html"><img src="__PUBLIC__/images/logo_icon.png" alt=""></a>
+    </div>
+    <!--logo and iconic logo end-->
+
+    <div class="left-side-inner">
+
+        <!-- visible to small devices only -->
+        <div class="visible-xs hidden-sm hidden-md hidden-lg">
+            <div class="media logged-user">
+                <img alt="" src="__PUBLIC__/images/photos/user-avatar.png" class="media-object">
+                <div class="media-body">
+                    <h4><a href="#">John Doe</a></h4>
+                    <span>"Hello There..."</span>
+                </div>
+            </div>
+
+            <h5 class="left-nav-title">Account Information</h5>
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li><a href="#"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
+                <li><a href="#"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+            </ul>
+        </div>
+
+        <!--sidebar nav start-->
+        <ul class="nav nav-pills nav-stacked custom-nav">
+            <li ><a href="{:U(MODULE_NAME.'/Index/index')}"><i class="fa fa-home"></i> <span>首页</span></a></li>
+            <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>布局</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="blank_page.html"> Blank Page</a></li>
+                    <li><a href="boxed_view.html"> Boxed Page</a></li>
+                    <li><a href="leftmenu_collapsed_view.html"> Sidebar Collapsed</a></li>
+                    <li><a href="horizontal_menu.html"> Horizontal Menu</a></li>
+
+                </ul>
+            </li>
+            <!-- 自己添加的栏目 -->
+
+            <li class="menu-list <if condition='$cate eq WebManage'>nav-active</if>"><a href=""><i class="fa fa-book"></i> <span>网站概况</span></a>
+                <ul class="sub-menu-list">
+                    <li <if condition="$menu eq 'webInfo'">class="active"</if> ><a href="{:U(MODULE_NAME.'/WebManage/webInfo')}"> 网站信息</a></li>
+                    <li <if condition="$menu eq 'webConfig'">class="active"</if> > <a href="{:U(MODULE_NAME.'/WebManage/webConfig')}"> 网站配置</a></li>
+
+                </ul>
+            </li>
+
+
+            <li class="menu-list <if condition='$cate eq UserManage'>nav-active</if>"><a href=""><i class="fa fa-book"></i> <span>用户管理</span></a>
+                <ul class="sub-menu-list">
+                    <li <if condition="$menu eq 'index'">class="active"</if> ><a href="{:U(MODULE_NAME.'/UserManage/index')}"> 用户列表</a></li>
+                    <!--<li <if condition="$menu eq 'rent'">class="active"</if> ><a href="{:U(MODULE_NAME.'/HouseManage/rent')}"> 出租管理</a></li>-->
+                    <!--<li <if condition="$menu eq 'buy'">class="active"</if> ><a href="{:U(MODULE_NAME.'/HouseManage/buy')}"> 求购管理</a></li>-->
+                    <!--<li <if condition="$menu eq 'hold'">class="active"</if> ><a href="{:U(MODULE_NAME.'/HouseManage/hold')}"> 求租管理</a></li>-->
+                    <!--<li <if condition="$menu eq 'consign'">class="active"</if> ><a href="{:U(MODULE_NAME.'/HouseManage/consign')}"> 委托出售</a></li>-->
+                    <!--<li <if condition="$menu eq 'report'">class="active"</if> ><a href="{:U(MODULE_NAME.'/HouseManage/report')}"> 房源虚假举报</a></li>-->
+                </ul>
+            </li>
+
+            <li class="menu-list <if condition='$cate eq BoroughManage'>nav-active</if>"><a href=""><i class="fa fa-home"></i> <span>订单管理</span></a>
+                <ul class="sub-menu-list">
+                    <li <if condition="$menu eq 'index'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/index')}"> 小区列表</a></li>
+                    <!--<li <if condition="$menu eq 'check'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/check')}"> 待审核小区</a></li>-->
+                    <!--<li <if condition="$menu eq 'updateCheck'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/updateCheck')}"> 小区更新管理</a></li>-->
+                    <!--<li <if condition="$menu eq 'evaluate'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/evaluate')}"> 评估价更新</a></li>-->
+                    <!--<li <if condition="$menu eq 'pingguDd'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/pingguDd')}"> 评估系数管理</a></li>-->
+                </ul>
+            </li>
+
+            <!--<li class="menu-list <if condition='$cate eq NewHouseManage'>nav-active</if>"><a href=""><i class="fa fa-home"></i> <span>新盘管理</span></a>-->
+                <!--<ul class="sub-menu-list">-->
+                    <!--<li <if condition="$menu eq 'index'">class="active"</if> ><a href="{:U(MODULE_NAME.'/NewHouseManage/index')}"> 新盘列表</a></li>-->
+                    <!--<li <if condition="$menu eq 'add'">class="active"</if> ><a href="{:U(MODULE_NAME.'/NewHouseManage/add')}"> 添加新盘</a></li>-->
+                    <!--<li <if condition="$menu eq 'updateCheck'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/updateCheck')}"> 小区更新管理</a></li>-->
+                    <!--<li <if condition="$menu eq 'evaluate'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/evaluate')}"> 评估价更新</a></li>-->
+                    <!--<li <if condition="$menu eq 'pingguDd'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/pingguDd')}"> 评估系数管理</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+
+            <!--<li class="menu-list <if condition='$cate eq CompanyManage'>nav-active</if>"><a href=""><i class="fa fa-cogs"></i> <span>公司管理</span></a>-->
+                <!--<ul class="sub-menu-list">-->
+                    <!--<li <if condition="$type eq 0">class="active"</if> ><a href="{:U(MODULE_NAME.'/CompanyManage/index',array('type'=>0))}"> 中介公司</a></li>-->
+                    <!--<li <if condition="$type eq 1">class="active"</if> ><a href="{:U(MODULE_NAME.'/CompanyManage/index',array('type'=>1))}"> 搬家公司</a></li>-->
+                    <!--<li <if condition="$type eq 2">class="active"</if> ><a href="{:U(MODULE_NAME.'/CompanyManage/index',array('type'=>2))}"> 装修公司</a></li>-->
+                    <!--<li <if condition="$type eq 3">class="active"</if> ><a href="{:U(MODULE_NAME.'/CompanyManage/index',array('type'=>3))}"> 其他公司</a></li>-->
+
+
+                <!--</ul>-->
+            <!--</li>-->
+
+            <!--<li class="menu-list <if condition='$cate eq TrendManage'>nav-active</if>"><a href=""><i class="fa fa-bullhorn"></i> <span>房产走势</span></a>-->
+                <!--<ul class="sub-menu-list">-->
+                    <!--<li <if condition="$menu eq 'index'">class="active"</if> ><a href="{:U(MODULE_NAME.'/TrendManage/index')}"> 总览</a></li>-->
+                    <!--<li <if condition="$menu eq 'sell'">class="active"</if> ><a href="{:U(MODULE_NAME.'/TrendManage/sell')}"> 二手房</a></li>-->
+                    <!--<li <if condition="$menu eq 'rent'">class="active"</if> ><a href="{:U(MODULE_NAME.'/TrendManage/rent')}"> 出租</a></li>-->
+                    <!--<li <if condition="$menu eq 'newHouse'">class="active"</if> ><a href="{:U(MODULE_NAME.'/TrendManage/newHouse')}"> 新房</a></li>-->
+                    <!--<li <if condition="$menu eq 'office'">class="active"</if> ><a href="{:U(MODULE_NAME.'/TrendManage/office')}"> 写字楼</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+
+            <!--<li class="menu-list <if condition='$cate eq UserManage'>nav-active</if>"><a href=""><i class="fa fa-envelope"></i> <span>会员管理</span></a>-->
+                <!--<ul class="sub-menu-list">-->
+                    <!--<li <if condition="$menu eq 'index'">class="active"</if> ><a href="{:U(MODULE_NAME.'/UserManage/index')}"> 系统用户管理</a></li>-->
+                    <!--<li <if condition="$menu eq 'group'">class="active"</if> ><a href="{:U(MODULE_NAME.'/UserManage/group')}"> 用户组管理</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+
+            <!--<li class="menu-list <if condition='$cate eq MemberManage'>nav-active</if>" ><a href=""><i class="fa fa-tasks"></i> <span>经纪人管理</span></a>-->
+                <!--<ul class="sub-menu-list">-->
+                    <!--<li <if condition="$menu eq 'index'">class="active"</if> ><a href="{:U(MODULE_NAME.'/MemberManage/index')}"> 经纪人列表</a></li>-->
+                    <!--<li <if condition="$menu eq 'indentity'">class="active"</if> ><a href="{:U(MODULE_NAME.'/MemberManage/indentity')}/status/0"> 身份审核</a></li>-->
+                    <!--<li <if condition="$menu eq 'aptitude'">class="active"</if> ><a href="{:U(MODULE_NAME.'/MemberManage/aptitude')}/status/0"> 资质审核</a></li>-->
+                    <!--<li <if condition="$menu eq 'avatar'">class="active"</if> ><a href="{:U(MODULE_NAME.'/MemberManage/avatar')}/status/0"> 头像审核</a></li>-->
+                    <!--<li <if condition="$menu eq 'evaluate'">class="active"</if> ><a href="{:U(MODULE_NAME.'/MemberManage/evaluate')}/status/0"> 评价审核</a></li>-->
+
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li class="menu-list <if condition='$cate eq About'>nav-active</if>" ><a href=""><i class="fa fa-bar-chart-o"></i> <span>关于我们</span></a>-->
+                <!--<ul class="sub-menu-list">-->
+                    <!--<li <if condition="$menu eq 'about'">class="active"</if> ><a href="{:U(MODULE_NAME.'/About/about')}"> 关于我们</a></li>-->
+                    <!--<li <if condition="$menu eq 'talented'">class="active"</if> ><a href="{:U(MODULE_NAME.'/About/talented')}"> 人才招聘</a></li>-->
+                    <!--<li <if condition="$menu eq 'agreenment'">class="active"</if> ><a href="{:U(MODULE_NAME.'/About/agreenment')}"> 用户协议</a></li>-->
+                    <!--<li <if condition="$menu eq 'copyright'">class="active"</if> ><a href="{:U(MODULE_NAME.'/About/copyright')}"> 版权声明</a></li>-->
+                    <!--<li <if condition="$menu eq 'contact'">class="active"</if> ><a href="{:U(MODULE_NAME.'/About/contact')}"> 联系我们</a></li>-->
+
+                <!--</ul>-->
+            <!--</li>-->
+
+            <!--<li class="menu-list <if condition='$cate eq City'>nav-active</if>" ><a href=""><i class="fa fa-th-list"></i> <span>多城市</span></a>-->
+                <!--<ul class="sub-menu-list">-->
+                    <!--<li <if condition="$menu eq 'index'">class="active"</if> ><a href="{:U(MODULE_NAME.'/City/index')}"> 城市管理</a></li>-->
+                    <!--<li <if condition="$menu eq 'union'">class="active"</if> ><a href="{:U(MODULE_NAME.'/City/union')}"> 加盟城市</a></li>-->
+
+                <!--</ul>-->
+            <!--</li>-->
+
+
+            <!--<li class="menu-list <if condition='$cate eq SystemManage'>nav-active</if>"><a href=""><i class="fa fa-cogs"></i> <span>系统管理</span></a>-->
+                <!--<ul class="sub-menu-list">-->
+                    <!--<li <if condition="$menu eq 'dd'">class="active"</if> ><a href="{:U(MODULE_NAME.'/SystemManage/dd')}"> 全局参数</a></li>-->
+                    <!--<li <if condition="$menu eq 'appointment'">class="active"</if> ><a href="{:U(MODULE_NAME.'/SystemManage/appointment')}"> 房源预约刷新</a></li>-->
+                    <!--<li <if condition="$menu eq 'crontab'">class="active"</if> ><a href="{:U(MODULE_NAME.'/SystemManage/crontab')}"> 计划任务执行</a></li>-->
+                    <!--<li <if condition="$menu eq 'integrationRule'">class="active"</if> ><a href="{:U(MODULE_NAME.'/SystemManage/integrationRule')}"> 积分规则</a></li>-->
+                    <!--<li <if condition="$menu eq 'MessageRule'">class="active"</if> ><a href="{:U(MODULE_NAME.'/SystemManage/MessageRule')}"> 自动站内信规则</a></li>-->
+                    <!--<li <if condition="$menu eq 'integrationRule'">class="active"</if> ><a href="{:U(MODULE_NAME.'/SystemManage/integrationRule')}"> 积分规则</a></li>-->
+                    <!--<li <if condition="$menu eq 'Innernote'">class="active"</if> ><a href="{:U(MODULE_NAME.'/SystemManage/Innernote')}"> 站内信</a></li>-->
+                    <!--<li <if condition="$menu eq 'cityareaList'">class="active"</if> ><a href="{:U(MODULE_NAME.'/SystemManage/cityareaList')}"> 地图区域</a></li>-->
+                    <!--<li <if condition="$menu eq 'integrationRule'">class="active"</if> ><a href="{:U(MODULE_NAME.'/SystemManage/integrationRule')}"> 积分规则</a></li>-->
+                    <!--<li <if condition="$menu eq 'integrationRule'">class="active"</if> ><a href="{:U(MODULE_NAME.'/SystemManage/integrationRule')}"> 积分规则</a></li>-->
+
+
+
+                <!--</ul>-->
+            <!--</li>-->
+
+        </ul>
+        <!--sidebar nav end-->
+
+    </div>
+</div>
+<!-- left side end-->
