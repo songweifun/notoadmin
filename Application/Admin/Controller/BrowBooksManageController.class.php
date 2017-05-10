@@ -7,9 +7,8 @@
  * job:南农后台人员管理
  */
 namespace Admin\Controller;
-use Think\Controller;
 
-class BrowBooksManageController extends Controller
+class BrowBooksManageController extends CommonCtroller
 {
     public function _initialize()
     {
