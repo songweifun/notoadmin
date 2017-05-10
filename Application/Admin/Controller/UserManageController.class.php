@@ -19,7 +19,7 @@ class UserManageController extends Controller
     }
 
 
-    public function index(){//用户列表
+    public function index(){//用户列表2git fansongweilaile
         $this->menu=ACTION_NAME;
 
         $this->display();
