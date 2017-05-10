@@ -915,7 +915,7 @@
 
         <!--footer section start-->
 <footer>
-    2016-2017 &copy;  by <a href="http://www.6doffice.com/" target="_blank">南农o20</a>
+    2017-2020 &copy;  by <a href="http://www.6doffice.com/" target="_blank">宝和数据</a>
 </footer>
 <!--footer section end-->
 
