@@ -8,8 +8,6 @@
 
 namespace Admin\Controller;
 use Think\Controller;
-use Think\Image;
-
 //登录模块
 class LoginController extends Controller
 {
@@ -46,7 +44,7 @@ class LoginController extends Controller
         $passwd=I('post.password');
         $userInfo=$user->where(array('user_name'=>$username))->find();
         if(!$verify->check($code)) $this->error('验证码错误');
-        //print_r($userInfo);
+        //echo "<pre>";print_r($userInfo);
         //die;
         if(!$userInfo){
             $this->error('用户名不存在');
@@ -55,15 +53,13 @@ class LoginController extends Controller
                 $this->error('密码错误');
             }else{
                 if(isset($notForget) && $notForget==1){//记住密码一年
-                    setcookie('AUTH_STRING',authcode($userInfo['user_id'] . "\t" . md5($passwd), 'ENCODE', C('AUTH_KEY')),0,'/',C('COOKIE_DOMAIN'));
+                    setcookie('AUTH_STRING',authcode($userInfo['id'] . "\t" . md5($passwd), 'ENCODE', C('AUTH_KEY')),time()+84600,'/',C('COOKIE_DOMAIN'));
+                }else{
+                    setcookie('AUTH_STRING',authcode($userInfo['id'] . "\t" . md5($passwd), 'ENCODE', C('AUTH_KEY')),0,'/',C('COOKIE_DOMAIN'));
                 }
-                /*$auth_code = authcode($userInfo['user_id']. "\t" . md5($passwd). "\t", 'ENCODE',C('AUTH_KEY'));
-                setcookie('AUTH_STRING',$auth_code,0,'/',C('COOKIE_DOMAIN'));
-                $_COOKIE['AUTH_STRING'] = $auth_code;
-                setcookie('ADMIN_USERID_KSY',$userInfo['user_id'],0,'/',C('COOKIE_DOMAIN'));
-                $_COOKIE['ADMIN_USERID_KSY'] = $userInfo['user_id'];*/
-                setcookie('AUTH_STRING',authcode($userInfo['user_id'] . "\t" . md5($passwd), 'ENCODE', C('AUTH_KEY')),0,'/',C('COOKIE_DOMAIN'));
-                setcookie('ADMIN_USERID_KSY',$userInfo['user_id'],time()+C('AUTH_TIME'),'/',C('COOKIE_DOMAIN'));//注意路径
+
+                //setcookie('AUTH_STRINGS','wwwwwww',0,'/',C('COOKIE_DOMAIN'));
+                setcookie('ADMIN_USERID_KSY',$userInfo['id'],time()+C('AUTH_TIME'),'/',C('COOKIE_DOMAIN'));//注意路径
                 setcookie('ADMIN_LIBID',$userInfo['library_id'],0,'/',C('COOKIE_DOMAIN'));//存入图书馆Id
 
                 $this->redirect('Index/index');

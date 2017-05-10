@@ -33,11 +33,12 @@ class AdminUserModel extends Model
             if ($result[$field]) {
                 return $result[$field];
             } else {
-                $info=$this->where(array('user_id'=>intval($result['user_id'])))->find();
+                $info=$this->where(array('id'=>intval($result['user_id'])))->find();
                 return $info[$field];
             }
         }
         return $result;
+        //echo "<pre>";print_r($result);die;
     }
 
 }

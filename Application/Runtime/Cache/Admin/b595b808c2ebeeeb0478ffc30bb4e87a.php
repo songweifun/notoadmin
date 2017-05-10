@@ -106,9 +106,9 @@
                 </ul>
             </li>
 
-            <li class="menu-list <?php if($cate == BoroughManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-home"></i> <span>订单管理</span></a>
+            <li class="menu-list <?php if($cate == BrowBooksManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-home"></i> <span>订单管理</span></a>
                 <ul class="sub-menu-list">
-                    <li <?php if($menu == 'index'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BoroughManage/index');?>"> 小区列表</a></li>
+                    <li <?php if($menu == 'index'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BrowBooksManage/index');?>"> 订单审核</a></li>
                     <!--<li <?php if($menu == 'check'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BoroughManage/check');?>"> 待审核小区</a></li>-->
                     <!--<li <?php if($menu == 'updateCheck'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BoroughManage/updateCheck');?>"> 小区更新管理</a></li>-->
                     <!--<li <?php if($menu == 'evaluate'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BoroughManage/evaluate');?>"> 评估价更新</a></li>-->
