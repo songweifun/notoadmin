@@ -434,36 +434,34 @@
             <table class="table table-striped" >
                 <tr class="hui_top">
                     <!--<th><input type="checkbox" id="all"></th>-->
-                    <th>一卡通号</th>
+                    <th>订单编号</th>
                     <th>姓名</th>
-                    <th>性别</th>
-                    <th>专业</th>
-                    <th>手机号</th>
-                    <th>个性签名</th>
-                    <th>状态</th>
+                    <th>书的标题</th>
+                    <th>isbn号</th>
+                    <th>卷册号</th>
+                    <th>申请时间</th>
+                    <th>申请状态</th>
                     <th style="text-align:center;">操作</th>
                 </tr>
-                <?php if($user != null): if(is_array($user)): foreach($user as $key=>$user): ?><tr class="result_list" id="<?php echo ($user['id']); ?>">
+                <?php if($orderList != null): if(is_array($orderList)): foreach($orderList as $key=>$orderList): ?><tr class="result_list" id="<?php echo ($orderList['id']); ?>">
                     <!--<td><input type="checkbox" id="selected" value="<?php echo ($user['id']); ?>"></td>-->
                     <td>
-                        <?php echo ($user['card']); ?>
+                        <?php echo ($orderList['id']); ?>
                     </td>
                     <td>
-                        <?php echo ($user['user_name']); ?>
+                        <?php echo ($orderList['user_name']); ?>
                     </td>
                     <td>
-                        <?php if($user['sex'] == 1): ?>男
-                        <?php else: ?>
-                            女<?php endif; ?>
+                        <?php echo ($orderList['title']); ?>
                     </td>
                     <td>
-                        <?php echo ($user['profession']); ?>
+                        <?php echo ($orderList['isbn']); ?>
                     </td>
                     <td>
-                        <?php echo ($user['phone']); ?>
+                        <?php echo ($orderList['volume']); ?>
                     </td>
                     <td>
-                        <?php echo ($user['discription']); ?>
+                        <?php echo (date('Y-m-d H:i:s',$orderList['create_time'])); ?>
                     </td>
                     <td class="isExam_<?php echo ($user['id']); ?>">
                         <?php if($user['state'] == 1): ?><font color="#00bfff">待审核</font>

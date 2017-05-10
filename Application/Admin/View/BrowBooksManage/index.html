@@ -1,0 +1,118 @@
+<include file="Common/meta_section"/>
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <include file="Common/left-side"/>
+    <!-- left side end-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <include file="Common:header_section"/>
+        <!-- header section end-->
+
+        <div class="totol " style=" width: 100%;">
+            <form action="{:U('UserManage/index')}" method="post" style="float:left;padding-left:80%;">
+                <input type="text" class="search-input" name="searchValue"  required placeholder="一卡通号/姓名/手机号" value=""/>
+                <input type="submit" value="检索"  style="margin-right:0;width:80px;"  />
+            </form>
+        </div>
+            <table class="table table-striped" >
+                <tr class="hui_top">
+                    <!--<th><input type="checkbox" id="all"></th>-->
+                    <th>订单编号</th>
+                    <th>姓名</th>
+                    <th>书的标题</th>
+                    <th>isbn号</th>
+                    <th>卷册号</th>
+                    <th>申请时间</th>
+                    <th>申请状态</th>
+                    <th style="text-align:center;">操作</th>
+                </tr>
+                <if condition="$orderList neq null">
+                <foreach name="orderList" item="orderList">
+                <tr class="result_list" id="{$orderList['id']}">
+                    <!--<td><input type="checkbox" id="selected" value="{$user['id']}"></td>-->
+                    <td>
+                        {$orderList['id']}
+                    </td>
+                    <td>
+                        {$orderList['user_name']}
+                    </td>
+                    <td>
+                        {$orderList['title']}
+                    </td>
+                    <td>
+                        {$orderList['isbn']}
+                    </td>
+                    <td>
+                        {$orderList['volume']}
+                    </td>
+                    <td>
+                        {$orderList['create_time']|date='Y-m-d H:i:s',###}
+                    </td>
+                    <td class="isExam_{$user['id']}">
+                        <if condition="$user['state'] eq 1">
+                                <font color="#00bfff">待审核</font>
+                            <elseif condition="$user['state'] eq 2" />
+                                <font color="green">已激活</font>
+                            <elseif condition="$user['state'] eq 3" />
+                                <font color="red">已注销</font>
+                            <else />
+                                已拒绝
+                        </if>
+                    </td>
+                    <td class="choose_td" align="center">
+                        <div style="min-width: 80px;">
+                            <if condition="$user['state'] eq 1">
+                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="2">激活</a>
+                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="4">拒绝</a>
+                            <elseif condition="$user['state'] eq 2" />
+                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="3">注销</a>
+                            <else />
+                                 <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="2">激活</a>
+                            </if>
+                                 <!--<a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="5">删除</a>-->
+                        </div>
+                    </td>
+                </tr>
+                </foreach>
+
+                <else />
+                    <tr style=" height:35px;">
+                        <td colspan="8" align="center" style=" color: #18c3a7">暂无批次数据……</td>
+                    </tr>
+                </if>
+            </table>
+            <!--<button style="color:blue;" id="getValue">操作</button>-->
+        <!--footer section start-->
+        <include file="Common/footer_section"/>
+        <!--footer section end-->
+    </div>
+    <!-- main content end-->
+</section>
+<script>
+    $(".exam").click(function(){
+        var id      =   $(this).attr("data-id");
+        var state   =   $(this).attr("data-state");
+        $.ajax ({
+            'url': '{:U("UserManage/exam")}',
+            'type':'post',
+            'data':{'id':id, 'state':state},
+            'dataType':'json',
+            'success':function (data) {
+                if (data.code == 200) {
+                    alert(data.msg);
+                    location.reload();//刷新当前页面.
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+    });
+</script>
+
+<include file="Common/jsfooter_section"/>
+
