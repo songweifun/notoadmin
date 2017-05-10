@@ -10469,3 +10469,79 @@ INFO: [ app_end ] --START--
 INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.009001s ]
 INFO: [ app_end ] --END-- [ RunTime:0.009001s ]
 
+[ 2017-05-10T17:59:52+08:00 ] ::1 /nannongAdmin/notoadmin/index.php/Admin/UserManage/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `noto_user` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined variable: where D:\WWW\nannongAdmin\notoadmin\Application\Admin\Controller\UserManageController.class.php 第 27 行.
+SQL: SELECT * FROM noto_user as u LEFT JOIN noto_user_detail as d on u.id=d.user_id  ORDER BY create_time desc  [ RunTime:0.0020s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8] Use of undefined constant WebManage - assumed 'WebManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 94 行.
+NOTIC: [8] Use of undefined constant UserManage - assumed 'UserManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 103 行.
+NOTIC: [8] Use of undefined constant BrowBooksManage - assumed 'BrowBooksManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 114 行.
+NOTIC: [8] Use of undefined constant NewHouseManage - assumed 'NewHouseManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 124 行.
+NOTIC: [8] Use of undefined constant CompanyManage - assumed 'CompanyManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 134 行.
+NOTIC: [8] Undefined variable: type D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 136 行.
+NOTIC: [8] Undefined variable: type D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 137 行.
+NOTIC: [8] Undefined variable: type D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 138 行.
+NOTIC: [8] Undefined variable: type D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 139 行.
+NOTIC: [8] Use of undefined constant TrendManage - assumed 'TrendManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 145 行.
+NOTIC: [8] Use of undefined constant UserManage - assumed 'UserManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 155 行.
+NOTIC: [8] Use of undefined constant MemberManage - assumed 'MemberManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 162 行.
+NOTIC: [8] Use of undefined constant About - assumed 'About' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 172 行.
+NOTIC: [8] Use of undefined constant City - assumed 'City' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 183 行.
+NOTIC: [8] Use of undefined constant SystemManage - assumed 'SystemManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 192 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.029001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.029001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2017-05-10T17:59:53+08:00 ] ::1 /nannongAdmin/notoadmin/index.php/Admin/UserManage/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `noto_user` [ RunTime:0.0070s ]
+NOTIC: [8] Undefined variable: where D:\WWW\nannongAdmin\notoadmin\Application\Admin\Controller\UserManageController.class.php 第 27 行.
+SQL: SELECT * FROM noto_user as u LEFT JOIN noto_user_detail as d on u.id=d.user_id  ORDER BY create_time desc  [ RunTime:0.0030s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8] Use of undefined constant WebManage - assumed 'WebManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 94 行.
+NOTIC: [8] Use of undefined constant UserManage - assumed 'UserManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 103 行.
+NOTIC: [8] Use of undefined constant BrowBooksManage - assumed 'BrowBooksManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 114 行.
+NOTIC: [8] Use of undefined constant NewHouseManage - assumed 'NewHouseManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 124 行.
+NOTIC: [8] Use of undefined constant CompanyManage - assumed 'CompanyManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 134 行.
+NOTIC: [8] Undefined variable: type D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 136 行.
+NOTIC: [8] Undefined variable: type D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 137 行.
+NOTIC: [8] Undefined variable: type D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 138 行.
+NOTIC: [8] Undefined variable: type D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 139 行.
+NOTIC: [8] Use of undefined constant TrendManage - assumed 'TrendManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 145 行.
+NOTIC: [8] Use of undefined constant UserManage - assumed 'UserManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 155 行.
+NOTIC: [8] Use of undefined constant MemberManage - assumed 'MemberManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 162 行.
+NOTIC: [8] Use of undefined constant About - assumed 'About' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 172 行.
+NOTIC: [8] Use of undefined constant City - assumed 'City' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 183 行.
+NOTIC: [8] Use of undefined constant SystemManage - assumed 'SystemManage' D:\WWW\nannongAdmin\notoadmin\Application\Runtime\Cache\Admin\3c7f6c15843b813090faa90a45856594.php 第 192 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.039003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.039003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
