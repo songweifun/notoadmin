@@ -19,7 +19,7 @@ class UserManageController extends Controller
     }
 
 
-    public function index(){
+    public function index(){//用户列表
         $this->menu=ACTION_NAME;
 
         $this->display();
