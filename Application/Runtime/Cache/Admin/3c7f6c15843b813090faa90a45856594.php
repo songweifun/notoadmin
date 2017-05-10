@@ -40,10 +40,6 @@
     <link rel="stylesheet" type="text/css" href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/admin.css" />
     <script type="text/javascript" src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/layer/layer.js"></script>
 </head>
-
-
-
-
 <body class="sticky-header">
 
 <section>
@@ -429,15 +425,74 @@
 <!-- header section end-->
         <!-- header section end-->
 
+        <div class="totol " style=" width: 100%;">
+            <form action="<?php echo U('UserManage/index');?>" method="post" style="float:left;padding-left:80%;">
+                <input type="text" class="search-input" name="searchValue"  required placeholder="一卡通号/姓名/手机号" value=""/>
+                <input type="submit" value="检索"  class="upbutton" style="margin-right:0;width:80px;"  />
+            </form>
+        </div>
+            <table class="table table-striped ctuu" >
+                <tr class="hui_top">
+                    <!--<th><input type="checkbox" id="all"></th>-->
+                    <th>一卡通号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>专业</th>
+                    <th>手机号</th>
+                    <th>个性签名</th>
+                    <th>状态</th>
+                    <th style="text-align:center;">操作</th>
+                </tr>
+                <?php if($user != null): if(is_array($user)): foreach($user as $key=>$user): ?><tr class="result_list" id="<?php echo ($user['id']); ?>">
+                    <!--<td><input type="checkbox" id="selected" value="<?php echo ($user['id']); ?>"></td>-->
+                    <td>
+                        <?php echo ($user['card']); ?>
+                    </td>
+                    <td>
+                        <?php echo ($user['user_name']); ?>
+                    </td>
+                    <td>
+                        <?php if($user['sex'] == 1): ?>男
+                        <?php else: ?>
+                            女<?php endif; ?>
+                    </td>
+                    <td>
+                        <?php echo ($user['profession']); ?>
+                    </td>
+                    <td>
+                        <?php echo ($user['phone']); ?>
+                    </td>
+                    <td>
+                        <?php echo ($user['discription']); ?>
+                    </td>
+                    <td class="isExam_<?php echo ($user['id']); ?>">
+                        <?php if($user['state'] == 1): ?><font color="#00bfff">待审核</font>
+                            <?php elseif($user['state'] == 2): ?>
+                                <font color="green">已激活</font>
+                            <?php elseif($user['state'] == 3): ?>
+                                <font color="red">已注销</font>
+                            <?php else: ?>
+                                已拒绝<?php endif; ?>
+                    </td>
+                    <td class="choose_td" align="center">
+                        <div style="min-width: 80px;">
+                            <?php if($user['state'] == 1): ?><a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="2">激活</a>
+                                <a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="4">拒绝</a>
+                            <?php elseif($user['state'] == 2): ?>
+                                <a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="3">注销</a>
+                            <?php else: ?>
+                                 <a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="2">激活</a><?php endif; ?>
+                                 <!--<a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="5">删除</a>-->
+                        </div>
+                    </td>
+                </tr><?php endforeach; endif; ?>
 
-        <!--写代码处 start-->
-
-        <!--写代码处 end-->z
-
-
-
-
-
+                <?php else: ?>
+                    <tr style=" height:35px;">
+                        <td colspan="8" align="center" style=" color: #18c3a7">暂无批次数据……</td>
+                    </tr><?php endif; ?>
+            </table>
+            <!--<button style="color:blue;" id="getValue">操作</button>-->
         <!--footer section start-->
         <!--footer section start-->
 <footer>
@@ -445,11 +500,29 @@
 </footer>
 <!--footer section end-->
         <!--footer section end-->
-
-
     </div>
     <!-- main content end-->
 </section>
+<script>
+    $(".exam").click(function(){
+        var id      =   $(this).attr("data-id");
+        var state   =   $(this).attr("data-state");
+        $.ajax ({
+            'url': '<?php echo U("UserManage/exam");?>',
+            'type':'post',
+            'data':{'id':id, 'state':state},
+            'dataType':'json',
+            'success':function (data) {
+                if (data.code == 200) {
+                    alert(data.msg);
+                    location.reload();//刷新当前页面.
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+    });
+</script>
 
 <!-- Placed js at the end of the document so the pages load faster -->
 <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery-ui-1.9.2.custom.min.js"></script>

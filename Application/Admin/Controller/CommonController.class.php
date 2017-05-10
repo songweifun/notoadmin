@@ -10,7 +10,7 @@ namespace Admin\Controller;
 use Think\Controller;
 
 //公共模块
-class CommonCtroller extends Controller
+class CommonController extends Controller
 {
 
     public function _initialize(){

@@ -8,7 +8,7 @@
  */
 namespace Admin\Controller;
 
-class BrowBooksManageController extends CommonCtroller
+class BrowBooksManageController extends CommonController
 {
     public function _initialize()
     {
