@@ -121,15 +121,16 @@
                 </ul>
             </li>
 
-            <!--<li class="menu-list <?php if($cate == NewHouseManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-home"></i> <span>新盘管理</span></a>-->
-                <!--<ul class="sub-menu-list">-->
-                    <!--<li <?php if($menu == 'index'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/NewHouseManage/index');?>"> 新盘列表</a></li>-->
-                    <!--<li <?php if($menu == 'add'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/NewHouseManage/add');?>"> 添加新盘</a></li>-->
-                    <!--<li <?php if($menu == 'updateCheck'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BoroughManage/updateCheck');?>"> 小区更新管理</a></li>-->
-                    <!--<li <?php if($menu == 'evaluate'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BoroughManage/evaluate');?>"> 评估价更新</a></li>-->
-                    <!--<li <?php if($menu == 'pingguDd'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BoroughManage/pingguDd');?>"> 评估系数管理</a></li>-->
-                <!--</ul>-->
-            <!--</li>-->
+            <li class="menu-list <?php if($cate == Rbac): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-home"></i> <span>权限管理</span></a>
+                <ul class="sub-menu-list">
+                    <li <?php if($menu == 'addRole'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/addRole');?>"> 添加角色</a></li>
+                    <li <?php if($menu == 'manageRole'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/manageRole');?>"> 角色管理</a></li>
+                    <li <?php if($menu == 'addNode'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/addNode');?>"> 添加权限</a></li>
+                    <li <?php if($menu == 'manageNode'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/manageNode');?>"> 权限管理</a></li>
+                    <li <?php if($menu == 'addAdmin'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/addAdmin');?>"> 添加管理员</a></li>
+                    <li <?php if($menu == 'manageAdmin'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/manageAdmin');?>"> 管理员管理</a></li>
+                </ul>
+            </li>
 
             <!--<li class="menu-list <?php if($cate == CompanyManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-cogs"></i> <span>公司管理</span></a>-->
                 <!--<ul class="sub-menu-list">-->

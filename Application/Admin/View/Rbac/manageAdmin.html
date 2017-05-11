@@ -1,0 +1,65 @@
+<include file="Common/meta_section"/>
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <include file="Common/left-side"/>
+    <!-- left side end-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <include file="Common:header_section"/>
+        <!-- header section end-->
+
+
+        <!-- page heading start-->
+        <div class="page-heading">
+
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">权限管理</a>
+                </li>
+                <li class="active"> 添加角色 </li>
+            </ul>
+
+        </div>
+        <!-- page heading end-->
+
+        <div class="container">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">角色名称</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="inputEmail3" placeholder="角色名称">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">角色描述</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="inputPassword3" placeholder="角色描述">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-6">
+                        <button type="submit" class="btn btn-primary">添加</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+
+        <!--footer section start-->
+        <include file="Common/footer_section"/>
+        <!--footer section end-->
+    </div>
+    <!-- main content end-->
+</section>
+
+
+<include file="Common/jsfooter_section"/>
+

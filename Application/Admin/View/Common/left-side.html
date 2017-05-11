@@ -54,7 +54,7 @@
             </li>
 
 
-            <li class="menu-list <if condition='$cate eq UserManage'>nav-active</if>"><a href=""><i class="fa fa-book"></i> <span>用户管理</span></a>
+            <li class="menu-list <if condition='$cate eq UserManage'>nav-active</if>"><a href=""><i class="fa fa-user"></i> <span>用户管理</span></a>
                 <ul class="sub-menu-list">
                     <li <if condition="$menu eq 'index'">class="active"</if> ><a href="{:U(MODULE_NAME.'/UserManage/index')}"> 用户列表</a></li>
                     <!--<li <if condition="$menu eq 'rent'">class="active"</if> ><a href="{:U(MODULE_NAME.'/HouseManage/rent')}"> 出租管理</a></li>-->
@@ -65,7 +65,7 @@
                 </ul>
             </li>
 
-            <li class="menu-list <if condition='$cate eq BrowBooksManage'>nav-active</if>"><a href=""><i class="fa fa-home"></i> <span>订单管理</span></a>
+            <li class="menu-list <if condition='$cate eq BrowBooksManage'>nav-active</if>"><a href=""><i class="fa fa-shopping-cart"></i> <span>订单管理</span></a>
                 <ul class="sub-menu-list">
                     <li <if condition="$menu eq 'index'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BrowBooksManage/index')}"> 订单审核</a></li>
                     <!--<li <if condition="$menu eq 'check'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/check')}"> 待审核小区</a></li>-->
@@ -75,15 +75,27 @@
                 </ul>
             </li>
 
-            <!--<li class="menu-list <if condition='$cate eq NewHouseManage'>nav-active</if>"><a href=""><i class="fa fa-home"></i> <span>新盘管理</span></a>-->
-                <!--<ul class="sub-menu-list">-->
-                    <!--<li <if condition="$menu eq 'index'">class="active"</if> ><a href="{:U(MODULE_NAME.'/NewHouseManage/index')}"> 新盘列表</a></li>-->
-                    <!--<li <if condition="$menu eq 'add'">class="active"</if> ><a href="{:U(MODULE_NAME.'/NewHouseManage/add')}"> 添加新盘</a></li>-->
-                    <!--<li <if condition="$menu eq 'updateCheck'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/updateCheck')}"> 小区更新管理</a></li>-->
-                    <!--<li <if condition="$menu eq 'evaluate'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/evaluate')}"> 评估价更新</a></li>-->
-                    <!--<li <if condition="$menu eq 'pingguDd'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/pingguDd')}"> 评估系数管理</a></li>-->
-                <!--</ul>-->
-            <!--</li>-->
+            <li class="menu-list <if condition='$cate eq Rbac'>nav-active</if>"><a href=""><i class="fa fa-group"></i> <span>权限管理</span></a>
+                <ul class="sub-menu-list">
+                    <li <if condition="$menu eq 'addRole'">class="active"</if> ><a href="{:U(MODULE_NAME.'/Rbac/addRole')}"> 添加角色</a></li>
+                    <li <if condition="$menu eq 'manageRole'">class="active"</if> ><a href="{:U(MODULE_NAME.'/Rbac/manageRole')}"> 角色管理</a></li>
+                    <li <if condition="$menu eq 'addNode'">class="active"</if> ><a href="{:U(MODULE_NAME.'/Rbac/addNode')}"> 添加权限</a></li>
+                    <li <if condition="$menu eq 'manageNode'">class="active"</if> ><a href="{:U(MODULE_NAME.'/Rbac/manageNode')}"> 权限管理</a></li>
+                    <li <if condition="$menu eq 'addAdmin'">class="active"</if> ><a href="{:U(MODULE_NAME.'/Rbac/addAdmin')}"> 添加馆员</a></li>
+                    <li <if condition="$menu eq 'manageAdmin'">class="active"</if> ><a href="{:U(MODULE_NAME.'/Rbac/manageAdmin')}"> 管理馆员</a></li>
+                </ul>
+            </li>
+
+            <li class="menu-list <if condition='$cate eq SystemManage'>nav-active</if>"><a href=""><i class="fa fa-wrench"></i> <span>系统管理</span></a>
+                <ul class="sub-menu-list">
+                    <li <if condition="$menu eq 'layout'">class="active"</if> ><a href="{:U(MODULE_NAME.'/SystemManage/layout')}"> 安全退出</a></li>
+                    <!--<li <if condition="$menu eq 'manageRole'">class="active"</if> ><a href="{:U(MODULE_NAME.'/Rbac/manageRole')}"> 角色管理</a></li>-->
+                    <!--<li <if condition="$menu eq 'addNode'">class="active"</if> ><a href="{:U(MODULE_NAME.'/Rbac/addNode')}"> 添加权限</a></li>-->
+                    <!--<li <if condition="$menu eq 'manageNode'">class="active"</if> ><a href="{:U(MODULE_NAME.'/Rbac/manageNode')}"> 权限管理</a></li>-->
+                    <!--<li <if condition="$menu eq 'addAdmin'">class="active"</if> ><a href="{:U(MODULE_NAME.'/Rbac/addAdmin')}"> 添加馆员</a></li>-->
+                    <!--<li <if condition="$menu eq 'manageAdmin'">class="active"</if> ><a href="{:U(MODULE_NAME.'/Rbac/manageAdmin')}"> 管理馆员</a></li>-->
+                </ul>
+            </li>
 
             <!--<li class="menu-list <if condition='$cate eq CompanyManage'>nav-active</if>"><a href=""><i class="fa fa-cogs"></i> <span>公司管理</span></a>-->
                 <!--<ul class="sub-menu-list">-->
