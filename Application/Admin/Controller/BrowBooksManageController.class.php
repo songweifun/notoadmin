@@ -118,13 +118,6 @@ class BrowBooksManageController extends CommonController
                 $data1['add_time']    = time();
                 M('Innernote')->data($data1)->add();
                 M('Order')->data($data)->where($where)->save();
-//                if($res && $res1){
-//                    $return['code']    =    200;
-//                    $return['msg']     =    '操作成功！';
-//                }else{
-//                    $return['code']    =    400;
-//                    $return['msg']     =    '操作失败！';
-//                }
             }
 
         }
@@ -174,10 +167,12 @@ class BrowBooksManageController extends CommonController
                     ->order('r.create_time desc')
                     ->select();
         foreach($returnList as $key=>$value){
-            $returnList[$key]['overtime']  =  round(($value['create_time']-$value['starttime'])/86400)+1;
+            $returnList[$key]['overtime']  =  round(($value['create_time']-$value['starttime'])/86400);
             if($value['borrowtime'] >= $returnList[$key]['overtime']){
+                //未过期
                 $returnList[$key]['isOver'] = 0;
             }else{
+                $returnList[$key]['overMoney'] = ($returnList[$key]['overtime']-$value['borrowtime'])*2;
                 $returnList[$key]['isOver'] = 1;
             }
         }
@@ -186,6 +181,8 @@ class BrowBooksManageController extends CommonController
 
         $this->display();
     }
+
+
 
 
 }

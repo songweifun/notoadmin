@@ -15,7 +15,7 @@
 
         <div class="totol " style=" width: 100%;">
             <form action="{:U('UserManage/index')}" method="post" style="float:left;padding-left:80%;">
-                <input type="text" class="search-input" name="searchValue"  required placeholder="订单号/一卡通号/姓名" value=""/>
+                <input type="text" class="search-input" name="searchValue"  required placeholder="订单号/一卡通号/用户名" value=""/>
                 <input type="submit" value="检索"  style="margin-right:0;width:80px;"  />
             </form>
         </div>
@@ -25,7 +25,7 @@
                     <th>订单编号</th>
                     <th>快递单号</th>
                     <th>一卡通号</th>
-                    <th>订单用户</th>
+                    <th>用户名</th>
                     <th>书的id  </th>
                     <th>是否过期</th>
                     <th>还书说明</th>
@@ -56,7 +56,7 @@
                         <if condition="$returnList['isOver'] eq 0">
                             否
                         <else />
-                            过期<font color="red">{$returnList['overtime']}</font>天
+                            过期<font color="red">{$returnList['overtime']}</font>天|{$returnList['overMoney']}元
                         </if>
                     </td>
                     <td>
@@ -77,10 +77,10 @@
 
                     <td class="choose_td" align="center">
                         <div style="min-width: 80px;">
-                            <if condition="$returnList['status'] lt 3">
-                                <a href="javascript:;" class="operation" data-id="{$returnList['id']}" data-state="3">审核通过</a>
-                            <elseif condition="$returnList['status'] eq 3" />
-                                <a href="javascript:;" class="operation" data-id="{$returnList['id']}" data-state="4">发件</a>
+                            <if condition="$returnList['status'] eq 1">
+                                <a href="javascript:;" class="accept btn" data-id="{$returnList['id']}" data-state="2">接收</a>
+                            <elseif condition="$returnList['status'] eq 2" />
+                                <a href="javascript:;" class="accept" data-id="{$returnList['id']}" data-state="4">确定归还</a>
                             </if>
                         </div>
                     </td>
@@ -101,11 +101,11 @@
     <!-- main content end-->
 </section>
 <script>
-    $(".operation").click(function(){
+    $(".accept").click(function(){
         var id      =   $(this).attr("data-id");
         var status   =   $(this).attr("data-state");
         $.ajax ({
-            'url': '{:U("BrowBooksManage/operation")}',
+            'url': '{:U("BrowBooksManage/accept")}',
             'type':'post',
             'data':{'id':id, 'status':status},
             'dataType':'json',
