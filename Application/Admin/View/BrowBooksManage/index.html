@@ -15,66 +15,72 @@
 
         <div class="totol " style=" width: 100%;">
             <form action="{:U('UserManage/index')}" method="post" style="float:left;padding-left:80%;">
-                <input type="text" class="search-input" name="searchValue"  required placeholder="一卡通号/姓名/手机号" value=""/>
+                <input type="text" class="search-input" name="searchValue"  required placeholder="订单号/一卡通号/姓名" value=""/>
                 <input type="submit" value="检索"  style="margin-right:0;width:80px;"  />
             </form>
         </div>
             <table class="table table-striped" >
                 <tr class="hui_top">
-                    <!--<th><input type="checkbox" id="all"></th>-->
+                    <th><input type="checkbox" id="all"></th>
                     <th>订单编号</th>
-                    <th>姓名</th>
-                    <th>书的标题</th>
-                    <th>isbn号</th>
-                    <th>卷册号</th>
+                    <th>一卡通号</th>
+                    <th>订单用户</th>
+                    <th>收件人</th>
+                    <th>收件人电话</th>
+                    <th>收件地址</th>
                     <th>申请时间</th>
-                    <th>申请状态</th>
+                    <th>支付状态</th>
+                    <th>订单状态</th>
                     <th style="text-align:center;">操作</th>
                 </tr>
                 <if condition="$orderList neq null">
                 <foreach name="orderList" item="orderList">
-                <tr class="result_list" id="{$orderList['id']}">
-                    <!--<td><input type="checkbox" id="selected" value="{$user['id']}"></td>-->
+                <tr class="result_list">
+                    <td><input type="checkbox" value="{$orderList['id']}"></td>
                     <td>
                         {$orderList['id']}
+                    </td>
+                    <td>
+                        {$orderList['card']}
                     </td>
                     <td>
                         {$orderList['user_name']}
                     </td>
                     <td>
-                        {$orderList['title']}
+                        {$orderList['consignee']}
                     </td>
                     <td>
-                        {$orderList['isbn']}
+                        {$orderList['tel']}
                     </td>
                     <td>
-                        {$orderList['volume']}
+                        {$orderList['province']}{$orderList['city']}{$orderList['county']}{$orderList['street']}{$orderList['detail_address']}
                     </td>
                     <td>
                         {$orderList['create_time']|date='Y-m-d H:i:s',###}
                     </td>
-                    <td class="isExam_{$user['id']}">
-                        <if condition="$user['state'] eq 1">
-                                <font color="#00bfff">待审核</font>
-                            <elseif condition="$user['state'] eq 2" />
-                                <font color="green">已激活</font>
-                            <elseif condition="$user['state'] eq 3" />
-                                <font color="red">已注销</font>
+                    <td>
+                        <if condition="$orderList['status'] eq 0">
+                                <font color="red">未付款</font>
                             <else />
-                                已拒绝
+                                <font color="blue">已付</font>
+                        </if>
+                    </td>
+                    <td>
+                        <if condition="$orderList['status'] eq 3">
+                            <font color="red">待发件</font>
+                        <elseif condition="$orderList['status'] eq 4" />
+                            <font color="blue">已发件</font>
+                        <else />
+                            <font color="black">待审核..</font>
                         </if>
                     </td>
                     <td class="choose_td" align="center">
                         <div style="min-width: 80px;">
-                            <if condition="$user['state'] eq 1">
-                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="2">激活</a>
-                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="4">拒绝</a>
-                            <elseif condition="$user['state'] eq 2" />
-                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="3">注销</a>
-                            <else />
-                                 <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="2">激活</a>
+                            <if condition="$orderList['status'] lt 3">
+                                <a href="javascript:;" class="operation" data-id="{$orderList['id']}" data-state="3">审核通过</a>
+                            <elseif condition="$orderList['status'] eq 3" />
+                                <a href="javascript:;" class="operation" data-id="{$orderList['id']}" data-state="4">发件</a>
                             </if>
-                                 <!--<a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="5">删除</a>-->
                         </div>
                     </td>
                 </tr>
@@ -86,7 +92,7 @@
                     </tr>
                 </if>
             </table>
-            <!--<button style="color:blue;" id="getValue">操作</button>-->
+            <button style="" id="getValue">审核完成</button>
         <!--footer section start-->
         <include file="Common/footer_section"/>
         <!--footer section end-->
@@ -94,15 +100,44 @@
     <!-- main content end-->
 </section>
 <script>
-    $(".exam").click(function(){
+    $(".operation").click(function(){
         var id      =   $(this).attr("data-id");
-        var state   =   $(this).attr("data-state");
+        var status   =   $(this).attr("data-state");
         $.ajax ({
-            'url': '{:U("UserManage/exam")}',
+            'url': '{:U("BrowBooksManage/operation")}',
             'type':'post',
-            'data':{'id':id, 'state':state},
+            'data':{'id':id, 'status':status},
             'dataType':'json',
             'success':function (data) {
+                if (data.code == 200) {
+                    alert(data.msg);
+                    location.reload();//刷新当前页面.
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+    });
+    $('#all').click(function(){
+        if(this.checked){
+            $(".result_list :checkbox").prop("checked", true);
+        }else{
+            $(".result_list :checkbox").prop("checked", false);
+        }
+    });
+    $('#getValue').click(function(){
+        var valArr = new Array;
+        $(".result_list input[type='checkbox']:checked").each(function(i){
+            valArr[i] = $(this).val();
+        });
+        var vals = valArr.join(',');
+        $.ajax({
+            'url' :'{:U("BrowBooksManage/pass")}',
+            'type':'post',
+            'data': {'arrId':vals},
+            'dataType':'json',
+            'success':function(data){
+//                alert(data);
                 if (data.code == 200) {
                     alert(data.msg);
                     location.reload();//刷新当前页面.

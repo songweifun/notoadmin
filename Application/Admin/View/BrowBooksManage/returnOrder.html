@@ -15,80 +15,73 @@
 
         <div class="totol " style=" width: 100%;">
             <form action="{:U('UserManage/index')}" method="post" style="float:left;padding-left:80%;">
-                <input type="text" class="search-input" name="searchValue"  required placeholder="一卡通号/姓名/手机号" value=""/>
-                <input type="submit" value="检索"  class="upbutton" style="margin-right:0;width:80px;"  />
+                <input type="text" class="search-input" name="searchValue"  required placeholder="订单号/一卡通号/姓名" value=""/>
+                <input type="submit" value="检索"  style="margin-right:0;width:80px;"  />
             </form>
-
-
-
-
-
-
-
         </div>
-
-
-
-            <table class="table table-striped ctuu" >
+            <table class="table table-striped" >
                 <tr class="hui_top">
                     <th><input type="checkbox" id="all"></th>
+                    <th>订单编号</th>
+                    <th>快递单号</th>
                     <th>一卡通号</th>
-                    <th>姓名</th>
-                    <th>性别</th>
-                    <th>专业</th>
-                    <th>手机号</th>
-                    <th>个性签名</th>
-                    <th>状态</th>
+                    <th>订单用户</th>
+                    <th>书的id  </th>
+                    <th>是否过期</th>
+                    <th>还书说明</th>
+                    <th>生成时间</th>
+                    <th>订单状态</th>
                     <th style="text-align:center;">操作</th>
                 </tr>
-                <if condition="$user neq null">
-                <foreach name="user" item="user">
+                <if condition="$returnList neq null">
+                <foreach name="returnList" item="returnList">
                 <tr class="result_list">
-                    <td><input type="checkbox" value="{$user['id']}"></td>
+                    <td><input type="checkbox" value="{$returnList['id']}"></td>
                     <td>
-                        {$user['card']}
+                        {$returnList['id']}
                     </td>
                     <td>
-                        {$user['user_name']}
+                        {$returnList['express_num']}
                     </td>
                     <td>
-                        <if condition="$user['sex'] eq 1">
-                            男
+                        {$returnList['card']}
+                    </td>
+                    <td>
+                        {$returnList['user_name']}
+                    </td>
+                    <td>
+                        {$returnList['book_id']}
+                    </td>
+                    <td>
+                        <if condition="$returnList['isOver'] eq 0">
+                            否
                         <else />
-                            女
+                            过期<font color="red">{$returnList['overtime']}</font>天
                         </if>
                     </td>
                     <td>
-                        {$user['profession']}
+                        {$returnList['return_desc']}
                     </td>
                     <td>
-                        {$user['phone']}
+                        {$returnList['create_time']|date='Y-m-d H:i:s',###}
                     </td>
                     <td>
-                        {$user['discription']}
-                    </td>
-                    <td class="isExam_{$user['id']}">
-                        <if condition="$user['state'] eq 1">
-                                <font color="#00bfff">待审核</font>
-                            <elseif condition="$user['state'] eq 2" />
-                                <font color="blue">已激活</font>
-                            <elseif condition="$user['state'] eq 3" />
-                                <font color="red">已注销</font>
-                            <else />
-                                已拒绝
+                        <if condition="$returnList['status'] eq 1">
+                            <font color="red">已还出</font>
+                        <elseif condition="$returnList['status'] eq 2" />
+                            <font color="blue">已接收</font>
+                        <else />
+                            <font color="blue">已还完</font>
                         </if>
                     </td>
+
                     <td class="choose_td" align="center">
                         <div style="min-width: 80px;">
-                            <if condition="$user['state'] eq 1">
-                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="2">激活</a>
-                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="4">拒绝</a>
-                            <elseif condition="$user['state'] eq 2" />
-                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="3">注销</a>
-                            <else />
-                                 <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="2">激活</a>
+                            <if condition="$returnList['status'] lt 3">
+                                <a href="javascript:;" class="operation" data-id="{$returnList['id']}" data-state="3">审核通过</a>
+                            <elseif condition="$returnList['status'] eq 3" />
+                                <a href="javascript:;" class="operation" data-id="{$returnList['id']}" data-state="4">发件</a>
                             </if>
-                                 <!--<a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="5">删除</a>-->
                         </div>
                     </td>
                 </tr>
@@ -100,7 +93,7 @@
                     </tr>
                 </if>
             </table>
-            <button style="" id="getValue">激活</button>
+            <button style="" id="getValue">审核完成</button>
         <!--footer section start-->
         <include file="Common/footer_section"/>
         <!--footer section end-->
@@ -108,13 +101,13 @@
     <!-- main content end-->
 </section>
 <script>
-    $(".exam").click(function(){
+    $(".operation").click(function(){
         var id      =   $(this).attr("data-id");
-        var state   =   $(this).attr("data-state");
+        var status   =   $(this).attr("data-state");
         $.ajax ({
-            'url': '{:U("UserManage/exam")}',
+            'url': '{:U("BrowBooksManage/operation")}',
             'type':'post',
-            'data':{'id':id, 'state':state},
+            'data':{'id':id, 'status':status},
             'dataType':'json',
             'success':function (data) {
                 if (data.code == 200) {
@@ -140,7 +133,7 @@
         });
         var vals = valArr.join(',');
         $.ajax({
-            'url' :'{:U("UserManage/pass")}',
+            'url' :'{:U("BrowBooksManage/pass")}',
             'type':'post',
             'data': {'arrId':vals},
             'dataType':'json',

@@ -53,4 +53,34 @@ class UserManageController extends CommonController
 
     }
 
+    //一键审核
+    public function  pass(){
+        $this->menu=ACTION_NAME;
+        $arrId   =   I('post.arrId');
+        if($arrId == null || empty($arrId)){
+            $return['code']    =    400;
+            $return['msg']     =    '请先选择人员！';
+            $this->ajaxReturn($return);
+        }
+        $arrId   =   explode(',',$arrId);
+        foreach($arrId as $key=>$value){
+            $data['state'] = 2;
+            $where  =  "id='".$value."'";
+            M('User')->data($data)->where($where)->save();
+        }
+        foreach($arrId as $k=>$v){
+            $user['state'] = M('User')->where(array('id'=>$v))->getField('state');
+            if($user['state'] != 2){
+                $return['code']    =    400;
+                $return['msg']     =    '操作失败！';
+            }else{
+                $return['code']    =    200;
+                $return['msg']     =    '操作成功！';
+            }
+
+        }
+
+        $this->ajaxReturn($return);exit;
+    }
+
 }
