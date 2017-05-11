@@ -68,7 +68,7 @@
             <li class="menu-list <if condition='$cate eq BrowBooksManage'>nav-active</if>"><a href=""><i class="fa fa-shopping-cart"></i> <span>订单管理</span></a>
                 <ul class="sub-menu-list">
                     <li <if condition="$menu eq 'index'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BrowBooksManage/index')}"> 订单审核</a></li>
-                    <!--<li <if condition="$menu eq 'check'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/check')}"> 待审核小区</a></li>-->
+                    <li <if condition="$menu eq 'returnOrder'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BrowBooksManage/returnOrder')}"> 还书订单</a></li>
                     <!--<li <if condition="$menu eq 'updateCheck'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/updateCheck')}"> 小区更新管理</a></li>-->
                     <!--<li <if condition="$menu eq 'evaluate'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/evaluate')}"> 评估价更新</a></li>-->
                     <!--<li <if condition="$menu eq 'pingguDd'">class="active"</if> ><a href="{:U(MODULE_NAME.'/BoroughManage/pingguDd')}"> 评估系数管理</a></li>-->
