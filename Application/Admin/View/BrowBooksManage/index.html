@@ -80,6 +80,8 @@
                                 <a href="javascript:;" class="operation" data-id="{$orderList['id']}" data-state="3">审核通过</a>
                             <elseif condition="$orderList['status'] eq 3" />
                                 <a href="javascript:;" class="operation" data-id="{$orderList['id']}" data-state="4">发件</a>
+                            <elseif condition="$orderList['status'] eq 4" />
+                                已发件
                             </if>
                         </div>
                     </td>
@@ -92,7 +94,7 @@
                     </tr>
                 </if>
             </table>
-            <button style="" id="getValue">审核完成</button>
+            <button style="" id="getValue">审核</button>
             <!--分页-->
             <if condition="$page_count gt 1">
                 <div class="page">
