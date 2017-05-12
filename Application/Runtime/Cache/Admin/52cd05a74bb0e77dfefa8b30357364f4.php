@@ -512,6 +512,17 @@
                     </tr><?php endif; ?>
             </table>
             <button style="" id="getValue">审核完成</button>
+            <!--分页-->
+            <?php if($page_count > 1): ?><div class="page">
+                    <a href="javascript:void(0);" class="jump">跳转</a>
+                    <input type="text" class="rt number">
+                    <?php if($_GET['page'] < page_count): ?><a href="javascript:void(0);"><a href="javascript:void(0);" class="rt next">下一页</a><?php endif; ?>
+                    <span class="rt">
+                        <span class="current"><?php echo ($page); ?></span>/<span class="all"><?php echo ($page_count); ?></span>
+                    </span>
+                    <?php if($_GET['page'] > 1): ?><a class="rt prev">上一页</a><?php endif; ?>
+                </div><?php endif; ?>
+
         <!--footer section start-->
         <!--footer section start-->
 <footer>
@@ -523,6 +534,32 @@
     <!-- main content end-->
 </section>
 <script>
+    //下一页
+    $("a.next").click(function(){
+        var page = parseInt($(".current").text())+1;
+        location = "<?php echo U('BrowBooksManage/index');?>?page="+page;
+    });
+    //上一页
+    $("a.prev").click(function(){
+        var page = parseInt($(".current").text())-1;
+        location = "<?php echo U('BrowBooksManage/index');?>?page="+page;
+    });
+    //跳转页面
+    $(".jump").click(function(){
+        var jump_page = parseInt($(".number").val());
+        var page_count = parseInt($(".all").text());
+        var pre = /^[0-9]{1,}$/;
+        if(pre.test(jump_page) === false){
+            $(".number").val('');
+            return false;
+        }else if(jump_page < 1){
+            jump_page = 1;
+        }else if(jump_page > page_count){
+            jump_page = page_count;
+        }
+        location = "<?php echo U('BrowBooksManage/index');?>?page="+jump_page;
+    });
+
     $(".operation").click(function(){
         var id      =   $(this).attr("data-id");
         var status   =   $(this).attr("data-state");

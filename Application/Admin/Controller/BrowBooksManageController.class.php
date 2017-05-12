@@ -25,12 +25,26 @@ class BrowBooksManageController extends CommonController
             $where    .= "and u.card='".$searchValue."' or u.user_name='".$searchValue."' or o.id='".$searchValue."'";
         }
 
+        //显示的第几页
+        $page        =     intval($_GET['page'])?$_GET['page']:1;
+        $min         =     ($page-1)*1;
+        //共有几页
+        $count       =     M('Order as o')
+                    ->join('noto_user as u on u.id=o.user_id')
+//                    ->where($where)
+                    ->count();
+//        dump($count);die;
+        $page_count  =     ceil($count/1);
+        $this->assign('page_count',$page_count);
+        $this->assign('page',$page);
+
         $orderList   =   M('Order as o')
                     ->join('noto_user as u on u.id=o.user_id')
                     ->join('noto_user_address as a on a.address_id=o.address_id')
                     ->field('o.id,u.card,u.user_name,a.consignee,a.tel,a.province,a.city,a.county,a.street,a.detail_address,o.create_time,o.status')
 //                    ->where("o.library_id='".$library_id."'")
                     ->order('o.create_time desc')
+                    ->limit($min,1)
                     ->select();
         $this->assign('orderList',$orderList);
 
@@ -154,8 +168,21 @@ class BrowBooksManageController extends CommonController
         $searchValue  =   trim(I('post.searchValue'));
         $where        =    "r.library_id='".$library_id."'";
         if($searchValue){
-            $where    .= "and u.card='".$searchValue."' or u.user_name='".$searchValue."' or o.id='".$searchValue."'";
+            $where    .= "and u.card='".$searchValue."' or u.user_name='".$searchValue."' or r.id='".$searchValue."'";
         }
+
+        //显示的第几页
+        $page        =     intval($_GET['page'])?$_GET['page']:1;
+        $min         =     ($page-1)*1;
+        //共有几页
+        $count       =     M('ReturnOrder as r')
+                    ->join('noto_order_book_list as l on l.return_order_id=r.id')
+                    ->join('noto_user as u on u.id=r.user_id')
+//                    ->where($where)
+                    ->count();
+        $page_count  =     ceil($count/1);
+        $this->assign('page_count',$page_count);
+        $this->assign('page',$page);
 
         $returnList   =   M('ReturnOrder as r')
                     ->join('noto_order_book_list as l on l.return_order_id=r.id')
@@ -165,14 +192,16 @@ class BrowBooksManageController extends CommonController
                     ->field('r.id,r.library_id,r.status,r.express_num,r.create_time,u.card,u.user_name,l.book_id,l.return_desc,a.borrowtime,o.create_time as starttime')
 //                    ->where("r.library_id='".$library_id."'")
                     ->order('r.create_time desc')
+                    ->limit($min,1)
                     ->select();
+
         foreach($returnList as $key=>$value){
             $returnList[$key]['overtime']  =  round(($value['create_time']-$value['starttime'])/86400);
             if($value['borrowtime'] >= $returnList[$key]['overtime']){
                 //未过期
                 $returnList[$key]['isOver'] = 0;
             }else{
-                $returnList[$key]['overMoney'] = ($returnList[$key]['overtime']-$value['borrowtime'])*2;
+                $returnList[$key]['overMoney'] = ($returnList[$key]['overtime']-$value['borrowtime'])*4;
                 $returnList[$key]['isOver'] = 1;
             }
         }
