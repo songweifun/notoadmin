@@ -8,37 +8,37 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
     <title>用户列表</title>
-    <script src="/notoadmin/Application/Admin/View/Public/js/jquery-1.10.2.min.js"></script>
+    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery-1.10.2.min.js"></script>
 
     <!-- bootstrap -->
 
-    <link href="/notoadmin/Application/Admin/View/Public/css/bootstrap.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/bootstrap.css" rel="stylesheet">
     <!--icheck-->
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/square.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/red.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/blue.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/square.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/red.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/blue.css" rel="stylesheet">
 
     <!--dashboard calendar-->
-    <link href="/notoadmin/Application/Admin/View/Public/css/clndr.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/clndr.css" rel="stylesheet">
 
     <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.css">
+    <link rel="stylesheet" href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.css">
 
     <!--common-->
-    <link href="/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/css/style-responsive.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/style-responsive.css" rel="stylesheet">
 
 
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="/notoadmin/Application/Admin/View/Public/js/html5shiv.js"></script>
-    <script src="/notoadmin/Application/Admin/View/Public/js/respond.min.js"></script>
+    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/html5shiv.js"></script>
+    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/layer/layer.js"></script>
-    <script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/angular.min.js"></script>
+    <script type="text/javascript" src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/layer/layer.js"></script>
+    <script type="text/javascript" src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/angular.min.js"></script>
 
 
 </head>
@@ -51,11 +51,11 @@
 
     <!--logo and iconic logo start-->
     <div class="logo">
-        <a href="index.html"><img src="/notoadmin/Application/Admin/View/Public/images/logo.png" alt=""></a>
+        <a href="index.html"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/logo.png" alt=""></a>
     </div>
 
     <div class="logo-icon text-center">
-        <a href="index.html"><img src="/notoadmin/Application/Admin/View/Public/images/logo_icon.png" alt=""></a>
+        <a href="index.html"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/logo_icon.png" alt=""></a>
     </div>
     <!--logo and iconic logo end-->
 
@@ -64,7 +64,7 @@
         <!-- visible to small devices only -->
         <div class="visible-xs hidden-sm hidden-md hidden-lg">
             <div class="media logged-user">
-                <img alt="" src="/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" class="media-object">
+                <img alt="" src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" class="media-object">
                 <div class="media-body">
                     <h4><a href="#">John Doe</a></h4>
                     <span>"Hello There..."</span>
@@ -331,7 +331,7 @@
                     <ul class="dropdown-list normal-list">
                         <li class="new">
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user1.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user1.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">John Doe <span class="badge badge-success">new</span></span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -340,7 +340,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user2.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user2.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Jonathan Smith</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -349,7 +349,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user3.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user3.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Jane Doe</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -358,7 +358,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user4.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user4.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Mark Henry</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -367,7 +367,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user5.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user5.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Jim Doe</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -420,7 +420,7 @@
             </li>
             <li>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <img src="/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" alt="" />
+                    <img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" alt="" />
                     范松伟
                     <span class="caret"></span>
                 </a>
@@ -501,7 +501,9 @@
                         <div style="min-width: 80px;">
                             <?php if($orderList['status'] < 3): ?><a href="javascript:;" class="operation" data-id="<?php echo ($orderList['id']); ?>" data-state="3">审核通过</a>
                             <?php elseif($orderList['status'] == 3): ?>
-                                <a href="javascript:;" class="operation" data-id="<?php echo ($orderList['id']); ?>" data-state="4">发件</a><?php endif; ?>
+                                <a href="javascript:;" class="operation" data-id="<?php echo ($orderList['id']); ?>" data-state="4">发件</a>
+                            <?php elseif($orderList['status'] == 4): ?>
+                                已发件<?php endif; ?>
                         </div>
                     </td>
                 </tr><?php endforeach; endif; ?>
@@ -511,7 +513,18 @@
                         <td colspan="8" align="center" style=" color: #18c3a7">暂无批次数据……</td>
                     </tr><?php endif; ?>
             </table>
-            <button style="" id="getValue">审核完成</button>
+            <button style="" id="getValue">审核</button>
+            <!--分页-->
+            <?php if($page_count > 1): ?><div class="page">
+                    <a href="javascript:void(0);" class="jump">跳转</a>
+                    <input type="text" class="rt number">
+                    <?php if($_GET['page'] < page_count): ?><a href="javascript:void(0);"><a href="javascript:void(0);" class="rt next">下一页</a><?php endif; ?>
+                    <span class="rt">
+                        <span class="current"><?php echo ($page); ?></span>/<span class="all"><?php echo ($page_count); ?></span>
+                    </span>
+                    <?php if($_GET['page'] > 1): ?><a class="rt prev">上一页</a><?php endif; ?>
+                </div><?php endif; ?>
+
         <!--footer section start-->
         <!--footer section start-->
 <footer>
@@ -523,6 +536,32 @@
     <!-- main content end-->
 </section>
 <script>
+    //下一页
+    $("a.next").click(function(){
+        var page = parseInt($(".current").text())+1;
+        location = "<?php echo U('BrowBooksManage/index');?>?page="+page;
+    });
+    //上一页
+    $("a.prev").click(function(){
+        var page = parseInt($(".current").text())-1;
+        location = "<?php echo U('BrowBooksManage/index');?>?page="+page;
+    });
+    //跳转页面
+    $(".jump").click(function(){
+        var jump_page = parseInt($(".number").val());
+        var page_count = parseInt($(".all").text());
+        var pre = /^[0-9]{1,}$/;
+        if(pre.test(jump_page) === false){
+            $(".number").val('');
+            return false;
+        }else if(jump_page < 1){
+            jump_page = 1;
+        }else if(jump_page > page_count){
+            jump_page = page_count;
+        }
+        location = "<?php echo U('BrowBooksManage/index');?>?page="+jump_page;
+    });
+
     $(".operation").click(function(){
         var id      =   $(this).attr("data-id");
         var status   =   $(this).attr("data-state");
@@ -573,45 +612,45 @@
 </script>
 
 <!-- Placed js at the end of the document so the pages load faster -->
-<script src="/notoadmin/Application/Admin/View/Public/js/jquery-ui-1.9.2.custom.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/modernizr.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/jquery.nicescroll.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/modernizr.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery.nicescroll.js"></script>
 
 <!--easy pie chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/easypiechart/jquery.easypiechart.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/easypiechart/easypiechart-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/easypiechart/jquery.easypiechart.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/easypiechart/easypiechart-init.js"></script>
 
 <!--Sparkline Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/sparkline/jquery.sparkline.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/sparkline/sparkline-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/sparkline/jquery.sparkline.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/sparkline/sparkline-init.js"></script>
 
 <!--icheck -->
-<script src="/notoadmin/Application/Admin/View/Public/js/iCheck/jquery.icheck.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/icheck-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/jquery.icheck.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/icheck-init.js"></script>
 
 <!-- jQuery Flot Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.tooltip.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.resize.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.tooltip.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.resize.js"></script>
 
 
 <!--Morris Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/morris-chart/raphael-min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/morris-chart/raphael-min.js"></script>
 
 <!--Calendar-->
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/clndr.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/evnt.calendar.init.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/moment-2.2.1.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/calendar/clndr.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/calendar/evnt.calendar.init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/calendar/moment-2.2.1.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 
 <!--common scripts for all pages-->
-<script src="/notoadmin/Application/Admin/View/Public/js/scripts.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/scripts.js"></script>
 
 <!--Dashboard Charts-->
-<script src="/notoadmin/Application/Admin/View/Public/js/dashboard-chart-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/dashboard-chart-init.js"></script>
 
 
 </body>

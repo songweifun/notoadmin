@@ -17,15 +17,26 @@ class UserManageController extends CommonController
     //申请用户显示
     public function index(){
         $this->menu=ACTION_NAME;
+
         $searchValue  =   trim(I('post.searchValue'));
         if($searchValue){
-            $where = "card='".$searchValue."' or user_name='".$searchValue."' or phone='".$searchValue."'";
+            $where = "u.card='".$searchValue."' or u.user_name='".$searchValue."' or u.phone='".$searchValue."'";
         }
+        //显示的第几页
+        $page        =     intval($_GET['page'])?$_GET['page']:1;
+        $min         =     ($page-1)*1;
+        //共有几页
+        $count       =     M('User as u')->where($where)->count();
+        $page_count  =     ceil($count/1);
+        $this->assign('page_count',$page_count);
+        $this->assign('page',$page);
+
         $user    =    M('User as u')
-            ->join('noto_user_detail as d on u.id=d.user_id','LEFT')
-            ->order('create_time desc')
-            ->where($where)
-            ->select();
+                ->join('noto_user_detail as d on u.id=d.user_id','LEFT')
+                ->order('create_time desc')
+                ->where($where)
+                ->limit($min,1)
+                ->select();
         $this->assign('user',$user);
         $this->display();
     }
