@@ -26,7 +26,7 @@
         </div>
         <!-- page heading end-->
 
-        <div class="container">
+        <div class="container" ng-app="myApps" ng-controller="myCtrl">
 
             <div class="row">
                 <div class="table-responsive" class="col-md-8">
@@ -35,15 +35,15 @@
                         <tr class="success">
                             <th>角色id</th>
                             <th>角色名称</th>
-                            <th>角色描述</th>
+                            <th>开启状态</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        <tr ng-repeat="(k,v) in roleList">
+                            <td ng-bind="v.id"></td>
+                            <td ng-bind="v.name"></td>
+                            <td ng-bind="v.status?'是':'否'"></td>
                             <td>配置权限</td>
                         </tr>
                         </tbody>
@@ -67,6 +67,44 @@
     </div>
     <!-- main content end-->
 </section>
+
+<script>
+    var m=angular.module('myApps',[]);
+    m.controller('myCtrl',['$scope','$http',function ($scope,$http) {
+
+        $http.get("{:U(MODULE_NAME.'/Rbac/manageRole')}/action/getRoleList").then(function ($resp) {
+            $scope.roleList=$resp.data;
+        })
+        $scope.node={};
+        $scope.node.status=1;
+        $scope.addNode=function () {
+            //console.log($scope.node);
+            var url="{:U(MODULE_NAME.'/Rbac/addRoleHandle')}"
+
+            //alert(url);
+            $http({
+                method:'post',
+                url:url,
+                data:$.param($scope.node),
+                headers:{'Content-type':'application/x-www-form-urlencoded'}
+            }).then(function ($resp) {
+                if ($resp.data.status){
+                    layer.alert($resp.data.msg);
+                    $('#myModal').modal('hide');
+                    $scope.node={};
+                    $http.get("{:U(MODULE_NAME.'/Rbac/manageRole')}/action/getRoleList").then(function ($resp) {
+                        $scope.roleList=$resp.data;
+                    })
+
+                }else{
+                    layer.msg($resp.data.msg);
+                }
+
+            })
+        }
+    }])
+
+</script>
 
 
 <include file="Common/jsfooter_section"/>

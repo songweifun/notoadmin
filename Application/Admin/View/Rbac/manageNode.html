@@ -27,27 +27,134 @@
         </div>
         <!-- page heading end-->
 
-        <div class="container">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">角色名称</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="角色名称">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">角色描述</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="inputPassword3" placeholder="角色描述">
-                    </div>
-                </div>
+        <div class="container" ng-app="myApps" ng-controller="myCtrl">
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-6">
-                        <button type="submit" class="btn btn-primary">添加</button>
+            <div class="row">
+                <div class="table-responsive" class="col-md-8">
+                    <table class="table table-hover table-bordered table-striped table-condensed">
+                        <thead>
+                        <tr class="success">
+                            <th>权限id</th>
+                            <th>权限结构</th>
+                            <th>名称</th>
+                            <th>类型</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(k,v) in nodeList">
+                            <td ng-bind="v.id"></td>
+                            <td ng-bind="v.title"></td>
+                            <td ng-bind="v.name"></td>
+                            <td ng-bind="v.name"></td>
+                            <td>配置权限</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                <i class="fa fa-plus"></i> 添加权限
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">添加权限</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <form class="form-horizontal" name="myForm">
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">英文名称</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control"  placeholder="英文名称" ng-model="node.name" required name="name">
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <i class="fa fa-check btn-success" ng-show="myForm.name.$dirty && myForm.name.$valid"></i>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">显示中文名称</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control"  placeholder="显示中文名称" ng-model="node.title" name="title" required>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <i class="fa fa-check btn-success" ng-show="myForm.remark.$dirty && myForm.remark.$valid"></i>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">状态</label>
+                                    <div class="col-sm-9">
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="node.status" ng-value="1"> 启用
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="node.status"  ng-value="0"> 禁用
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">类型</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" ng-model="node.level">
+                                            <option ng-value="1">项目</option>
+                                            <option ng-value="2">模块</option>
+                                            <option ng-value="3">操作</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">父节点</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" ng-model="node.pid">
+                                            <option value="0">根节点</option>
+
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">排序</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control"  placeholder="排序" ng-model="node.sort" required name="name">
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <i class="fa fa-check btn-success" ng-show="myForm.name.$dirty && myForm.name.$valid"></i>
+                                    </div>
+                                </div>
+
+
+
+                            </form>
+
+
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" ng-click="addNode()" ng-disabled="myForm.$invalid">保存</button>
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
+            <!-- modal end -->
+
+
         </div>
 
 
@@ -59,6 +166,42 @@
     </div>
     <!-- main content end-->
 </section>
+
+<script>
+    var m=angular.module('myApps',[]);
+    m.controller('myCtrl',['$scope','$http',function ($scope,$http) {
+
+        $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getNodeList").then(function ($resp) {
+            $scope.nodeList=$resp.data;
+        })
+        $scope.node={};
+        $scope.node.status=1;
+        $scope.addNode=function () {
+            //console.log($scope.node);
+            var url="{:U(MODULE_NAME.'/Rbac/manageNode')}/action/addNode"
+
+            //alert(url);
+            $http({
+                method:'post',
+                url:url,
+                data:$.param($scope.node),
+                headers:{'Content-type':'application/x-www-form-urlencoded'}
+            }).then(function ($resp) {
+                if ($resp.data.status){
+                    layer.alert($resp.data.msg);
+                    //window.location.href="{:U(MODULE_NAME.'/Rbac/ManageRole')}";
+                    //location.reload();
+                    $scope.node={};
+
+                }else{
+                    layer.msg($resp.data.msg);
+                }
+
+            })
+        }
+    }])
+
+</script>
 
 
 <include file="Common/jsfooter_section"/>

@@ -27,24 +27,44 @@
         </div>
         <!-- page heading end-->
 
-        <div class="container">
-            <form class="form-horizontal">
+        <div class="container" ng-app="myApps" ng-controller="myCtrl">
+            <form class="form-horizontal" name="myForm">
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">角色名称</label>
+                    <label  class="col-sm-2 control-label">角色名称</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="角色名称">
+                        <input type="text" class="form-control"  placeholder="角色名称" ng-model="role.name" required name="name">
+                    </div>
+                    <div class="col-sm-1">
+                        <i class="fa fa-check btn-success" ng-show="myForm.name.$dirty && myForm.name.$valid"></i>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">角色描述</label>
+                    <label  class="col-sm-2 control-label">角色描述</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="inputPassword3" placeholder="角色描述">
+                        <input type="text" class="form-control"  placeholder="角色描述" ng-model="role.remark" name="remark" required>
+                    </div>
+                    <div class="col-sm-1">
+                        <i class="fa fa-check btn-success" ng-show="myForm.remark.$dirty && myForm.remark.$valid"></i>
                     </div>
                 </div>
 
                 <div class="form-group">
+                    <label  class="col-sm-2 control-label">是否开启</label>
+                    <div class="col-sm-6">
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="role.status" ng-value="1"> 是
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="role.status"  ng-value="0"> 否
+                        </label>
+                    </div>
+
+                </div>
+                <input type="hidden" ng-model="role.pid" ng-value="0">
+
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-6">
-                        <button type="submit" class="btn btn-primary">添加</button>
+                        <button type="submit" class="btn btn-primary" ng-click="addRole()" ng-disabled="myForm.$invalid">添加</button>
                     </div>
                 </div>
             </form>
@@ -59,6 +79,38 @@
     </div>
     <!-- main content end-->
 </section>
+
+<script>
+    var m=angular.module('myApps',[]);
+    m.controller('myCtrl',['$scope','$http',function ($scope,$http) {
+        $scope.role={};
+        $scope.role.status=1;
+        $scope.addRole=function () {
+            //console.log($scope.role);
+            var url="{:U(MODULE_NAME.'/Rbac/addRoleHandle')}"
+
+            //alert(url);
+            $http({
+                method:'post',
+                url:url,
+                data:$.param($scope.role),
+                headers:{'Content-type':'application/x-www-form-urlencoded'}
+            }).then(function ($resp) {
+                if ($resp.data.status){
+                    layer.alert($resp.data.msg);
+                    //window.location.href="{:U(MODULE_NAME.'/Rbac/ManageRole')}";
+                    //location.reload();
+                    $scope.role={};
+
+                }else{
+                    layer.msg($resp.data.msg);
+                }
+
+            })
+        }
+    }])
+
+</script>
 
 
 <include file="Common/jsfooter_section"/>

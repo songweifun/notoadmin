@@ -26,11 +26,30 @@ class RbacController extends CommonController
 
         $this->display();
     }
+
+    //添加角色异步方法
+    public function addRoleHandle(){
+        if(M('adminRole')->add($_POST)){
+            echo json_encode(array('status'=>true,'msg'=>'添加成功'));
+        }else{
+            echo json_encode(array('status'=>false,'msg'=>'添加失败'));
+        }
+        die;
+    }
     //角色管理
     public function manageRole(){
 
-        $this->menu  =  ACTION_NAME;
+        $action=I('get.action');
+        //获得roleList接口
+        if($action=='getRoleList'){
+            $roleList=M('adminRole')->select();
+            echo json_encode($roleList);
+            die;
 
+
+        }
+
+        $this->menu  =  ACTION_NAME;
         $this->display();
 
     }
@@ -45,8 +64,36 @@ class RbacController extends CommonController
     //权限管理
     public function manageNode(){
 
-        $this->menu  =  ACTION_NAME;
+        $action=I('get.action');
+        $adminNode=M('adminNode');
+        //获得nodeList接口
+        if($action=='getNodeList'){
+            $nodeList=M('adminNode')->select();
+            echo json_encode($nodeList);
+            die;
 
+
+        }elseif($action=='getPidNodeList'){
+            //获得可以作为父节点的下拉列表
+            $nodePidList=M('adminNode')->where(array('level',array('neq 3')))->order('sort')->select();
+            echo json_encode($nodePidList);
+            die;
+
+
+        }elseif ($action=='addNode'){
+
+            if($adminNode->add($_POST)){
+                echo json_encode(array('status'=>true,'msg'=>'添加成功'));
+            }else{
+                echo json_encode(array('status'=>false,'msg'=>'添加失败'));
+            }
+            die;
+
+
+
+        }
+
+        $this->menu  =  ACTION_NAME;
         $this->display();
 
     }
