@@ -44,7 +44,42 @@
                             <td ng-bind="v.id"></td>
                             <td ng-bind="v.name"></td>
                             <td ng-bind="v.status?'是':'否'"></td>
-                            <td>配置权限</td>
+                            <td>
+
+                                <a class="btn btn-primary btn-xs" ng-click="addNodeToRole(v.name)"><i class="fa fa-wrench" ></i> 配置权限</a>
+                                <div class="modal fade bs-example-modal-lg" id="modalid" >
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title">【{{rolenow}}】权限配置</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                    <label class="checkbox-inline" ng-repeat="(k,v) in nodeList">
+                                                        <input type="checkbox"  value="option{{k}}">{{v.title}}
+                                                    </label>
+
+
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    关闭
+                                                </button>
+                                                <button type="button" class="btn btn-primary">保存</button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
+
+
+
+
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -71,10 +106,16 @@
 <script>
     var m=angular.module('myApps',[]);
     m.controller('myCtrl',['$scope','$http',function ($scope,$http) {
-
+        //获得角色列表
         $http.get("{:U(MODULE_NAME.'/Rbac/manageRole')}/action/getRoleList").then(function ($resp) {
             $scope.roleList=$resp.data;
         })
+        //获得节点列表
+        $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getNodeList").then(function ($resp) {
+            $scope.nodeList=$resp.data;
+        })
+
+
         $scope.node={};
         $scope.node.status=1;
         $scope.addNode=function () {
@@ -90,7 +131,6 @@
             }).then(function ($resp) {
                 if ($resp.data.status){
                     layer.alert($resp.data.msg);
-                    $('#myModal').modal('hide');
                     $scope.node={};
                     $http.get("{:U(MODULE_NAME.'/Rbac/manageRole')}/action/getRoleList").then(function ($resp) {
                         $scope.roleList=$resp.data;
@@ -101,6 +141,13 @@
                 }
 
             })
+        }
+        //给角色添加权限模态框
+        $scope.addNodeToRole=function (name) {
+            //alert(1111)
+            $scope.rolenow=name;
+            $('#modalid').modal('show');
+
         }
     }])
 

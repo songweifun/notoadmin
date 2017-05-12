@@ -21,33 +21,108 @@
                 <li>
                     <a href="#">权限管理</a>
                 </li>
-                <li class="active"> 添加角色 </li>
+                <li class="active"> 馆员管理 </li>
             </ul>
 
         </div>
         <!-- page heading end-->
 
-        <div class="container">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">角色名称</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="角色名称">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">角色描述</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="inputPassword3" placeholder="角色描述">
-                    </div>
-                </div>
+        <div class="container" ng-app="myApps" ng-controller="myCtrl">
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-6">
-                        <button type="submit" class="btn btn-primary">添加</button>
+            <div class="row">
+                <div class="table-responsive" class="col-md-8">
+                    <table class="table table-hover table-bordered table-striped table-condensed">
+                        <thead>
+                        <tr class="success">
+                            <th>id</th>
+                            <th>用户名</th>
+                            <th>上次登录时间</th>
+                            <th>上次登录IP</th>
+                            <th>所属用户组</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(k,v) in adminList">
+                            <td ng-bind="v.id"></td>
+                            <td ng-bind="v.user_name"></td>
+                            <td ng-bind="v.logintime*1000|date:'yyyy年mm月dd日 HH:mm:ss'"></td>
+                            <td ng-bind="v.loginip"></td>
+                            <td ng-bind="v.rolename?v.rolename:'超级管理员'"></td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" ng-click="deleteAdmin(v.id)">删除</button>
+                                <button class="btn btn-primary btn-xs" ng-click="editAdmin(v.id)">编辑</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                <i class="fa fa-plus"></i> 添加馆员
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">添加馆员</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <form class="form-horizontal" name="myForm">
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">用户名</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control"  placeholder="用户名" ng-model="admin.user_name" required name="user_name" >
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <i class="fa fa-check btn-success" ng-show="myForm.user_name.$dirty && myForm.user_name.$valid"></i>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="!admin.id">
+                                    <label  class="col-sm-3 control-label">密码</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control"  placeholder="密码" ng-model="admin.password" name="password" required>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <i class="fa fa-check btn-success" ng-show="myForm.password.$dirty && myForm.password.$valid"></i>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label">所属用户组</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" ng-model="admin.role_id" ng-options="v.id as v.name for v in roleList">
+
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <!-- 控制编辑 -->
+                                <input type="hidden" ng-model="admin.id">
+
+
+
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" ng-click="addAdmin()" ng-disabled="myForm.$invalid">保存</button>
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
+            <!-- modal end -->
+
+
         </div>
 
 
@@ -59,6 +134,77 @@
     </div>
     <!-- main content end-->
 </section>
+
+<script>
+    var m=angular.module('myApps',[]);
+    m.controller('myCtrl',['$scope','$http',function ($scope,$http) {
+
+
+        //获取adminlist异步请求
+        $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getAdminList").then(function ($resp) {
+            $scope.adminList=$resp.data;
+        })
+        //获取父节点异步请求
+        $http.get("{:U(MODULE_NAME.'/Rbac/manageRole')}/action/getRoleList").then(function ($resp) {
+            $scope.roleList=$resp.data;
+        })
+
+        $scope.admin={};
+        //添加官员
+        $scope.addAdmin=function () {
+            //console.log($scope.node);
+            var url="{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/addAdmin";
+
+            //alert($);
+            $http({
+                method:'post',
+                url:url,
+                data:$.param($scope.admin),
+                headers:{'Content-type':'application/x-www-form-urlencoded'}
+            }).then(function ($resp) {
+                if ($resp.data.status){
+                    layer.alert($resp.data.msg);
+                    $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getAdminList").then(function ($resp) {
+                        $scope.adminList=$resp.data;
+                    });
+                    //window.location.href="{:U(MODULE_NAME.'/Rbac/ManageRole')}";
+                    //location.reload();
+                    $('#myModal').modal('hide');
+
+                    $scope.admin={};
+
+                }else{
+                    layer.msg($resp.data.msg);
+                }
+
+            })
+        }
+        //删除官员
+        $scope.deleteAdmin=function (id) {
+            $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/deleteAdmin/id/"+id).then(function ($resp) {
+                if ($resp.data.status){
+                    layer.alert($resp.data.msg);
+                    $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getAdminList").then(function ($resp) {
+                        $scope.adminList=$resp.data;
+                    });
+
+                }else{
+                    layer.msg($resp.data.msg);
+                }
+            })
+        }
+        //编辑官员
+        $scope.editAdmin=function (id) {
+            $('#myModal').modal('show');
+            $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getOneAdmin/id/"+id).then(function ($resp) {
+                $scope.admin=$resp.data;
+                
+            })
+
+        }
+    }])
+
+</script>
 
 
 <include file="Common/jsfooter_section"/>

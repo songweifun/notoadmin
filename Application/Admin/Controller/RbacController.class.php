@@ -53,14 +53,7 @@ class RbacController extends CommonController
         $this->display();
 
     }
-    //添加权限
-    public function addNode(){
 
-        $this->menu  =  ACTION_NAME;
-
-        $this->display();
-
-    }
     //权限管理
     public function manageNode(){
 
@@ -69,13 +62,18 @@ class RbacController extends CommonController
         //获得nodeList接口
         if($action=='getNodeList'){
             $nodeList=M('adminNode')->select();
+            $nodeList=Ancestry($nodeList,0);
             echo json_encode($nodeList);
             die;
 
 
         }elseif($action=='getPidNodeList'){
             //获得可以作为父节点的下拉列表
-            $nodePidList=M('adminNode')->where(array('level',array('neq 3')))->order('sort')->select();
+            $nodePidList=M('adminNode')->where("level !=3")->order('sort')->select();
+            $nodePidList=Ancestry($nodePidList,0);
+
+
+
             echo json_encode($nodePidList);
             die;
 
@@ -98,19 +96,96 @@ class RbacController extends CommonController
 
     }
 
-    //添加馆员
-    public function addAdmin(){
 
-        $this->menu  =  ACTION_NAME;
-
-        $this->display();
-
-    }
     //管理官员
     public function manageAdmin(){
 
-        $this->menu  =  ACTION_NAME;
+        $action=I('get.action');
+        $adminUser=D('AdminUser');
+        //获得nodeList接口
+        if($action=='getAdminList'){
+            //$adminList=$adminUser->select();
+            $adminList=$adminUser->relation(true)->where(array('library_id'=>$_COOKIE['ADMIN_LIBID']))->select();
+            $roleList=M('adminRole')->select();
+            foreach ($adminList as $k=>$v){
+                foreach ($roleList as $kk=>$vv){
+                    if($v['role_id']==$vv['id']){
+                        $adminList[$k]['rolename']=$vv['name'];
+                    }
+                }
+            }
+            //$adminList=Ancestry($adminList,0);
+            echo json_encode($adminList);
+            die;
 
+
+        }elseif($action=='addAdmin'){
+            //添加 编辑 馆员接口
+
+            //print_r($_POST);die;
+
+
+            $_POST['library_id']=$_COOKIE['ADMIN_LIBID'];
+            $_POST['password']=md5($_POST['password']);
+            $_POST['logintime']=time();
+            $_POST['loginip']=get_client_ip();
+            $_POST['password']=md5($_POST['password']);
+            $_POST['status']=1;
+
+            if ($_POST['id']){
+                //编辑
+                $id=$_POST['id'];
+                unset($_POST['id']);
+                if($user_id=M('adminUser')->where(array('id'=>$id))->save($_POST)){//插入admin_user表
+
+                    $_POST['user_id']=$id;
+                    M('adminRoleUser')->where(array('user_id'=>$id))->save($_POST);//出入role_user关联表
+                    echo json_encode(array('status'=>true,'msg'=>'编辑成功'));
+                }else{
+                    echo json_encode(array('status'=>false,'msg'=>'编辑失败'));
+                }
+
+            }else{
+                //添加
+                if($user_id=M('adminUser')->add($_POST)){//插入admin_user表
+                    echo json_encode(array('status'=>true,'msg'=>'添加成功'));
+                    $_POST['user_id']=$user_id;
+                    M('adminRoleUser')->add($_POST);//出入role_user关联表
+                }else{
+                    echo json_encode(array('status'=>false,'msg'=>'添加失败'));
+                }
+
+            }
+
+
+            die;
+
+
+
+        }elseif ($action=='deleteAdmin'){
+            //删除馆员接口
+            $id=I('get.id');
+            if($adminUser->where(array('id'=>$id))->delete()){
+                M('adminRoleUser')->where(array('user_id'=>$id))->delete();
+                echo json_encode(array('status'=>true,'msg'=>'删除成功'));
+            }else{
+                echo json_encode(array('status'=>false,'msg'=>'删除失败'));
+            }
+            die;
+
+
+        }elseif ($action=='getOneAdmin'){
+            //获得单个馆员信息接口
+            $id=I('get.id');
+            $adminOne=$adminUser->relation(true)->where(array('id'=>$id))->find();
+            echo json_encode($adminOne);
+            die;
+
+
+
+        }
+
+        $this->menu  =  ACTION_NAME;
         $this->display();
 
     }
