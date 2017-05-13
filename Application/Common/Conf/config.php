@@ -40,6 +40,26 @@ return array(
     //每隔一小时验证cookie信息是否与数据库一致
     'AUTH_TIME'=>3600,
     'AUTH_CHECKTIME'=>7200,// 间隔AUTH_CHECKTIME时间检查一次cookie信息是否和数据库一至
+    /**
+    +------------------------------------------------------------------------------
+     * 基于角色的数据库方式验证类
+    +------------------------------------------------------------------------------
+     */
+     //配置文件增加设置
+     'RBAC_SUPERADMIN'=>'admin', //超级管理员的用户名对应于admin_user表中的某一用户名
+     'ADMIN_AUTH_KEY'=>'superadmin',//自定义加密key
+     'USER_AUTH_ON' =>true,//是否需要认证
+     'USER_AUTH_TYPE'=>1,// 认证类型 1登录之后认证 2实时认证
+     'USER_AUTH_KEY' =>'authid',//认证识别号 自定义
+     //'REQUIRE_AUTH_MODULE'=>'',//  需要认证模块
+     'NOT_AUTH_MODULE'=>'Index,SystemManage',// 无需认证模块
+     'NOT_AUTH_ACTION'=>'index',// 无需认证操作
+     //'USER_AUTH_GATEWAY'=>'/Login/login',// 认证网关
+     //'RBAC_DB_DSN'=>'mysql://root:admin888@localhost:3306/subject_3.0_nannong',//  数据库连接DSN
+     'RBAC_ROLE_TABLE'=>'noto_admin_role',// 角色表名称
+     'RBAC_USER_TABLE' =>'noto_admin_role_user',//用户表名称 角色用户关联表
+     'RBAC_ACCESS_TABLE'=>'noto_admin_access',// 权限表名称
+     'RBAC_NODE_TABLE'=>'noto_admin_node',// 节点表名称
 );
 
 

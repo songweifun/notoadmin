@@ -42,8 +42,13 @@ class AdminUserModel extends RelationModel
      * @return array
      */
     function getAuthInfo($field=NULL) {
+        //echo $field;
         $authInfo = authcode($_COOKIE['AUTH_STRING'], 'DECODE', C('AUTH_KEY'));
+        //print_r($authInfo);die();
+
+
         $authInfo = explode("\t",$authInfo);
+
         $result['user_id'] = $authInfo[0];
         $result['passwd'] = $authInfo[1];
         if ($field) {
@@ -51,6 +56,7 @@ class AdminUserModel extends RelationModel
                 return $result[$field];
             } else {
                 $info=$this->where(array('id'=>intval($result['user_id'])))->find();
+                //print_r($info);die;
                 return $info[$field];
             }
         }

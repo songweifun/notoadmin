@@ -74,6 +74,25 @@ class RbacController extends CommonController
             }
             //print_r($_POST['access']);
             die;
+        }elseif ($action=='getNodeListAcess'){
+
+            //获得指定角色带权限的节点列表接口
+            $role_id=I('get.role_id');
+            $nodeList=M('adminNode')->order('sort')->select();
+            //$accessList=M('adminAccess')->where(array(''))->select();
+            foreach ($nodeList as $k=>$v){
+                //将原来已经设置过的权限通过access字段组织进去
+                if (M('adminAccess')->where(array('role_id'=>$role_id,'node_id'=>$v['id']))->count()){
+                    $nodeList[$k]['access']=1;
+                }else{
+                    $nodeList[$k]['access']=0;
+                }
+            }
+            $nodeList=Ancestry($nodeList,0);
+            echo json_encode($nodeList);
+            die;
+
+
         }
 
         $this->menu  =  ACTION_NAME;
@@ -159,7 +178,7 @@ class RbacController extends CommonController
             die;
 
 
-        }elseif ($action=='getNodeListAcess'){
+        }elseif ($action=='getNodeListAcess'){//重复暂时保留
 
             //获得指定角色带权限的节点列表接口
             $role_id=I('get.role_id');
@@ -184,8 +203,8 @@ class RbacController extends CommonController
             //print_r($_POST);die;
 
 
+
             $_POST['library_id']=$_COOKIE['ADMIN_LIBID'];
-            $_POST['password']=md5($_POST['password']);
             $_POST['logintime']=time();
             $_POST['loginip']=get_client_ip();
             $_POST['password']=md5($_POST['password']);

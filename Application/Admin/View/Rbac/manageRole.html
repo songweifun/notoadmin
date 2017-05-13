@@ -235,7 +235,7 @@
         //给角色添加权限模态框
         $scope.addNodeToRole=function (name,id) {
             //获得节点列表
-            $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getNodeListAcess/role_id/"+id).then(function ($resp) {
+            $http.get("{:U(MODULE_NAME.'/Rbac/manageRole')}/action/getNodeListAcess/role_id/"+id).then(function ($resp) {
                 $scope.nodeList=$resp.data;
                 console.log($scope.nodeList)
             })

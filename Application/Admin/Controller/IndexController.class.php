@@ -3,6 +3,8 @@ namespace Admin\Controller;
 class IndexController extends CommonController {
     public function index(){
 
+        //dump($_SESSION);die;
+
         $this->display();
 
         //echo 11111111;

@@ -7,6 +7,7 @@
  */
 
 namespace Admin\Controller;
+use Org\Util\Rbac;
 use Think\Controller;
 //登录模块
 class LoginController extends Controller
@@ -42,6 +43,7 @@ class LoginController extends Controller
         $user=D('AdminUser');
         $username=trim(I('post.name'));
         $passwd=I('post.password');
+        //echo $passwd;
         $userInfo=$user->where(array('user_name'=>$username))->find();
         if(!$verify->check($code)) $this->error('验证码错误');
         //echo "<pre>";print_r($userInfo);
@@ -61,6 +63,20 @@ class LoginController extends Controller
                 //setcookie('AUTH_STRINGS','wwwwwww',0,'/',C('COOKIE_DOMAIN'));
                 setcookie('ADMIN_USERID_KSY',$userInfo['id'],time()+C('AUTH_TIME'),'/',C('COOKIE_DOMAIN'));//注意路径
                 setcookie('ADMIN_LIBID',$userInfo['library_id'],0,'/',C('COOKIE_DOMAIN'));//存入图书馆Id
+                session(C('USER_AUTH_KEY'),$userInfo['id']);//注意这个是使用rbac时必须要有的
+                //$user_name = D('AdminUser')->getAuthInfo('user_name');
+                //echo $user_name;
+                //echo C('RBAC_SUPERADMIN');
+                //die;
+                if($username==C('RBAC_SUPERADMIN')){
+
+                    session(C('ADMIN_AUTH_KEY'),true);
+
+
+                }
+                import("Org.Util.Rbac");
+                Rbac::saveAccessList();
+
 
                 $this->redirect('Index/index');
             }

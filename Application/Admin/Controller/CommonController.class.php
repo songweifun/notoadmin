@@ -7,6 +7,7 @@
  */
 
 namespace Admin\Controller;
+use Org\Util\Rbac;
 use Think\Controller;
 
 //公共模块
@@ -29,6 +30,65 @@ class CommonController extends Controller
         }else{
             $this->redirect('Login/index');
         }
+
+        //RBAC认证机制
+        $notAuth=in_array(MODULE_NAME,explode(',',C('NOT_AUTH_MODULE')))||in_array(MODULE_NAME,explode(',',C('NOT_AUTH_ACTION')));
+        if(C('USER_AUTH_ON')&&!$notAuth){
+
+            import("Org.Util.Rbac");
+            if(!Rbac::AccessDecision()){
+                $this->error('对不起您没有权限',U('Index/index'));
+            }
+
+        }
+
+        //控制左侧菜单栏的控件
+        if ($_SESSION[C('ADMIN_AUTH_KEY')]){
+            $menuList=D('adminNode')->relation(true)->where(array('level'=>2))->select();
+            $this->menuList=$menuList;
+        }else{
+            $menuList=D('adminNode')->relation(true)->where(array('level'=>2))->select();
+            $accessList=$_SESSION['_ACCESS_LIST'];
+            //dump($menuList);die;
+            foreach ($menuList as $k=>$v){ //一层
+                foreach ($accessList['ADMIN'] as $kk=>$vv){//二层
+                    if($kk==strtoupper($v['name'])){
+                        $arr[$kk]=$v;
+                        unset($arr[$kk]['node']);
+                        foreach ($v['node'] as $kkk=>$vvv){
+                            foreach ($vv as $kkkk=>$vvvv){
+                                if($kkkk==strtoupper($vvv['name'])){
+                                    $arr[$kk]['node'][]=$vvv;
+                                }
+                            }
+                        }
+
+//                        foreach ($vv as $kkk=>$vvv){
+//                            //三层
+//                            $arr[$kk]=$v;
+//                            unset($arr[$kk]['node']);
+//                            foreach ($vvv as $kkkk=>$vvvv){//四层
+//                                if($kkkk==strtoupper($vvv['name'])){
+//                                    $arr[$kk]['node'][]=$vvv;
+//                                }
+//                            }
+//                        }
+                    }
+                }
+
+            }
+
+            $this->menuList=$arr;
+            //dump($arr);die;
+
+        }
+
+        //dump($menuList);die;
+
+
+
+
+
     }
 
 
