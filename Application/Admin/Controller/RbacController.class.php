@@ -47,6 +47,33 @@ class RbacController extends CommonController
             die;
 
 
+        }elseif ($action=='addAccess'){
+            $role_id=$_POST['role_id'];
+            //echo $role_id;die;
+            //print_r(json_decode($_POST['access'],true));die;
+
+            if(count(json_decode($_POST['access'],true))>0){
+                M('adminAccess')->where(array('role_id'=>$role_id))->delete();//删除这个角色的所欲权限
+                foreach (json_decode($_POST['access'],true) as $k=>$v){
+                    $tmp=explode('_',$v);
+                    $data[]=array(
+                      'role_id'=>$role_id,
+                       'node_id'=>$tmp[0],
+                       'level'=>$tmp[1]
+                    );
+                }
+                //print_r($data);die;
+                if(M('adminAccess')->addAll($data)){
+                    echo json_encode(array('status'=>true,'msg'=>'权限配置成功'));
+                }else{
+                    echo json_encode(array('status'=>false,'msg'=>'权限配置失败'));
+                }
+
+            }else{
+                echo json_encode(array('status'=>false,'msg'=>'您没有为这个角色配置任何权限'));
+            }
+            //print_r($_POST['access']);
+            die;
         }
 
         $this->menu  =  ACTION_NAME;
@@ -61,7 +88,7 @@ class RbacController extends CommonController
         $adminNode=M('adminNode');
         //获得nodeList接口
         if($action=='getNodeList'){
-            $nodeList=M('adminNode')->select();
+            $nodeList=M('adminNode')->order('sort')->select();
             $nodeList=Ancestry($nodeList,0);
             echo json_encode($nodeList);
             die;
@@ -70,6 +97,8 @@ class RbacController extends CommonController
         }elseif($action=='getPidNodeList'){
             //获得可以作为父节点的下拉列表
             $nodePidList=M('adminNode')->where("level !=3")->order('sort')->select();
+            //$nodePidList=M('adminNode')->where("level !=3")->order('sort')->select();
+            //array_unshift($nodePidList, array('id'=>1,'title'=>'根节点'));
             $nodePidList=Ancestry($nodePidList,0);
 
 
@@ -89,6 +118,17 @@ class RbacController extends CommonController
 
 
 
+        }elseif ($action=='deleteNode'){
+            $id=I('get.id');
+            if($adminNode->where(array('id'=>$id))->delete()){
+                M('adminAccess')->where(array('node_id'=>$id))->delete();
+                echo json_encode(array('status'=>true,'msg'=>'删除成功'));
+            }else{
+                echo json_encode(array('status'=>false,'msg'=>'删除失败'));
+            }
+            die;
+
+
         }
 
         $this->menu  =  ACTION_NAME;
@@ -97,7 +137,7 @@ class RbacController extends CommonController
     }
 
 
-    //管理官员
+    //管理馆员
     public function manageAdmin(){
 
         $action=I('get.action');
@@ -116,6 +156,25 @@ class RbacController extends CommonController
             }
             //$adminList=Ancestry($adminList,0);
             echo json_encode($adminList);
+            die;
+
+
+        }elseif ($action=='getNodeListAcess'){
+
+            //获得指定角色带权限的节点列表接口
+            $role_id=I('get.role_id');
+            $nodeList=M('adminNode')->order('sort')->select();
+            //$accessList=M('adminAccess')->where(array(''))->select();
+            foreach ($nodeList as $k=>$v){
+                //将原来已经设置过的权限通过access字段组织进去
+                if (M('adminAccess')->where(array('role_id'=>$role_id,'node_id'=>$v['id']))->count()){
+                    $nodeList[$k]['access']=1;
+                }else{
+                    $nodeList[$k]['access']=0;
+                }
+            }
+            $nodeList=Ancestry($nodeList,0);
+            echo json_encode($nodeList);
             die;
 
 

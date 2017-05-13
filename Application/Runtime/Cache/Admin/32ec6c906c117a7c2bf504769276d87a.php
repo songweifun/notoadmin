@@ -8,18 +8,18 @@
     <link rel="shortcut icon" href="#" type="image/png">
 
     <title>Login</title>
-    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery-1.10.2.min.js"></script>
-    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
-    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/modernizr.min.js"></script>
+    <script src="/notoadmin/Application/Admin/View/Public/js/jquery-1.10.2.min.js"></script>
+    <script src="/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
+    <script src="/notoadmin/Application/Admin/View/Public/js/modernizr.min.js"></script>
 
 
-    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
-    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/style-responsive.css" rel="stylesheet">
+    <link href="/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
+    <link href="/notoadmin/Application/Admin/View/Public/css/style-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/html5shiv.js"></script>
-    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/respond.min.js"></script>
+    <script src="/notoadmin/Application/Admin/View/Public/js/html5shiv.js"></script>
+    <script src="/notoadmin/Application/Admin/View/Public/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -30,7 +30,7 @@
     <form class="form-signin" action="<?php echo U(MODULE_NAME.'/Login/login');?>" method="post">
         <div class="form-signin-heading text-center">
             <h1 class="sign-title">后台登录</h1>
-            <img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/logo-login.png" alt=""/>
+            <img src="/notoadmin/Application/Admin/View/Public/images/logo-login.png" alt=""/>
         </div>
         <div class="login-wrap">
             <input type="text" class="form-control" placeholder="用户名" name="name" autofocus>

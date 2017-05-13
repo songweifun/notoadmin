@@ -181,17 +181,23 @@
         }
         //删除官员
         $scope.deleteAdmin=function (id) {
-            $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/deleteAdmin/id/"+id).then(function ($resp) {
-                if ($resp.data.status){
-                    layer.alert($resp.data.msg);
-                    $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getAdminList").then(function ($resp) {
-                        $scope.adminList=$resp.data;
-                    });
 
-                }else{
-                    layer.msg($resp.data.msg);
-                }
-            })
+            layer.confirm('确定要删除此用吗?', {icon: 3, title:'提示'}, function(){
+                //do something
+
+                $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/deleteAdmin/id/"+id).then(function ($resp) {
+                    if ($resp.data.status){
+                        layer.alert($resp.data.msg);
+                        $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getAdminList").then(function ($resp) {
+                            $scope.adminList=$resp.data;
+                        });
+
+                    }else{
+                        layer.msg($resp.data.msg);
+                    }
+                })
+            });
+
         }
         //编辑官员
         $scope.editAdmin=function (id) {

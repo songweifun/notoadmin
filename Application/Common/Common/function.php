@@ -36,15 +36,41 @@ function Ancestry($data , $pid=0,$count=1) {
         if($value['pid'] == $pid) {
             $value['Count'] = $count;
             $str='';
-            if($count!=1){
-                for ($i=1;$i<=$count;$i++){
-                    $str=$str.'----';
-                }
-            }
+//            if($count!=1){
+//                for ($i=1;$i<=$count;$i++){
+//                    $str=$str.'----';
+//                }
+//            }
             $value['title']=$str.$value['title'];
             $ancestry[] = $value;
 
             Ancestry($data , $value['id'],$count+1);
+        }
+    }
+    return $ancestry;
+}
+
+/**
+ * 获取家谱树
+ * @param   array        $data   待分类的数据
+ * @param   int/string   $pid    要找的祖先节点
+ */
+function AncestryNoTree($data , $pid=0,$count=1) {
+    static $ancestry = array();
+
+    foreach($data as $key => $value) {
+        if($value['pid'] == $pid) {
+            $value['Count'] = $count;
+//            $str='';
+//            if($count!=1){
+//                for ($i=1;$i<=$count;$i++){
+//                    $str=$str.'----';
+//                }
+//            }
+            $value['title']=$value['title'];
+            $ancestry[] = $value;
+
+            AncestryNoTree($data , $value['id'],$count+1);
         }
     }
     return $ancestry;

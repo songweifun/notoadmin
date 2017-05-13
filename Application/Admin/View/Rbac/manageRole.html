@@ -46,20 +46,31 @@
                             <td ng-bind="v.status?'是':'否'"></td>
                             <td>
 
-                                <a class="btn btn-primary btn-xs" ng-click="addNodeToRole(v.name)"><i class="fa fa-wrench" ></i> 配置权限</a>
+                                <a class="btn btn-primary btn-xs" ng-click="addNodeToRole(v.name,v.id)"><i class="fa fa-wrench" ></i> 配置权限</a>
                                 <div class="modal fade bs-example-modal-lg" id="modalid" >
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title">【{{rolenow}}】权限配置</h4>
+                                                <h4 class="modal-title">【{{rolenow}}】权限配置</h4>{{data}}
                                             </div>
                                             <div class="modal-body">
+                                                <form action="" id="myAccessForm" action="{:U(MODULE_NAME.'/Rbac/manageRole')}/action/addAccess">
+                                                    <p  ng-repeat="(k,v) in nodeList" ng-style="{'text-indent': v.level*20+'px','float':v.level==3?'left':'','clear':v.level!=3?'both':'','margin-right':'-40px'}">
+                                                        <input type="checkbox" id="{{v.id}}" name="access[]" value="{{v.id}}_{{v.level}}" pid="{{v.pid}}" level="{{v.level}}" ng-checked="v.access" ng-click="nodeClickEvent($event,v.id,v.level)"> <span ng-show="v.level!=3" ng-style="{color:'blue'}" >【{{leixing[v.level-1].name}}】</span>{{v.title}}
+                                                    </p>
 
-                                                    <label class="checkbox-inline" ng-repeat="(k,v) in nodeList">
-                                                        <input type="checkbox"  value="option{{k}}">{{v.title}}
-                                                    </label>
+                                                </form>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -69,7 +80,7 @@
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                                     关闭
                                                 </button>
-                                                <button type="button" class="btn btn-primary">保存</button>
+                                                <button type="button" class="btn btn-primary" ng-click="addAccess()">保存</button>
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
@@ -104,16 +115,95 @@
 </section>
 
 <script>
+
+
+//    //input选中dom操作
+//        $("body").delegate("input","click",function(){
+//            var level=$(this).attr('level');
+//            if(level==1){
+//                var str='_';
+//                var inputs=$('input[value*='+str+']');
+//                $(this).attr('checked')?inputs.attr('checked',true):inputs.removeAttr('checked');
+//
+//            }
+//            if(level==2){
+//                var id=$(this).attr('id');//意思就是所有父节点为此id的选中
+//                //var pid=$(this).attr('pid');
+//                //$(this).attr('checked')?$('input[id='+pid+']').attr('checked',true):$('input[id='+pid+']').removeAttr('checked');
+//                var inputs=$('input[pid='+id+']');
+//                $(this).attr('checked')?inputs.attr('checked',true):inputs.removeAttr('checked');
+//
+//
+//            }
+//
+//            if(level==3){
+//                if($(this).attr('checked')){
+//                    var pid=$(this).attr('pid');//相反
+//                    $('input[id='+pid+']').attr('checked',true);
+//                    var ppid=$('input[id='+pid+']').attr('pid');
+//                    var inputs=$('input[id='+ppid+']').attr('checked',true);
+//
+//                }
+//
+//
+//            }
+//            //alert(level);
+//        });
+
+
+
+
+
     var m=angular.module('myApps',[]);
     m.controller('myCtrl',['$scope','$http',function ($scope,$http) {
+
+
+        $scope.nodeClickEvent=function($event,id,level){
+            var checkbox = $event.target;
+
+            if(level==1){
+                var str='_';
+                var inputs=$('input[value*='+str+']');
+                //console.log(inputs)
+                $(checkbox).attr('checked')?inputs.attr('checked','checked'):inputs.removeAttr('checked');
+
+            }
+            if(level==2){
+                var id=$(checkbox).attr('id');//意思就是所有父节点为此id的选中
+                //$(this).attr('checked')?$('input[id='+pid+']').attr('checked',true):$('input[id='+pid+']').removeAttr('checked');
+                var inputs=$('input[pid='+id+']');
+                $(checkbox).attr('checked')?inputs.attr('checked',true):inputs.removeAttr('checked');
+
+
+            }
+
+            if(level==3){
+                if($(checkbox).attr('checked')){
+                    var pid=$(checkbox).attr('pid');//相反
+                    $('input[id='+pid+']').attr('checked',true);
+                    var ppid=$('input[id='+pid+']').attr('pid');
+                    $('input[id='+ppid+']').attr('checked',true);
+
+                }
+
+
+            }
+            //$scope.$apply();
+
+        }
+
+
+        //根据role的level确定类型
+        $scope.leixing=[
+            {value:1,name:'项目'},
+            {value:2,name:'模块'},
+            {value:3,name:'方法'}
+        ]
         //获得角色列表
         $http.get("{:U(MODULE_NAME.'/Rbac/manageRole')}/action/getRoleList").then(function ($resp) {
             $scope.roleList=$resp.data;
         })
-        //获得节点列表
-        $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getNodeList").then(function ($resp) {
-            $scope.nodeList=$resp.data;
-        })
+
 
 
         $scope.node={};
@@ -143,10 +233,65 @@
             })
         }
         //给角色添加权限模态框
-        $scope.addNodeToRole=function (name) {
+        $scope.addNodeToRole=function (name,id) {
+            //获得节点列表
+            $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getNodeListAcess/role_id/"+id).then(function ($resp) {
+                $scope.nodeList=$resp.data;
+                console.log($scope.nodeList)
+            })
             //alert(1111)
             $scope.rolenow=name;
+            $scope.role_id=id;
             $('#modalid').modal('show');
+
+        }
+        //添加权限接口调用
+        $scope.addAccess=function () {
+            //obj = document.getElementsByName("access[]");
+            obj=$('#modalid').find("input:checked");
+            //alert(obj.length);
+            check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+//            var new_arr=[];
+//            for(var i=0;i<check_val.length;i++) {
+//                var items=check_val[i];
+//                //判断元素是否存在于new_arr中，如果不存在则插入到new_arr的最后
+//                if($.inArray(items,new_arr)==-1) {
+//                    new_arr.push(items);
+//                }
+//            }
+            //alert(check_val)
+            //var access=$('#myAccessForm').find("[name*='access']").val();
+            //console.log(check_val);
+            var strify = JSON.stringify(check_val);
+            var url="{:U(MODULE_NAME.'/Rbac/manageRole')}/action/addAccess"
+            $http({
+                method:'post',
+                url:url,
+                data:$.param({access:strify,role_id:$scope.role_id}),
+                headers:{'Content-type':'application/x-www-form-urlencoded'}
+            }).then(function ($resp) {
+                if ($resp.data.status){
+                    layer.alert($resp.data.msg);
+                    $('#modalid').modal('hide');
+                    //获得节点列表
+//                    $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getNodeListAcess/role_id/"+$scope.role_id).then(function ($resp) {
+//                        $scope.nodeList=$resp.data;
+//                    })
+
+
+                }else{
+                    layer.msg($resp.data.msg);
+                }
+
+            })
+
+
+
+
 
         }
     }])

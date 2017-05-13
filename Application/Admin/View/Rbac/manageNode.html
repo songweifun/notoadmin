@@ -48,7 +48,7 @@
                             <td ng-bind="v.name"></td>
                             <td ng-bind="leixing[v.level-1].name"></td>
                             <td>
-                                <button class="btn btn-primary btn-xs">删除</button>
+                                <button class="btn btn-primary btn-xs" ng-click="deleteNode(v.id)">删除</button>
                             </td>
                         </tr>
                         </tbody>
@@ -108,6 +108,7 @@
                                     <label  class="col-sm-3 control-label">类型</label>
                                     <div class="col-sm-8">
                                         <select class="form-control" ng-model="node.level" ng-options="v.value as v.name for v in leixing">
+                                            <option value="">请选择</option>
 
                                         </select>
                                     </div>
@@ -118,7 +119,7 @@
                                     <label  class="col-sm-3 control-label">父节点</label>
                                     <div class="col-sm-8">
                                         <select class="form-control" ng-model="node.pid" ng-options="v.id as v.title for v in nodePidList">
-                                            <option value="0">根节点</option>
+                                            <option value="">请选择</option>
                                         </select>
                                     </div>
 
@@ -200,9 +201,14 @@
             }).then(function ($resp) {
                 if ($resp.data.status){
                     layer.alert($resp.data.msg);
+                    //获取nodelist异步请求
                     $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getNodeList").then(function ($resp) {
                         $scope.nodeList=$resp.data;
-                    });
+                    })
+                    //获取父节点异步请求
+                    $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getPidNodeList").then(function ($resp) {
+                        $scope.nodePidList=$resp.data;
+                    })
                     //window.location.href="{:U(MODULE_NAME.'/Rbac/ManageRole')}";
                     //location.reload();
                     $('#myModal').modal('hide');
@@ -215,6 +221,32 @@
                 }
 
             })
+        }
+
+        $scope.deleteNode=function (id) {
+
+            layer.confirm('确定要删除此用吗?', {icon: 3, title:'提示'}, function(){
+                //do something
+
+                $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/deleteNode/id/"+id).then(function ($resp) {
+                    if ($resp.data.status){
+                        layer.alert($resp.data.msg);
+                        //获取nodelist异步请求
+                        $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getNodeList").then(function ($resp) {
+                            $scope.nodeList=$resp.data;
+                        })
+                        //获取父节点异步请求
+                        $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getPidNodeList").then(function ($resp) {
+                            $scope.nodePidList=$resp.data;
+                        })
+
+                    }else{
+                        layer.msg($resp.data.msg);
+                    }
+                })
+
+                //alert(id)
+            });
         }
     }])
 
