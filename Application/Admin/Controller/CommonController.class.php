@@ -44,10 +44,10 @@ class CommonController extends Controller
 
         //控制左侧菜单栏的控件
         if ($_SESSION[C('ADMIN_AUTH_KEY')]){
-            $menuList=D('adminNode')->relation(true)->where(array('level'=>2))->select();
+            $menuList=D('AdminNode')->relation(true)->where(array('level'=>2))->select();
             $this->menuList=$menuList;
         }else{
-            $menuList=D('adminNode')->relation(true)->where(array('level'=>2))->select();
+            $menuList=D('AdminNode')->relation(true)->where(array('level'=>2))->select();
             $accessList=$_SESSION['_ACCESS_LIST'];
             //dump($menuList);die;
             foreach ($menuList as $k=>$v){ //一层
