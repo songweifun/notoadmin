@@ -13,31 +13,42 @@
         <include file="Common:header_section"/>
         <!-- header section end-->
 
+        <!-- page heading start-->
+        <div class="page-heading">
+
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">用户管理</a>
+                </li>
+                <li class="active"> 用户审核 </li>
+            </ul>
+
+        </div>
+        <!-- page heading end-->
+<div class="container" ng-app="myApps" ng-controller="myCtrl">
+    <div class="row">
+        <div class="table-responsive" class="col-md-8">
         <div class="totol " style=" width: 100%;">
             <form action="{:U('UserManage/index')}" method="post" style="float:left;padding-left:80%;">
                 <input type="text" class="search-input" name="searchValue"  required placeholder="一卡通号/姓名/手机号" value=""/>
-                <input type="submit" value="检索"  class="upbutton" style="margin-right:0;width:80px;"  />
+                <input type="submit" value="检索"  class="btn btn-primary btn-sm" style="margin-left:10px;width:60px;float:right;"  />
             </form>
-
-
-
-
         </div>
-
-
-
-            <table class="table table-striped ctuu" >
-                <tr class="hui_top">
-                    <th><input type="checkbox" id="all"></th>
-                    <th>一卡通号</th>
-                    <th>姓名</th>
-                    <th>性别</th>
-                    <th>专业</th>
-                    <th>手机号</th>
-                    <th>个性签名</th>
-                    <th>状态</th>
-                    <th style="text-align:center;">操作</th>
-                </tr>
+            <table class="table table-hover table-bordered table-striped table-condensed" >
+                <thead>
+                    <tr class="success hui_top" >
+                        <th><input type="checkbox" id="all"></th>
+                        <th>一卡通号</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>专业</th>
+                        <th>手机号</th>
+                        <th>个性签名</th>
+                        <th>状态</th>
+                        <th style="text-align:center;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <if condition="$user neq null">
                 <foreach name="user" item="user">
                 <tr class="result_list">
@@ -70,20 +81,20 @@
                             <elseif condition="$user['state'] eq 2" />
                                 <font color="blue">已激活</font>
                             <elseif condition="$user['state'] eq 3" />
-                                <font color="red">已注销</font>
+                                <font color="grey">已注销</font>
                             <else />
-                                已拒绝
+                                <font color="red">已拒绝</font>
                         </if>
                     </td>
                     <td class="choose_td" align="center">
                         <div style="min-width: 80px;">
                             <if condition="$user['state'] eq 1">
-                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="2">激活</a>
-                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="4">拒绝</a>
+                                <a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="{$user['id']}" data-state="2">激活</a>
+                                <a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="{$user['id']}" data-state="4">拒绝</a>
                             <elseif condition="$user['state'] eq 2" />
-                                <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="3">注销</a>
+                                <a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="{$user['id']}" data-state="3">注销</a>
                             <else />
-                                 <a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="2">激活</a>
+                                 <a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="{$user['id']}" data-state="2">再次激活</a>
                             </if>
                                  <!--<a href="javascript:;" class="exam" data-id="{$user['id']}" data-state="5">删除</a>-->
                         </div>
@@ -96,21 +107,28 @@
                         <td colspan="8" align="center" style=" color: #18c3a7">暂无批次数据……</td>
                     </tr>
                 </if>
+                </tbody>
             </table>
-            <button style="" id="getValue">激活</button>
-        <if condition="$page_count gt 1">
-            <div class="page">
-                <a href="javascript:void(0);" class="jump">跳转</a>
-                <input type="text" class="rt number">
-                <if condition="$_GET['page'] lt page_count">
-                    <a href="javascript:void(0);"><a href="javascript:void(0);" class="rt next">下一页</a>
-                </if>
-                <span class="rt">
-                    <span class="current">{$page}</span>/<span class="all">{$page_count}</span>
-                </span>
-                <if condition="$_GET['page'] gt 1"><a class="rt prev">上一页</a></if>
+
+        <button  type="button" class="btn btn-primary btn-sm" id="getValue" data-toggle="modal" data-target="#myModal">激活</button>
+            <div style="float:right;">
+            <if condition="$page_count gt 1">
+                <div class="page">
+                    <a href="javascript:void(0);" class="jump">跳转</a>
+                    <input type="text" class="rt number" style="width:40px;">
+                    <if condition="$_GET['page'] lt page_count">
+                        <a href="javascript:void(0);" class="rt next">&nbsp;Next</a>
+                    </if>
+                    <span class="rt">
+                        <span class="current">{$page}</span>/<span class="all">{$page_count}</span>
+                    </span>
+                    <if condition="$_GET['page'] gt 1"><a class="rt prev">Previous&nbsp;</a></if>
+                </div>
+            </if>
             </div>
-        </if>
+        </div>
+    </div>
+</div>
         <!--footer section start-->
         <include file="Common/footer_section"/>
         <!--footer section end-->

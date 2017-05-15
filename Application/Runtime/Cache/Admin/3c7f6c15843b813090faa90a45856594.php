@@ -8,37 +8,37 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
     <title>用户列表</title>
-    <script src="/notoadmin/Application/Admin/View/Public/js/jquery-1.10.2.min.js"></script>
+    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery-1.10.2.min.js"></script>
 
     <!-- bootstrap -->
 
-    <link href="/notoadmin/Application/Admin/View/Public/css/bootstrap.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/bootstrap.css" rel="stylesheet">
     <!--icheck-->
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/square.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/red.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/blue.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/square.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/red.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/blue.css" rel="stylesheet">
 
     <!--dashboard calendar-->
-    <link href="/notoadmin/Application/Admin/View/Public/css/clndr.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/clndr.css" rel="stylesheet">
 
     <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.css">
+    <link rel="stylesheet" href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.css">
 
     <!--common-->
-    <link href="/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/css/style-responsive.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/style-responsive.css" rel="stylesheet">
 
 
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="/notoadmin/Application/Admin/View/Public/js/html5shiv.js"></script>
-    <script src="/notoadmin/Application/Admin/View/Public/js/respond.min.js"></script>
+    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/html5shiv.js"></script>
+    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/layer/layer.js"></script>
-    <script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/angular.min.js"></script>
+    <script type="text/javascript" src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/layer/layer.js"></script>
+    <script type="text/javascript" src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/angular.min.js"></script>
 
 
 </head>
@@ -51,11 +51,11 @@
 
     <!--logo and iconic logo start-->
     <div class="logo">
-        <a href="index.html"><img src="/notoadmin/Application/Admin/View/Public/images/logo.png" alt=""></a>
+        <a href="index.html"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/logo.png" alt=""></a>
     </div>
 
     <div class="logo-icon text-center">
-        <a href="index.html"><img src="/notoadmin/Application/Admin/View/Public/images/logo_icon.png" alt=""></a>
+        <a href="index.html"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/logo_icon.png" alt=""></a>
     </div>
     <!--logo and iconic logo end-->
 
@@ -64,7 +64,7 @@
         <!-- visible to small devices only -->
         <div class="visible-xs hidden-sm hidden-md hidden-lg">
             <div class="media logged-user">
-                <img alt="" src="/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" class="media-object">
+                <img alt="" src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" class="media-object">
                 <div class="media-body">
                     <h4><a href="#">John Doe</a></h4>
                     <span>"Hello There..."</span>
@@ -95,135 +95,10 @@
 
             <?php if(is_array($menuList)): foreach($menuList as $k=>$vo): ?><li class="menu-list <?php if($cate == $vo["name"] ): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-book"></i> <span><?php echo ($vo["title"]); ?></span></a>
                     <ul class="sub-menu-list">
-                        <?php if(is_array($vo['node'])): foreach($vo['node'] as $kk=>$voo): ?><li <?php if($menu == $voo["name"] ): ?>class="active"<?php endif; ?> ><a href="/notoadmin/index.php/Admin/<?php echo ($vo["name"]); ?>/<?php echo ($voo["name"]); ?>"> <?php echo ($voo["title"]); ?></a></li><?php endforeach; endif; ?>
+                        <?php if(is_array($vo['node'])): foreach($vo['node'] as $kk=>$voo): ?><li <?php if($menu == $voo["name"] ): ?>class="active"<?php endif; ?> ><a href="/nannongAdmin/notoadmin/index.php/Admin/<?php echo ($vo["name"]); ?>/<?php echo ($voo["name"]); ?>"> <?php echo ($voo["title"]); ?></a></li><?php endforeach; endif; ?>
                     </ul>
                 </li><?php endforeach; endif; ?>
 
-            <!--<li class="menu-list <?php if($cate == WebManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-book"></i> <span>网站概况</span></a>-->
-                <!--<ul class="sub-menu-list">-->
-                    <!--<li <?php if($menu == 'webInfo'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/WebManage/webInfo');?>"> 网站信息</a></li>-->
-                    <!--<li <?php if($menu == 'webConfig'): ?>class="active"<?php endif; ?> > <a href="<?php echo U(MODULE_NAME.'/WebManage/webConfig');?>"> 网站配置</a></li>-->
-
-                <!--</ul>-->
-            <!--</li>-->
-
-
-            <!--<li class="menu-list <?php if($cate == UserManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-user"></i> <span>用户管理</span></a>-->
-                <!--<ul class="sub-menu-list">-->
-                    <!--<li <?php if($menu == 'index'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/UserManage/index');?>"> 用户列表</a></li>-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'rent'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/HouseManage/rent');?>"> 出租管理</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'buy'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/HouseManage/buy');?>"> 求购管理</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'hold'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/HouseManage/hold');?>"> 求租管理</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'consign'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/HouseManage/consign');?>"> 委托出售</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'report'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/HouseManage/report');?>"> 房源虚假举报</a></li>&ndash;&gt;-->
-                <!--</ul>-->
-            <!--</li>-->
-
-            <!--<li class="menu-list <?php if($cate == BrowBooksManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-shopping-cart"></i> <span>订单管理</span></a>-->
-                <!--<ul class="sub-menu-list">-->
-                    <!--<li <?php if($menu == 'index'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BrowBooksManage/index');?>"> 订单审核</a></li>-->
-                    <!--<li <?php if($menu == 'returnOrder'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BrowBooksManage/returnOrder');?>"> 还书订单</a></li>-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'updateCheck'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BoroughManage/updateCheck');?>"> 小区更新管理</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'evaluate'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BoroughManage/evaluate');?>"> 评估价更新</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'pingguDd'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/BoroughManage/pingguDd');?>"> 评估系数管理</a></li>&ndash;&gt;-->
-                <!--</ul>-->
-            <!--</li>-->
-
-            <!--<li class="menu-list <?php if($cate == Rbac): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-group"></i> <span>权限管理</span></a>-->
-                <!--<ul class="sub-menu-list">-->
-                    <!--<li <?php if($menu == 'addRole'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/addRole');?>"> 添加角色</a></li>-->
-                    <!--<li <?php if($menu == 'manageRole'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/manageRole');?>"> 角色管理</a></li>-->
-                    <!--<li <?php if($menu == 'manageNode'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/manageNode');?>"> 权限管理</a></li>-->
-                    <!--<li <?php if($menu == 'manageAdmin'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/manageAdmin');?>"> 管理馆员</a></li>-->
-                <!--</ul>-->
-            <!--</li>-->
-
-            <!--<li class="menu-list <?php if($cate == SystemManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-wrench"></i> <span>系统管理</span></a>-->
-                <!--<ul class="sub-menu-list">-->
-                    <!--<li <?php if($menu == 'layout'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/SystemManage/layout');?>"> 安全退出</a></li>-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'manageRole'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/manageRole');?>"> 角色管理</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'addNode'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/addNode');?>"> 添加权限</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'manageNode'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/manageNode');?>"> 权限管理</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'addAdmin'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/addAdmin');?>"> 添加馆员</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'manageAdmin'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/Rbac/manageAdmin');?>"> 管理馆员</a></li>&ndash;&gt;-->
-                <!--</ul>-->
-            <!--</li>-->
-
-            <!--&lt;!&ndash;<li class="menu-list <?php if($cate == CompanyManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-cogs"></i> <span>公司管理</span></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<ul class="sub-menu-list">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($type == 0): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/CompanyManage/index',array('type'=>0));?>"> 中介公司</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($type == 1): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/CompanyManage/index',array('type'=>1));?>"> 搬家公司</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($type == 2): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/CompanyManage/index',array('type'=>2));?>"> 装修公司</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($type == 3): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/CompanyManage/index',array('type'=>3));?>"> 其他公司</a></li>&ndash;&gt;-->
-
-
-                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<li class="menu-list <?php if($cate == TrendManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-bullhorn"></i> <span>房产走势</span></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<ul class="sub-menu-list">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'index'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/TrendManage/index');?>"> 总览</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'sell'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/TrendManage/sell');?>"> 二手房</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'rent'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/TrendManage/rent');?>"> 出租</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'newHouse'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/TrendManage/newHouse');?>"> 新房</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'office'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/TrendManage/office');?>"> 写字楼</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<li class="menu-list <?php if($cate == UserManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-envelope"></i> <span>会员管理</span></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<ul class="sub-menu-list">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'index'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/UserManage/index');?>"> 系统用户管理</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'group'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/UserManage/group');?>"> 用户组管理</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<li class="menu-list <?php if($cate == MemberManage): ?>nav-active<?php endif; ?>" ><a href=""><i class="fa fa-tasks"></i> <span>经纪人管理</span></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<ul class="sub-menu-list">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'index'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/MemberManage/index');?>"> 经纪人列表</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'indentity'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/MemberManage/indentity');?>/status/0"> 身份审核</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'aptitude'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/MemberManage/aptitude');?>/status/0"> 资质审核</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'avatar'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/MemberManage/avatar');?>/status/0"> 头像审核</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'evaluate'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/MemberManage/evaluate');?>/status/0"> 评价审核</a></li>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--&lt;!&ndash;<li class="menu-list <?php if($cate == About): ?>nav-active<?php endif; ?>" ><a href=""><i class="fa fa-bar-chart-o"></i> <span>关于我们</span></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<ul class="sub-menu-list">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'about'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/About/about');?>"> 关于我们</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'talented'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/About/talented');?>"> 人才招聘</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'agreenment'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/About/agreenment');?>"> 用户协议</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'copyright'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/About/copyright');?>"> 版权声明</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'contact'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/About/contact');?>"> 联系我们</a></li>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<li class="menu-list <?php if($cate == City): ?>nav-active<?php endif; ?>" ><a href=""><i class="fa fa-th-list"></i> <span>多城市</span></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<ul class="sub-menu-list">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'index'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/City/index');?>"> 城市管理</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'union'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/City/union');?>"> 加盟城市</a></li>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-
-
-            <!--&lt;!&ndash;<li class="menu-list <?php if($cate == SystemManage): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-cogs"></i> <span>系统管理</span></a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<ul class="sub-menu-list">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'dd'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/SystemManage/dd');?>"> 全局参数</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'appointment'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/SystemManage/appointment');?>"> 房源预约刷新</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'crontab'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/SystemManage/crontab');?>"> 计划任务执行</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'integrationRule'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/SystemManage/integrationRule');?>"> 积分规则</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'MessageRule'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/SystemManage/MessageRule');?>"> 自动站内信规则</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'integrationRule'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/SystemManage/integrationRule');?>"> 积分规则</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'Innernote'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/SystemManage/Innernote');?>"> 站内信</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'cityareaList'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/SystemManage/cityareaList');?>"> 地图区域</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'integrationRule'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/SystemManage/integrationRule');?>"> 积分规则</a></li>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<li <?php if($menu == 'integrationRule'): ?>class="active"<?php endif; ?> ><a href="<?php echo U(MODULE_NAME.'/SystemManage/integrationRule');?>"> 积分规则</a></li>&ndash;&gt;-->
-
-
-
-                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
 
         </ul>
         <!--sidebar nav end-->
@@ -335,7 +210,7 @@
                     <ul class="dropdown-list normal-list">
                         <li class="new">
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user1.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user1.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">John Doe <span class="badge badge-success">new</span></span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -344,7 +219,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user2.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user2.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Jonathan Smith</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -353,7 +228,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user3.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user3.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Jane Doe</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -362,7 +237,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user4.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user4.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Mark Henry</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -371,7 +246,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user5.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user5.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Jim Doe</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -424,7 +299,7 @@
             </li>
             <li>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <img src="/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" alt="" />
+                    <img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" alt="" />
                     范松伟
                     <span class="caret"></span>
                 </a>
@@ -446,31 +321,42 @@
 
         <!-- header section end-->
 
+        <!-- page heading start-->
+        <div class="page-heading">
+
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">用户管理</a>
+                </li>
+                <li class="active"> 用户审核 </li>
+            </ul>
+
+        </div>
+        <!-- page heading end-->
+<div class="container" ng-app="myApps" ng-controller="myCtrl">
+    <div class="row">
+        <div class="table-responsive" class="col-md-8">
         <div class="totol " style=" width: 100%;">
             <form action="<?php echo U('UserManage/index');?>" method="post" style="float:left;padding-left:80%;">
                 <input type="text" class="search-input" name="searchValue"  required placeholder="一卡通号/姓名/手机号" value=""/>
-                <input type="submit" value="检索"  class="upbutton" style="margin-right:0;width:80px;"  />
+                <input type="submit" value="检索"  class="btn btn-primary btn-sm" style="margin-left:10px;width:60px;float:right;"  />
             </form>
-
-
-
-
         </div>
-
-
-
-            <table class="table table-striped ctuu" >
-                <tr class="hui_top">
-                    <th><input type="checkbox" id="all"></th>
-                    <th>一卡通号</th>
-                    <th>姓名</th>
-                    <th>性别</th>
-                    <th>专业</th>
-                    <th>手机号</th>
-                    <th>个性签名</th>
-                    <th>状态</th>
-                    <th style="text-align:center;">操作</th>
-                </tr>
+            <table class="table table-hover table-bordered table-striped table-condensed" >
+                <thead>
+                    <tr class="success hui_top" >
+                        <th><input type="checkbox" id="all"></th>
+                        <th>一卡通号</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>专业</th>
+                        <th>手机号</th>
+                        <th>个性签名</th>
+                        <th>状态</th>
+                        <th style="text-align:center;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <?php if($user != null): if(is_array($user)): foreach($user as $key=>$user): ?><tr class="result_list">
                     <td><input type="checkbox" value="<?php echo ($user['id']); ?>"></td>
                     <td>
@@ -498,18 +384,18 @@
                             <?php elseif($user['state'] == 2): ?>
                                 <font color="blue">已激活</font>
                             <?php elseif($user['state'] == 3): ?>
-                                <font color="red">已注销</font>
+                                <font color="grey">已注销</font>
                             <?php else: ?>
-                                已拒绝<?php endif; ?>
+                                <font color="red">已拒绝</font><?php endif; ?>
                     </td>
                     <td class="choose_td" align="center">
                         <div style="min-width: 80px;">
-                            <?php if($user['state'] == 1): ?><a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="2">激活</a>
-                                <a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="4">拒绝</a>
+                            <?php if($user['state'] == 1): ?><a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="<?php echo ($user['id']); ?>" data-state="2">激活</a>
+                                <a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="<?php echo ($user['id']); ?>" data-state="4">拒绝</a>
                             <?php elseif($user['state'] == 2): ?>
-                                <a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="3">注销</a>
+                                <a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="<?php echo ($user['id']); ?>" data-state="3">注销</a>
                             <?php else: ?>
-                                 <a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="2">激活</a><?php endif; ?>
+                                 <a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="<?php echo ($user['id']); ?>" data-state="2">再次激活</a><?php endif; ?>
                                  <!--<a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="5">删除</a>-->
                         </div>
                     </td>
@@ -519,17 +405,24 @@
                     <tr style=" height:35px;">
                         <td colspan="8" align="center" style=" color: #18c3a7">暂无批次数据……</td>
                     </tr><?php endif; ?>
+                </tbody>
             </table>
-            <button style="" id="getValue">激活</button>
-        <?php if($page_count > 1): ?><div class="page">
-                <a href="javascript:void(0);" class="jump">跳转</a>
-                <input type="text" class="rt number">
-                <?php if($_GET['page'] < page_count): ?><a href="javascript:void(0);"><a href="javascript:void(0);" class="rt next">下一页</a><?php endif; ?>
-                <span class="rt">
-                    <span class="current"><?php echo ($page); ?></span>/<span class="all"><?php echo ($page_count); ?></span>
-                </span>
-                <?php if($_GET['page'] > 1): ?><a class="rt prev">上一页</a><?php endif; ?>
-            </div><?php endif; ?>
+
+        <button  type="button" class="btn btn-primary btn-sm" id="getValue" data-toggle="modal" data-target="#myModal">激活</button>
+            <div style="float:right;">
+            <?php if($page_count > 1): ?><div class="page">
+                    <a href="javascript:void(0);" class="jump">跳转</a>
+                    <input type="text" class="rt number" style="width:40px;">
+                    <?php if($_GET['page'] < page_count): ?><a href="javascript:void(0);" class="rt next">&nbsp;Next</a><?php endif; ?>
+                    <span class="rt">
+                        <span class="current"><?php echo ($page); ?></span>/<span class="all"><?php echo ($page_count); ?></span>
+                    </span>
+                    <?php if($_GET['page'] > 1): ?><a class="rt prev">Previous&nbsp;</a><?php endif; ?>
+                </div><?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
         <!--footer section start-->
         <!--footer section start-->
 <footer>
@@ -616,45 +509,45 @@
 </script>
 
 <!-- Placed js at the end of the document so the pages load faster -->
-<script src="/notoadmin/Application/Admin/View/Public/js/jquery-ui-1.9.2.custom.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/modernizr.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/jquery.nicescroll.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/modernizr.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery.nicescroll.js"></script>
 
 <!--easy pie chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/easypiechart/jquery.easypiechart.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/easypiechart/easypiechart-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/easypiechart/jquery.easypiechart.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/easypiechart/easypiechart-init.js"></script>
 
 <!--Sparkline Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/sparkline/jquery.sparkline.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/sparkline/sparkline-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/sparkline/jquery.sparkline.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/sparkline/sparkline-init.js"></script>
 
 <!--icheck -->
-<script src="/notoadmin/Application/Admin/View/Public/js/iCheck/jquery.icheck.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/icheck-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/jquery.icheck.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/icheck-init.js"></script>
 
 <!-- jQuery Flot Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.tooltip.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.resize.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.tooltip.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.resize.js"></script>
 
 
 <!--Morris Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/morris-chart/raphael-min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/morris-chart/raphael-min.js"></script>
 
 <!--Calendar-->
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/clndr.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/evnt.calendar.init.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/moment-2.2.1.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/calendar/clndr.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/calendar/evnt.calendar.init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/calendar/moment-2.2.1.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 
 <!--common scripts for all pages-->
-<script src="/notoadmin/Application/Admin/View/Public/js/scripts.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/scripts.js"></script>
 
 <!--Dashboard Charts-->
-<script src="/notoadmin/Application/Admin/View/Public/js/dashboard-chart-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/dashboard-chart-init.js"></script>
 
 
 </body>
