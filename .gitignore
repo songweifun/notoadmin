@@ -4,3 +4,4 @@ Application/Runtime/
 .idea/
 .DS_Store
 .idea/notoadmin.iml
+/vendor/

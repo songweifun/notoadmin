@@ -7,6 +7,8 @@
  */
 
 namespace Admin\Controller;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 
 /**
  * 权限管理
@@ -109,6 +111,16 @@ class RbacController extends CommonController
         if($action=='getNodeList'){
             $nodeList=M('adminNode')->order('sort')->select();
             $nodeList=Ancestry($nodeList,0);
+            $adapter = new ArrayAdapter($nodeList);
+            $pagerfanta = new Pagerfanta($adapter);
+            $nbResults = $pagerfanta->getNbResults();
+
+            $currentPageResults = $pagerfanta->getCurrentPageResults();
+
+            echo $pagerfanta->getAdapter();
+
+            $pagerfanta->haveToPaginate();
+            die;
             echo json_encode($nodeList);
             die;
 
