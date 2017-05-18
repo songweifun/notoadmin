@@ -8,37 +8,37 @@
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
     <title>用户列表</title>
-    <script src="/notoadmin/Application/Admin/View/Public/js/jquery-1.10.2.min.js"></script>
+    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery-1.10.2.min.js"></script>
 
     <!-- bootstrap -->
 
-    <link href="/notoadmin/Application/Admin/View/Public/css/bootstrap.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/bootstrap.css" rel="stylesheet">
     <!--icheck-->
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/square.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/red.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/blue.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/square.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/red.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/blue.css" rel="stylesheet">
 
     <!--dashboard calendar-->
-    <link href="/notoadmin/Application/Admin/View/Public/css/clndr.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/clndr.css" rel="stylesheet">
 
     <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.css">
+    <link rel="stylesheet" href="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.css">
 
     <!--common-->
-    <link href="/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/css/style-responsive.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
+    <link href="/nannongAdmin/notoadmin/Application/Admin/View/Public/css/style-responsive.css" rel="stylesheet">
 
 
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="/notoadmin/Application/Admin/View/Public/js/html5shiv.js"></script>
-    <script src="/notoadmin/Application/Admin/View/Public/js/respond.min.js"></script>
+    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/html5shiv.js"></script>
+    <script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/layer/layer.js"></script>
-    <script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/angular.min.js"></script>
+    <script type="text/javascript" src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/layer/layer.js"></script>
+    <script type="text/javascript" src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/angular.min.js"></script>
 
 
 </head>
@@ -51,11 +51,11 @@
 
     <!--logo and iconic logo start-->
     <div class="logo">
-        <a href="index.html"><img src="/notoadmin/Application/Admin/View/Public/images/logo.png" alt=""></a>
+        <a href="index.html"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/logo.png" alt=""></a>
     </div>
 
     <div class="logo-icon text-center">
-        <a href="index.html"><img src="/notoadmin/Application/Admin/View/Public/images/logo_icon.png" alt=""></a>
+        <a href="index.html"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/logo_icon.png" alt=""></a>
     </div>
     <!--logo and iconic logo end-->
 
@@ -64,7 +64,7 @@
         <!-- visible to small devices only -->
         <div class="visible-xs hidden-sm hidden-md hidden-lg">
             <div class="media logged-user">
-                <img alt="" src="/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" class="media-object">
+                <img alt="" src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" class="media-object">
                 <div class="media-body">
                     <h4><a href="#">John Doe</a></h4>
                     <span>"Hello There..."</span>
@@ -95,7 +95,7 @@
 
             <?php if(is_array($menuList)): foreach($menuList as $k=>$vo): ?><li class="menu-list <?php if($cate == $vo["name"] ): ?>nav-active<?php endif; ?>"><a href=""><i class="fa fa-book"></i> <span><?php echo ($vo["title"]); ?></span></a>
                     <ul class="sub-menu-list">
-                        <?php if(is_array($vo['node'])): foreach($vo['node'] as $kk=>$voo): ?><li <?php if($menu == $voo["name"] ): ?>class="active"<?php endif; ?> ><a href="/notoadmin/index.php/Admin/<?php echo ($vo["name"]); ?>/<?php echo ($voo["name"]); ?>"> <?php echo ($voo["title"]); ?></a></li><?php endforeach; endif; ?>
+                        <?php if(is_array($vo['node'])): foreach($vo['node'] as $kk=>$voo): ?><li <?php if($menu == $voo["name"] ): ?>class="active"<?php endif; ?> ><a href="/nannongAdmin/notoadmin/index.php/Admin/<?php echo ($vo["name"]); ?>/<?php echo ($voo["name"]); ?>"> <?php echo ($voo["title"]); ?></a></li><?php endforeach; endif; ?>
                     </ul>
                 </li><?php endforeach; endif; ?>
 
@@ -210,7 +210,7 @@
                     <ul class="dropdown-list normal-list">
                         <li class="new">
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user1.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user1.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">John Doe <span class="badge badge-success">new</span></span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -219,7 +219,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user2.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user2.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Jonathan Smith</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -228,7 +228,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user3.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user3.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Jane Doe</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -237,7 +237,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user4.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user4.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Mark Henry</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -246,7 +246,7 @@
                         </li>
                         <li>
                             <a href="">
-                                <span class="thumb"><img src="/notoadmin/Application/Admin/View/Public/images/photos/user5.png" alt="" /></span>
+                                <span class="thumb"><img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user5.png" alt="" /></span>
                                         <span class="desc">
                                           <span class="name">Jim Doe</span>
                                           <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -299,7 +299,7 @@
             </li>
             <li>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <img src="/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" alt="" />
+                    <img src="/nannongAdmin/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" alt="" />
                     范松伟
                     <span class="caret"></span>
                 </a>
@@ -321,31 +321,42 @@
 
         <!-- header section end-->
 
+        <!-- page heading start-->
+        <div class="page-heading">
+
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">用户管理</a>
+                </li>
+                <li class="active"> 用户审核 </li>
+            </ul>
+
+        </div>
+        <!-- page heading end-->
+<div class="container" ng-app="myApps" ng-controller="myCtrl">
+    <div class="row">
+        <div class="table-responsive" class="col-md-8">
         <div class="totol " style=" width: 100%;">
             <form action="<?php echo U('UserManage/index');?>" method="post" style="float:left;padding-left:80%;">
                 <input type="text" class="search-input" name="searchValue"  required placeholder="一卡通号/姓名/手机号" value=""/>
-                <input type="submit" value="检索"  class="upbutton" style="margin-right:0;width:80px;"  />
+                <input type="submit" value="检索"  class="btn btn-primary btn-sm" style="margin-left:10px;width:60px;float:right;"  />
             </form>
-
-
-
-
         </div>
-
-
-
-            <table class="table table-striped ctuu" >
-                <tr class="hui_top">
-                    <th><input type="checkbox" id="all"></th>
-                    <th>一卡通号</th>
-                    <th>姓名</th>
-                    <th>性别</th>
-                    <th>专业</th>
-                    <th>手机号</th>
-                    <th>个性签名</th>
-                    <th>状态</th>
-                    <th style="text-align:center;">操作</th>
-                </tr>
+            <table class="table table-hover table-bordered table-striped table-condensed" >
+                <thead>
+                    <tr class="success hui_top" >
+                        <th><input type="checkbox" id="all"></th>
+                        <th>一卡通号</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>专业</th>
+                        <th>手机号</th>
+                        <th>个性签名</th>
+                        <th>状态</th>
+                        <th style="text-align:center;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <?php if($user != null): if(is_array($user)): foreach($user as $key=>$user): ?><tr class="result_list">
                     <td><input type="checkbox" value="<?php echo ($user['id']); ?>"></td>
                     <td>
@@ -373,18 +384,18 @@
                             <?php elseif($user['state'] == 2): ?>
                                 <font color="blue">已激活</font>
                             <?php elseif($user['state'] == 3): ?>
-                                <font color="red">已注销</font>
+                                <font color="grey">已注销</font>
                             <?php else: ?>
-                                已拒绝<?php endif; ?>
+                                <font color="red">已拒绝</font><?php endif; ?>
                     </td>
                     <td class="choose_td" align="center">
                         <div style="min-width: 80px;">
-                            <?php if($user['state'] == 1): ?><a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="2">激活</a>
-                                <a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="4">拒绝</a>
+                            <?php if($user['state'] == 1): ?><a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="<?php echo ($user['id']); ?>" data-state="2">激活</a>
+                                <a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="<?php echo ($user['id']); ?>" data-state="4">拒绝</a>
                             <?php elseif($user['state'] == 2): ?>
-                                <a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="3">注销</a>
+                                <a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="<?php echo ($user['id']); ?>" data-state="3">注销</a>
                             <?php else: ?>
-                                 <a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="2">激活</a><?php endif; ?>
+                                 <a href="javascript:;" class="btn btn-primary btn-sm exam" data-id="<?php echo ($user['id']); ?>" data-state="2">再次激活</a><?php endif; ?>
                                  <!--<a href="javascript:;" class="exam" data-id="<?php echo ($user['id']); ?>" data-state="5">删除</a>-->
                         </div>
                     </td>
@@ -394,17 +405,24 @@
                     <tr style=" height:35px;">
                         <td colspan="8" align="center" style=" color: #18c3a7">暂无批次数据……</td>
                     </tr><?php endif; ?>
+                </tbody>
             </table>
-            <button style="" id="getValue">激活</button>
-        <?php if($page_count > 1): ?><div class="page">
-                <a href="javascript:void(0);" class="jump">跳转</a>
-                <input type="text" class="rt number">
-                <?php if($_GET['page'] < page_count): ?><a href="javascript:void(0);"><a href="javascript:void(0);" class="rt next">下一页</a><?php endif; ?>
-                <span class="rt">
-                    <span class="current"><?php echo ($page); ?></span>/<span class="all"><?php echo ($page_count); ?></span>
-                </span>
-                <?php if($_GET['page'] > 1): ?><a class="rt prev">上一页</a><?php endif; ?>
-            </div><?php endif; ?>
+
+        <button  type="button" class="btn btn-primary btn-sm" id="getValue" data-toggle="modal" data-target="#myModal">激活</button>
+            <div style="float:right;">
+            <?php if($page_count > 1): ?><div class="page">
+                    <a href="javascript:void(0);" class="jump">跳转</a>
+                    <input type="text" class="rt number" style="width:40px;">
+                    <?php if($_GET['page'] < page_count): ?><a href="javascript:void(0);" class="rt next">&nbsp;Next</a><?php endif; ?>
+                    <span class="rt">
+                        <span class="current"><?php echo ($page); ?></span>/<span class="all"><?php echo ($page_count); ?></span>
+                    </span>
+                    <?php if($_GET['page'] > 1): ?><a class="rt prev">Previous&nbsp;</a><?php endif; ?>
+                </div><?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
         <!--footer section start-->
         <!--footer section start-->
 <footer>
@@ -491,45 +509,45 @@
 </script>
 
 <!-- Placed js at the end of the document so the pages load faster -->
-<script src="/notoadmin/Application/Admin/View/Public/js/jquery-ui-1.9.2.custom.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/modernizr.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/jquery.nicescroll.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/modernizr.min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/jquery.nicescroll.js"></script>
 
 <!--easy pie chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/easypiechart/jquery.easypiechart.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/easypiechart/easypiechart-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/easypiechart/jquery.easypiechart.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/easypiechart/easypiechart-init.js"></script>
 
 <!--Sparkline Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/sparkline/jquery.sparkline.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/sparkline/sparkline-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/sparkline/jquery.sparkline.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/sparkline/sparkline-init.js"></script>
 
 <!--icheck -->
-<script src="/notoadmin/Application/Admin/View/Public/js/iCheck/jquery.icheck.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/icheck-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/iCheck/jquery.icheck.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/icheck-init.js"></script>
 
 <!-- jQuery Flot Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.tooltip.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.resize.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.tooltip.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.resize.js"></script>
 
 
 <!--Morris Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/morris-chart/raphael-min.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/morris-chart/raphael-min.js"></script>
 
 <!--Calendar-->
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/clndr.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/evnt.calendar.init.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/moment-2.2.1.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/calendar/clndr.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/calendar/evnt.calendar.init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/calendar/moment-2.2.1.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 
 <!--common scripts for all pages-->
-<script src="/notoadmin/Application/Admin/View/Public/js/scripts.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/scripts.js"></script>
 
 <!--Dashboard Charts-->
-<script src="/notoadmin/Application/Admin/View/Public/js/dashboard-chart-init.js"></script>
+<script src="/nannongAdmin/notoadmin/Application/Admin/View/Public/js/dashboard-chart-init.js"></script>
 
 
 </body>

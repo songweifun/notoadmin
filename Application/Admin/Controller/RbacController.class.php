@@ -7,8 +7,8 @@
  */
 
 namespace Admin\Controller;
-use Pagerfanta\Adapter\ArrayAdapter;
-use Pagerfanta\Pagerfanta;
+//use Pagerfanta\Adapter\ArrayAdapter;
+//use Pagerfanta\Pagerfanta;
 
 /**
  * 权限管理
@@ -118,12 +118,14 @@ class RbacController extends CommonController
             //$pagerfanta->setCurrentPage(1);
             //$nbResults = $pagerfanta->getNbResults();
 
+
              //$currentPageResults = $pagerfanta->getCurrentPageResults();
 
              //$pagerfanta->getAdapter();
 
             //echo $pagerfanta->haveToPaginate();
             //echo $pagerfanta;
+
             //die;
             echo json_encode($nodeList);
             die;

@@ -7,6 +7,7 @@
  */
 
 namespace Common\Model;
+//use Think\Model;
 
 
 use Think\Model\RelationModel;
