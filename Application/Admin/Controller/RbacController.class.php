@@ -111,16 +111,20 @@ class RbacController extends CommonController
         if($action=='getNodeList'){
             $nodeList=M('adminNode')->order('sort')->select();
             $nodeList=Ancestry($nodeList,0);
-            $adapter = new ArrayAdapter($nodeList);
-            $pagerfanta = new Pagerfanta($adapter);
-            $nbResults = $pagerfanta->getNbResults();
+            //$adapter = new ArrayAdapter($nodeList);
+            //$pagerfanta = new Pagerfanta($adapter);
+            //$pagerfanta->setMaxPerPage(45);
+            //$page=I('get.page');
+            //$pagerfanta->setCurrentPage(1);
+            //$nbResults = $pagerfanta->getNbResults();
 
-            $currentPageResults = $pagerfanta->getCurrentPageResults();
+             //$currentPageResults = $pagerfanta->getCurrentPageResults();
 
-            echo $pagerfanta->getAdapter();
+             //$pagerfanta->getAdapter();
 
-            $pagerfanta->haveToPaginate();
-            die;
+            //echo $pagerfanta->haveToPaginate();
+            //echo $pagerfanta;
+            //die;
             echo json_encode($nodeList);
             die;
 
@@ -219,8 +223,9 @@ class RbacController extends CommonController
             $_POST['library_id']=$_COOKIE['ADMIN_LIBID'];
             $_POST['logintime']=time();
             $_POST['loginip']=get_client_ip();
-            $_POST['password']=md5($_POST['password']);
+            $_POST['password']=md5(I('post.password'));
             $_POST['status']=1;
+            //print_r($_POST)
 
             if ($_POST['id']){
                 //编辑
@@ -236,6 +241,11 @@ class RbacController extends CommonController
                 }
 
             }else{
+                //名称存在不给添加
+                if(M('adminUser')->where(array('user_name'=>I('post.user_name')))->count()){
+                    echo json_encode(array('status'=>false,'msg'=>'名称已存在！'));
+                    die;
+                }
                 //添加
                 if($user_id=M('adminUser')->add($_POST)){//插入admin_user表
                     echo json_encode(array('status'=>true,'msg'=>'添加成功'));

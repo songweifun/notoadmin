@@ -13,7 +13,8 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "pagerfanta/pagerfanta": "^1.0@dev"
+        "pagerfanta/pagerfanta": "^1.0@dev",
+        "houdunwang/page": "dev-master"
     },
     "minimum-stability": "dev",
     "repositories": {

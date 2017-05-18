@@ -46,7 +46,7 @@ class LoginController extends Controller
         //echo $passwd;
         $userInfo=$user->where(array('user_name'=>$username))->find();
         if(!$verify->check($code)) $this->error('验证码错误');
-        //echo "<pre>";print_r($userInfo);
+        //echo "<pre>";print_r($userInfo);die;
         //die;
         if(!$userInfo){
             $this->error('用户名不存在');

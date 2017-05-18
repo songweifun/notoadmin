@@ -4,8 +4,422 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dbdd271c370af42396fd9515c79d9e85",
+    "content-hash": "1661bf0f20568e9f86a1b551d65dc0df",
     "packages": [
+        {
+            "name": "houdunwang/arr",
+            "version": "v1.0.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/houdunwang/arr.git",
+                "reference": "993577f8af8cef192dc647f12fd8f62bfd965254"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/houdunwang/arr/993577f8af8cef192dc647f12fd8f62bfd965254.zip",
+                "reference": "993577f8af8cef192dc647f12fd8f62bfd965254",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "project",
+            "autoload": {
+                "files": [],
+                "psr-4": {
+                    "houdunwang\\arr\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "后盾网向军",
+                    "email": "2300071698@qq.com"
+                }
+            ],
+            "description": "数组增强组件主要是对数组等数据进行处理，如无限级分类操作、商品规格的迪卡尔乘积运算等",
+            "homepage": "http://www.houdunwang.com/",
+            "keywords": [
+                "array",
+                "hdphp",
+                "houdunwang",
+                "后盾人",
+                "后盾网",
+                "向军老师"
+            ],
+            "time": "2017-05-01T06:17:06+00:00"
+        },
+        {
+            "name": "houdunwang/config",
+            "version": "v1.0.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/houdunwang/config.git",
+                "reference": "6d52a32468b34e3dc7526bac587e98233823b602"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/houdunwang/config/6d52a32468b34e3dc7526bac587e98233823b602.zip",
+                "reference": "6d52a32468b34e3dc7526bac587e98233823b602",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "vlucas/phpdotenv": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "project",
+            "autoload": {
+                "files": [
+                    "src/helper.php"
+                ],
+                "psr-4": {
+                    "houdunwang\\config\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "后盾网向军",
+                    "email": "2300071698@qq.com"
+                }
+            ],
+            "description": "config组件用于管理网站配置项",
+            "homepage": "http://www.houdunwang.com/",
+            "keywords": [
+                "hdphp",
+                "houdunwang",
+                "后盾人",
+                "后盾网",
+                "向军老师",
+                "配置管理"
+            ],
+            "time": "2017-05-04T14:39:38+00:00"
+        },
+        {
+            "name": "houdunwang/cookie",
+            "version": "v1.0.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/houdunwang/cookie.git",
+                "reference": "6648b1a9c39ca21455232cfbe80b01d58121d7d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/houdunwang/cookie/6648b1a9c39ca21455232cfbe80b01d58121d7d6.zip",
+                "reference": "6648b1a9c39ca21455232cfbe80b01d58121d7d6",
+                "shasum": ""
+            },
+            "require": {
+                "houdunwang/arr": "~1.0",
+                "houdunwang/config": "~1.0",
+                "houdunwang/crypt": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "project",
+            "autoload": {
+                "files": [],
+                "psr-4": {
+                    "houdunwang\\cookie\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "后盾网向军",
+                    "email": "2300071698@qq.com"
+                }
+            ],
+            "description": "COOKIE管理组件",
+            "homepage": "http://www.houdunwang.com/",
+            "keywords": [
+                "cookie",
+                "hdphp",
+                "houdunwang",
+                "后盾人",
+                "后盾网",
+                "向军老师"
+            ],
+            "time": "2017-05-02T14:23:51+00:00"
+        },
+        {
+            "name": "houdunwang/crypt",
+            "version": "v1.0.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/houdunwang/crypt.git",
+                "reference": "edd931ece50abd19f84355a298101b3c2bfebb80"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/houdunwang/crypt/edd931ece50abd19f84355a298101b3c2bfebb80.zip",
+                "reference": "edd931ece50abd19f84355a298101b3c2bfebb80",
+                "shasum": ""
+            },
+            "require": {
+                "houdunwang/config": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "project",
+            "autoload": {
+                "files": [
+                    "src/helper.php"
+                ],
+                "psr-4": {
+                    "houdunwang\\crypt\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "后盾网向军",
+                    "email": "2300071698@qq.com"
+                }
+            ],
+            "description": "crypt加密组件包提供功能强大的加密功能",
+            "homepage": "http://www.houdunwang.com/",
+            "keywords": [
+                "hdphp",
+                "houdunwang",
+                "mcrypt",
+                "加密解密",
+                "后盾人",
+                "后盾网",
+                "向军老师"
+            ],
+            "time": "2017-05-02T10:14:08+00:00"
+        },
+        {
+            "name": "houdunwang/page",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/houdunwang/page.git",
+                "reference": "642f6b9492fd9df3456def8d0627d427499db7e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/houdunwang/page/642f6b9492fd9df3456def8d0627d427499db7e1.zip",
+                "reference": "642f6b9492fd9df3456def8d0627d427499db7e1",
+                "shasum": ""
+            },
+            "require": {
+                "houdunwang/config": "~1.0",
+                "houdunwang/request": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "project",
+            "autoload": {
+                "files": [],
+                "psr-4": {
+                    "houdunwang\\page\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "后盾网向军",
+                    "email": "2300071698@qq.com"
+                }
+            ],
+            "description": "分页组件可以产生基于当前页面的智能「范围」链接，所产生的 HTML 兼容 Bootstrap CSS 框架.",
+            "homepage": "http://www.houdunwang.com/",
+            "keywords": [
+                "hdphp",
+                "houdunwang",
+                "page",
+                "后盾人",
+                "后盾网",
+                "后盾网向军"
+            ],
+            "time": "2017-05-04 07:46:27"
+        },
+        {
+            "name": "houdunwang/request",
+            "version": "v1.0.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/houdunwang/request.git",
+                "reference": "a8caf1ff6087f659d3178b932495048657cda525"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/houdunwang/request/a8caf1ff6087f659d3178b932495048657cda525.zip",
+                "reference": "a8caf1ff6087f659d3178b932495048657cda525",
+                "shasum": ""
+            },
+            "require": {
+                "houdunwang/arr": "~1.0",
+                "houdunwang/cookie": "~1.0",
+                "houdunwang/session": "~1.0",
+                "houdunwang/tool": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "project",
+            "autoload": {
+                "files": [
+                    "src/helper.php"
+                ],
+                "psr-4": {
+                    "houdunwang\\request\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "后盾网向军",
+                    "email": "2300071698@qq.com"
+                }
+            ],
+            "description": "客户端请求处理组件",
+            "homepage": "http://www.houdunwang.com/",
+            "keywords": [
+                "hdphp",
+                "houdunwang",
+                "json",
+                "request",
+                "后盾人",
+                "后盾网",
+                "向军老师"
+            ],
+            "time": "2017-05-05T04:32:04+00:00"
+        },
+        {
+            "name": "houdunwang/session",
+            "version": "v1.0.21",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/houdunwang/session.git",
+                "reference": "745bd7139c05c5556c67a2f753e11f915a5b816d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/houdunwang/session/745bd7139c05c5556c67a2f753e11f915a5b816d.zip",
+                "reference": "745bd7139c05c5556c67a2f753e11f915a5b816d",
+                "shasum": ""
+            },
+            "require": {
+                "houdunwang/config": "~1.0",
+                "houdunwang/cookie": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "project",
+            "autoload": {
+                "files": [],
+                "psr-4": {
+                    "houdunwang\\session\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "后盾网向军",
+                    "email": "2300071698@qq.com"
+                }
+            ],
+            "description": "SESSION会话管理组件",
+            "homepage": "http://www.houdunwang.com/",
+            "keywords": [
+                "hdphp",
+                "houdunwang",
+                "mcrypt",
+                "session",
+                "后盾人",
+                "后盾网",
+                "向军老师"
+            ],
+            "time": "2017-05-08T10:05:52+00:00"
+        },
+        {
+            "name": "houdunwang/tool",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/houdunwang/tool.git",
+                "reference": "e9b37ae442ba86707eb1ba1a043c066a7130f5e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/houdunwang/tool/e9b37ae442ba86707eb1ba1a043c066a7130f5e3.zip",
+                "reference": "e9b37ae442ba86707eb1ba1a043c066a7130f5e3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [],
+                "psr-4": {
+                    "houdunwang\\tool\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "后盾网向军",
+                    "email": "2300071698@qq.com"
+                }
+            ],
+            "description": "工具组件包含开发中常用的一些小功能",
+            "homepage": "http://www.houdunwang.com/",
+            "keywords": [
+                "hdphp",
+                "houdunwang",
+                "tool",
+                "后盾人",
+                "后盾网",
+                "向军老师"
+            ],
+            "time": "2017-05-10T04:36:10+00:00"
+        },
         {
             "name": "pagerfanta/pagerfanta",
             "version": "dev-master",
@@ -74,13 +488,64 @@
                 "paging"
             ],
             "time": "2017-03-20 13:46:15"
+        },
+        {
+            "name": "vlucas/phpdotenv",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vlucas/phpdotenv.git",
+                "reference": "7ac2c1cef304f5bd5a8d40750fbcbdd49333b9e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/vlucas/phpdotenv/7ac2c1cef304f5bd5a8d40750fbcbdd49333b9e5.zip",
+                "reference": "7ac2c1cef304f5bd5a8d40750fbcbdd49333b9e5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dotenv\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause-Attribution"
+            ],
+            "authors": [
+                {
+                    "name": "Vance Lucas",
+                    "email": "vance@vancelucas.com",
+                    "homepage": "http://www.vancelucas.com"
+                }
+            ],
+            "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
+            "keywords": [
+                "dotenv",
+                "env",
+                "environment"
+            ],
+            "time": "2017-02-03 22:05:04"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "pagerfanta/pagerfanta": 20
+        "pagerfanta/pagerfanta": 20,
+        "houdunwang/page": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
