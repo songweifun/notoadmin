@@ -75,3 +75,27 @@ function AncestryNoTree($data , $pid=0,$count=1) {
     }
     return $ancestry;
 }
+
+function getBookDeatil($book_id){
+    //初始化
+//    $ch = curl_init();
+//    $api_url  =   sprintf('http://101.201.103.106/subject_book/widgets/interface/index.html?indexId=3&api_type=articles_one&content_tag=1&a_id=%s',$book_id);
+//    //设置选项，包括URL
+//    curl_setopt($ch, CURLOPT_URL,$api_url);
+//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//    curl_setopt($ch, CURLOPT_HEADER, 0);
+//    //执行并获取HTML文档内容
+//    $output = curl_exec($ch);
+//    //释放curl句柄
+//    curl_close($ch);
+
+    $api_url  =   sprintf('http://101.201.103.106/subject_book/widgets/interface/index.html?indexId=3&api_type=articles_one&content_tag=1&a_id=%s',$book_id);
+    $ch       = curl_init ($api_url) ;
+    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1) ;
+    $arr      = curl_exec ($ch) ;
+    curl_close ($ch) ;
+    $arr      =   json_decode($arr,true);
+    return $arr['content'];
+
+
+}

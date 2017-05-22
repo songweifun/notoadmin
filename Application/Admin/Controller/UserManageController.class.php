@@ -17,7 +17,6 @@ class UserManageController extends CommonController
     //申请用户显示
     public function index(){
         $this->menu=ACTION_NAME;
-
         $searchValue  =   trim(I('post.searchValue'));
         if($searchValue){
             $where = "u.card='".$searchValue."' or u.user_name='".$searchValue."' or u.phone='".$searchValue."'";

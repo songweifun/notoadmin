@@ -18,7 +18,7 @@ class BrowBooksManageController extends CommonController
     //订单显示
     public function index(){
         $this->menu  =  ACTION_NAME;
-        $library_id  =  $_COOKIE['ADMIN_LIBID'];
+        $library_id   =  $_COOKIE['ADMIN_LIBID'];
         $searchValue  =   trim(I('post.searchValue'));
         $where        =    "o.library_id='".$library_id."'";
         if($searchValue){
@@ -42,7 +42,7 @@ class BrowBooksManageController extends CommonController
                     ->join('noto_user as u on u.id=o.user_id')
                     ->join('noto_user_address as a on a.address_id=o.address_id')
                     ->field('o.id,u.card,u.user_name,a.consignee,a.tel,a.province,a.city,a.county,a.street,a.detail_address,o.create_time,o.status')
-//                    ->where("o.library_id='".$library_id."'")
+//                    ->where($where)
                     ->order('o.create_time desc')
                     ->limit($min,1)
                     ->select();
@@ -186,13 +186,15 @@ class BrowBooksManageController extends CommonController
                     ->join('noto_library as a on a.id=r.library_id')
                     ->join('noto_order as o on o.id=l.order_id')
                     ->field('r.id,r.library_id,l.status,r.express_num,r.create_time,u.card,u.user_name,l.book_id,l.return_desc,a.borrowtime,o.create_time as starttime')
-//                    ->where("r.library_id='".$library_id."'")
+//                    ->where($where)
                     ->order('r.id')
                     ->limit($min,10)
                     ->select();
 
         foreach($returnList as $key=>$value){
             $returnList[$key]['overtime']  =  round(($value['create_time']-$value['starttime'])/86400);
+            $BookDeatil                     =  getBookDeatil($value['book_id']);
+            $returnList[$key]['book_title']  =  $BookDeatil['title'];
             if($value['borrowtime'] >= $returnList[$key]['overtime']){
                 //未过期
                 $returnList[$key]['isOver'] = 0;
@@ -201,7 +203,7 @@ class BrowBooksManageController extends CommonController
                 $returnList[$key]['isOver'] = 1;
             }
         }
-//        dump($returnList);die;
+//        print_r($returnList);die;
         $this->assign('returnList',$returnList);
 
         $this->display();
