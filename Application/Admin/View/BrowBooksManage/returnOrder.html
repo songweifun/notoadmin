@@ -27,10 +27,10 @@
 <div class="container" ng-app="myApps" ng-controller="myCtrl">
     <div class="row">
         <div class="table-responsive" class="col-md-8">
-        <div class="totol " style=" width: 100%;">
-            <form action="{:U('UserManage/index')}" method="post" style="float:left;padding-left:80%;">
+        <div class="totol " style="float:right;">
+            <form action="{:U('UserManage/index')}" method="post">
                 <input type="text" class="search-input" name="searchValue"  required placeholder="订单号/一卡通号/用户名" value=""/>
-                <input type="submit" value="检索" class="btn btn-primary btn-sm" style="margin-left:10px;width:60px;float:right;"  />
+                <input type="submit" value="检索" class="btn btn-primary btn-sm"  />
             </form>
         </div>
             <table class="table table-hover table-bordered table-striped table-condensed" >
@@ -41,7 +41,7 @@
                     <th>快递单号</th>
                     <th>一卡通号</th>
                     <th>用户名</th>
-                    <th>书的id  </th>
+                    <th>书名  </th>
                     <th>是否过期</th>
                     <th>还书说明</th>
                     <th>生成时间</th>
@@ -67,7 +67,7 @@
                         {$returnList['user_name']}
                     </td>
                     <td>
-                        {$returnList['book_id']}
+                        {$returnList['book_title']}
                     </td>
                     <td>
                         <if condition="$returnList['isOver'] eq 0">
@@ -119,14 +119,14 @@
         <if condition="$page_count gt 1">
             <div class="page">
                 <a href="javascript:void(0);" class="jump">跳转</a>
-                <input type="text" class="rt number">
+                <input type="text" class="rt number" style="width:80px;">
                 <if condition="$_GET['page'] lt page_count">
-                    <a href="javascript:void(0);"><a href="javascript:void(0);" class="rt next">下一页</a>
+                    <a href="javascript:void(0);" class="rt next">下一页</a>
                 </if>
                     <span class="rt">
                         <span  class="current">{$page}</span>/<span class="all">{$page_count}</span>
                     </span>
-                <if condition="$_GET['page'] gt 1"><a class="rt prev">上一页</a></if>
+                <if condition="$_GET['page'] gt 1"><a href="javascript:void(0);" class="rt prev">上一页</a></if>
             </div>
         </if>
         </div>
@@ -176,10 +176,10 @@
             'dataType':'json',
             'success':function (data) {
                 if (data.code == 200) {
-                    alert(data.msg);
+                    layer.alert(data.msg);
                     location.reload();//刷新当前页面.
                 }else{
-                    alert(data.msg);
+                    layer.alert(data.msg);
                 }
             }
         });
@@ -198,6 +198,7 @@
             valArr[i] = $(this).val();
             valArr1[i] = $(this).attr('book_id');
         });
+//        console.log(valArr);return false;
         var vals = valArr.join(',');
         var vals1 = valArr1.join(',');
 //        alert(vals);
@@ -208,10 +209,10 @@
             'dataType':'json',
             'success':function(data){
                 if (data.code == 200) {
-                    alert(data.msg);
+                    layer.alert(data.msg);
                     location.reload();//刷新当前页面.
                 }else{
-                    alert(data.msg);
+                    layer.alert(data.msg);
                 }
             }
         });
