@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>安徽大学情报工程实验室</title>
+
+    <!-- Bootstrap -->
+    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+ 	<link href="public/css/master.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="public/js/html5shiv.min.js"></script>
+      <script src="public/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	<!--header-->
+    <div class="navbar-wrapper">
+    	<div class="container">
+    		<div class="logo">
+    			<h1>
+    				<a href="/">安徽大学情报工程实验室</a>
+    			</h1>
+    		</div>
+    		<ul class="nav">
+    			<li>
+    				<a href="#">学校首页</a>
+    			</li>
+    			<li class="tu-index">
+    				<a href="#">图书馆首页</a>
+    			</li>
+    		</ul>
+    	</div>
+    </div>
+    <!--banner-->
+	<div id="carousel-banner" class="carousel slide" data-ride="carousel">
+	  <!-- Indicators -->
+	  <ol class="carousel-indicators">
+          <{assign var=k value=0}>
+          <{foreach $qb_list as $k=>$v}>
+	    <li data-target="#carousel-banner" data-slide-to="<{$k}>" <{if $k == 0}> class="active" <{/if}>></li>
+          <{$k=$k+1}>
+          <{/foreach}>
+	  </ol>
+
+	  <!-- Wrapper for slides -->
+	  <div class="carousel-inner banner-bg" role="listbox">
+          <{assign var=i value=0}>
+      <{foreach $qb_list as $k=>$v}>
+
+	    <div class="item <{if $i == 0}> active <{/if}>">
+	      	<div class="container banner-content">
+				<div class="banner-header"><a href="<{$v['url']}>"><{$v['title']}></a></div>
+				<div class="banner-description"><{$v['value']}></div>
+			</div>
+	    </div>
+          <{$i=$i+1}>
+      <{/foreach}>
+
+	  </div>
+	</div>
+	<!--main-->
+	<div class="container projects">
+		<div class="projects-header">
+			<h2>我们的服务</h2>
+			<hr>
+		</div>
+		<div id="projects-items" class="carousel slide" data-ride="carousel">
+		  <!-- Wrapper for slides -->
+		  <div class="carousel-inner" role="listbox">
+
+		    <div class="item active">
+		      <div class="row">
+                  <{assign var=ii value=1}>
+                  <{foreach $qb_list as $k=>$v}>
+		      	<div class="col-lg-4">
+		      		<img src="<{$v['img_url']|En_TruePath:0}>" width="80" height="80">
+		      		<h2><a href="<{$v['url']}>"><{$v['title']}></a></h2>
+		      		<p><{$v['value2']}></p>
+		      	</div>
+                <{if  ($ii == 3 && count($qb_list)!='3')||($ii == 6 &&count($qb_list)!='6')}>
+              </div>
+            </div>
+              <div class="item">
+                  <div class="row">
+                      <{/if}>
+
+                      <{$ii=$ii+1}>
+                  <{/foreach}>
+
+
+		    </div>
+		  </div>
+          </div>
+
+		  <!-- Controls -->
+			<{if count($qb_list)>3}>
+		  <a class="left carousel-control" href="#projects-items" role="button" data-slide="prev">
+		    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="right carousel-control" href="#projects-items" role="button" data-slide="next">
+		    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
+		  <{/if}>
+		</div>
+	</div>
+	<div class="footer">
+	    Copyright © 2017. All Rights Reserved 安徽大学情报工程实验室 版权所有
+	</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="public/js/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="public/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+    		 $("#projects-items").carousel('pause');
+    	});
+    </script>
+  </body>
+</html>

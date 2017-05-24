@@ -1,0 +1,330 @@
+<include file="Common/meta_section"/>
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <include file="Common/left-side"/>
+    <!-- left side end-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <include file="Common:header_section"/>
+        <!-- header section end-->
+
+
+        <!-- page heading start-->
+        <div class="page-heading">
+
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">消息管理</a>
+                </li>
+                <li class="active"> 站内信 </li>
+            </ul>
+
+        </div>
+        <!-- page heading end-->
+
+        <!--<div>-->
+            <!--&lt;!&ndash; Nav tabs &ndash;&gt;-->
+            <!--<ul class="nav nav-tabs" role="tablist">-->
+                <!--<li role="presentation" class="active"><a href="<{$WEB['www']}>?h=mycommunity&job=communityEmail" >收件箱<span style="color:red">(<{$countall}>)</span></a></li>-->
+
+                <!--<li role="presentation" ><a href="<{$WEB['www']}>?h=mycommunity&job=communityEmail&type=msgWrite">撰写信件</a></li>-->
+                <!--<li role="presentation"><a href="<{$WEB['www']}>?h=mycommunity&job=communityEmail&type=msgSend" >已发信件</a></li>-->
+                <!--<li role="presentation"><a href="<{$WEB['www']}>?h=mycommunity&job=communityEmail&type=msgGarbage" >垃圾箱</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--<br>-->
+        <!--<br>-->
+
+
+        <!--<table class="table table-bordered table-hover">-->
+            <!--<thead>-->
+            <!--<tr class="success">-->
+                <!--<th>&nbsp;</th>-->
+                <!--<th >信件主题</th>-->
+                <!--<th>发件人</th>-->
+                <!--<th>发件时间</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<form name="myform" action="<{$WEBURL}>&action=toDel" method="POST">-->
+                <!--<tbody>-->
+                <!--<{foreach $result as $k=>$v}>-->
+                <!--<tr>-->
+                    <!--<td> <input type="checkbox" name="ids[]" value="<{$v.id}>" /></td>-->
+                    <!--<td><{if $v.is_new}><img src="public/img/msgUnread.gif" title="未读" /><{else}><img src="public/img/msgRead.gif" title="已读" /><{/if}>&nbsp;<a href="<{$WEB['www']}>?h=mycommunity&job=communityMsgDetail&id=<{$v.id}>" title="打开信件"><{$v.msg_title}></a></td>-->
+                    <!--<td><{$v.msg_from}></td>-->
+                    <!--<td><{$v.add_time></td>-->
+                <!--</tr>-->
+                <!--<{/foreach}>-->
+                <!--<tr>-->
+                    <!--<td colspan="4" class="listOperation">-->
+                        <!--<label for="checkBoxAll"><input type="checkbox" id="checkBoxAll" name="checkBoxAll" value="1" onclick="checkAll(this);" />全选</label>-->
+                        <!--<input class="btn btn-success btn-xs" type="button" value="删除选中的信件" onclick="if(confirm('你确认要删除选中的信件么？')){myform.submit();}" />-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</form>-->
+        <!--</table>-->
+
+
+        <div class="container" ng-app="myApps" ng-controller="myCtrl">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">收件箱</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">发送信息</a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">已发信息</a></li>
+                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">回收站</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <table class="table table-bordered table-hover table-responsive table-condensed">
+                        <thead>
+                        <tr class="success">
+                            <th width="10%"><input type="checkbox"  ng-model="all">&nbsp;<span ng-bind="all?'反选':'全选'"></span></th>
+                            <th >信件主题</th>
+                            <th>发件人</th>
+                            <th>发件时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(k,v) in libMessages">
+                            <td><input type="checkbox" name="ids" value="{{v.id}}" ng-checked="all"></td>
+                            <td>
+                                <a href="{:U(MODULE_NAME.'/MessageManage/messageDetail')}/id/{{v.id}}">
+                                <span ng-style="{color:v.is_new==1?'green':''}"><i class="fa fa-envelope"></i></span> {{v.msg_title}}
+                                </a>
+                            </td>
+                            <td ng-bind="v.msg_from"></td>
+                            <td ng-bind="v.add_time*1000|date:'yyyy-mm-dd'"></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary btn-xs" ng-click="deleteMessage('home')"><i class="fa fa-minus"></i> 删除</button>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                    <div class="container">
+                        <div class="row">
+                            <br>
+
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">收件人</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="收件人" ng-model="message.msg_to">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">消息</label>
+                                    <textarea name="" id="exampleInputPassword1" cols="30" rows="10" class="form-control" ng-model="message.content"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-xs" ng-click="sendMessage()">发送</button>
+                            </form>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="messages">
+                    <table class="table table-bordered table-hover table-responsive table-condensed">
+                        <thead>
+                        <tr class="success">
+                            <th width="10%"><input type="checkbox"  ng-model="areadyall">&nbsp;<span ng-bind="areadyall?'反选':'全选'"></span></th>
+                            <th >信件主题</th>
+                            <th>发件人</th>
+                            <th>发件时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(k,v) in alreadySendMessage">
+                            <td><input type="checkbox" name="ids" value="{{v.id}}" ng-checked="areadyall"></td>
+                            <td>
+                                <a href="{:U(MODULE_NAME.'/MessageManage/messageDetail')}/id/{{v.id}}">
+                                    <span ng-style="{color:v.is_new==1?'green':''}"><i class="fa fa-envelope"></i></span> {{v.msg_title}}
+                                </a>
+                            </td>
+                            <td ng-bind="v.msg_from"></td>
+                            <td ng-bind="v.add_time*1000|date:'yyyy-mm-dd'"></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary btn-xs" ng-click="deleteMessage('messages')"><i class="fa fa-minus"></i> 删除</button>
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="settings">
+                    <table class="table table-bordered table-hover table-responsive table-condensed">
+                        <thead>
+                        <tr class="success">
+                            <th width="10%"><input type="checkbox"  ng-model="recycleall">&nbsp;<span ng-bind="recycleall?'反选':'全选'"></span></th>
+                            <th >信件主题</th>
+                            <th>发件人</th>
+                            <th>发件时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(k,v) in recycleMessage">
+                            <td><input type="checkbox" name="ids" value="{{v.id}}" ng-checked="recycleall"></td>
+                            <td>
+                                <a href="{:U(MODULE_NAME.'/MessageManage/messageDetail')}/id/{{v.id}}">
+                                    <span ng-style="{color:v.is_new==1?'green':''}"><i class="fa fa-envelope"></i></span> {{v.msg_title}}
+                                </a>
+                            </td>
+                            <td ng-bind="v.msg_from"></td>
+                            <td ng-bind="v.add_time*1000|date:'yyyy-mm-dd'"></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary btn-xs" ng-click="deleteMessageComplete()"><i class="fa fa-minus"></i> 彻底删除</button>
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <!--footer section start-->
+        <include file="Common/footer_section"/>
+        <!--footer section end-->
+    </div>
+    <!-- main content end-->
+</section>
+
+<script>
+
+    var m=angular.module('myApps',[]);
+    m.controller('myCtrl',['$scope','$http',function ($scope,$http) {
+            //console.log($scope.role);
+            var url="{:U(MODULE_NAME.'/MessageManage/getLibraryMessages')}";//收件箱
+            var areadySendUrl="{:U(MODULE_NAME.'/MessageManage/alreadySendMessage')}";//已发送信息
+            var recycleMessageUrl="{:U(MODULE_NAME.'/MessageManage/recycleMessage')}";//回收站
+
+        $http.get(url).then(function ($resp) {
+                $scope.libMessages=$resp.data;
+            });
+
+        $http.get(areadySendUrl).then(function ($resp) {
+            $scope.alreadySendMessage=$resp.data;
+        });
+        $http.get(recycleMessageUrl).then(function ($resp) {
+            $scope.recycleMessage=$resp.data;
+        });
+        //非物理删除信息
+
+        $scope.deleteMessage=function (item) {
+
+            obj=$('#'+item).find("input:checked");
+            check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            if(check_val.length==0){
+                layer.alert('您没有选择任何信息!');
+                return false;
+            }
+            var strify = JSON.stringify(check_val);
+            var deleteMessageUrl="{:U(MODULE_NAME.'/MessageManage/deleteMessage')}";
+            $http({
+                method:'post',
+                url:deleteMessageUrl,
+                data:$.param({data:strify}),
+                headers:{'Content-type':'application/x-www-form-urlencoded'}
+            }).then(function ($resp) {
+                if ($resp.data.status){
+                    $http.get(url).then(function ($resp) {
+                        $scope.libMessages=$resp.data;
+                    });
+
+                    $http.get(areadySendUrl).then(function ($resp) {
+                        $scope.alreadySendMessage=$resp.data;
+                    });
+                    $http.get(recycleMessageUrl).then(function ($resp) {
+                        $scope.recycleMessage=$resp.data;
+                    });
+                    layer.alert($resp.data.msg);
+                }else{
+                    layer.alert($resp.data.msg);
+                }
+
+            })
+        }
+        //发送信息
+        $scope.sendMessage=function () {
+            console.log($scope.message)
+            var sendMessageUrl="{:U(MODULE_NAME.'/MessageManage/sendMessage')}"
+            $http({
+                method:'post',
+                url:sendMessageUrl,
+                data:$.param($scope.message),
+                headers:{'Content-type':'application/x-www-form-urlencoded'}
+            }).then(function ($resp) {
+                if ($resp.data.status){
+
+                    layer.alert($resp.data.msg);
+                }else{
+                    layer.alert($resp.data.msg);
+                }
+
+            })
+        }
+
+        //物理删除消息
+        $scope.deleteMessageComplete=function () {
+
+            obj=$('#settings').find("input:checked");
+            check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            if(check_val.length==0){
+                layer.alert('您没有选择任何信息!');
+                return false;
+            }
+            var strify = JSON.stringify(check_val);
+            var deleteMessageUrl="{:U(MODULE_NAME.'/MessageManage/deleteMessageComplete')}";
+            $http({
+                method:'post',
+                url:deleteMessageUrl,
+                data:$.param({data:strify}),
+                headers:{'Content-type':'application/x-www-form-urlencoded'}
+            }).then(function ($resp) {
+                if ($resp.data.status){
+                    $http.get(url).then(function ($resp) {
+                        $scope.libMessages=$resp.data;
+                    });
+
+                    $http.get(areadySendUrl).then(function ($resp) {
+                        $scope.alreadySendMessage=$resp.data;
+                    });
+                    $http.get(recycleMessageUrl).then(function ($resp) {
+                        $scope.recycleMessage=$resp.data;
+                    });
+                    layer.alert($resp.data.msg);
+                }else{
+                    layer.alert($resp.data.msg);
+                }
+
+            })
+
+        }
+
+    }])
+
+</script>
+
+
+<include file="Common/jsfooter_section"/>
+

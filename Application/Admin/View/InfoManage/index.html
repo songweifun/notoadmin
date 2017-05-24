@@ -1,0 +1,179 @@
+<include file="Common/meta_section"/>
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <include file="Common/left-side"/>
+    <!-- left side end-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <include file="Common:header_section"/>
+        <!-- header section end-->
+
+
+        <!-- page heading start-->
+        <div class="page-heading">
+
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">资料管理</a>
+                </li>
+                <li class="active"> 基本资料 </li>
+            </ul>
+
+        </div>
+
+
+        <!--body wrapper start-->
+        <div class="wrapper" ng-app="myApps" ng-controller="myCtrl">
+
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <div class="profile-pic text-center">
+                                        <img alt="" src="__PUBLIC__/images/nnu.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <ul class="p-info">
+                                        <li>
+                                            <div class="title">名称</div>
+                                            <div class="desk">{{libInfo.lname}}</div>
+                                        </li>
+                                        <li>
+                                            <div class="title">电话</div>
+                                            <div class="desk">{{libInfo.tel}}</div>
+                                        </li>
+                                        <li>
+                                            <div class="title">简称</div>
+                                            <div class="desk">{{libInfo.sub_name}}</div>
+                                        </li>
+                                        <li>
+                                            <div class="title">地址</div>
+                                            <div class="desk">{{libInfo.address}}</div>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body p-states">
+                                    <div class="summary pull-left">
+                                        <h4>Total <span>Sales</span></h4>
+                                        <span>Monthly Summary</span>
+                                        <h3>$ 5,600</h3>
+                                    </div>
+                                    <div id="expense" class="chart-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body p-states green-box">
+                                    <div class="summary pull-left">
+                                        <h4>Product <span>refund</span></h4>
+                                        <span>Monthly Summary</span>
+                                        <h3>160</h3>
+                                    </div>
+                                    <div id="pro-refund" class="chart-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body p-states">
+                                    <div class="summary pull-left">
+                                        <h4>Total <span>Earning</span></h4>
+                                        <span>Monthly Summary</span>
+                                        <h3>$ 51,2600</h3>
+                                    </div>
+                                    <div id="expense2" class="chart-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+        </div>
+        <!--body wrapper end-->
+
+
+
+
+
+
+
+
+        <!--footer section start-->
+        <include file="Common/footer_section"/>
+        <!--footer section end-->
+    </div>
+    <!-- main content end-->
+</section>
+
+<script>
+
+    var m=angular.module('myApps',[]);
+    m.controller('myCtrl',['$scope','$http',function ($scope,$http) {
+        //console.log($scope.role);
+        var url="{:U(MODULE_NAME.'/InfoManage/getLibraryInfo')}";
+
+        $http.get(url).then(function ($resp) {
+            $scope.libInfo=$resp.data;
+        })
+
+        $scope.deleteMessage=function () {
+
+            obj=$('#home').find("input:checked");
+            check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            if(check_val.length==0){
+                layer.alert('您没有选择任何信息!');
+                return false;
+            }
+            var strify = JSON.stringify(check_val);
+            var deleteMessageUrl="{:U(MODULE_NAME.'/MessageManage/deleteMessage')}";
+            $http({
+                method:'post',
+                url:deleteMessageUrl,
+                data:$.param({data:strify}),
+                headers:{'Content-type':'application/x-www-form-urlencoded'}
+            }).then(function ($resp) {
+                if ($resp.data.status){
+                    $http.get(url).then(function ($res) {
+                        $scope.libMessages=$res.data;
+                    })
+                    layer.alert($resp.data.msg);
+                }else{
+                    layer.alert($resp.data.msg);
+                }
+
+            })
+        }
+
+    }])
+
+</script>
+
+
+<include file="Common/jsfooter_section"/>
+

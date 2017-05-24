@@ -3,10 +3,10 @@ return array(
 	//'配置项'=>'配置值'
     /* 数据库设置 */
     'DB_TYPE'               =>  'mysql',     // 数据库类型
-    'DB_HOST'               =>  '192.168.1.122', // 服务器地址
+    'DB_HOST'               =>  '127.0.0.1', // 服务器地址
     'DB_NAME'               =>  'subject_3.0_nannong',          // 数据库名
     'DB_USER'               =>  'root',      // 用户名
-    'DB_PWD'                =>  'root',          // 密码
+    'DB_PWD'                =>  'admin888',          // 密码
     'DB_PORT'               =>  '',        // 端口
     'DB_PREFIX'             =>  'noto_',    // 数据库表前缀
     'DB_PARAMS'          	=>  array(), // 数据库连接参数
@@ -60,6 +60,9 @@ return array(
      'RBAC_USER_TABLE' =>'noto_admin_role_user',//用户表名称 角色用户关联表
      'RBAC_ACCESS_TABLE'=>'noto_admin_access',// 权限表名称
      'RBAC_NODE_TABLE'=>'noto_admin_node',// 节点表名称
+
+    /**********************************************加载自定义函数文件********************************/
+    'LOAD_EXT_FILE'=>'dir,file.func',
 );
 
 
