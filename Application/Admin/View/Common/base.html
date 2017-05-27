@@ -1,0 +1,480 @@
+<include file="Common/meta_section"/>
+<link rel="stylesheet" href="__PUBLIC__/js/multi_select/css/multi-select.css">
+
+</head>
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <include file="Common/left-side"/>
+    <!-- left side end-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <include file="Common:header_section"/>
+        <!-- header section end-->
+
+
+        <!-- page heading start-->
+        <div class="page-heading">
+
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">专题管理</a>
+                </li>
+                <li class="active"> 专题列表 </li>
+            </ul>
+
+        </div>
+
+
+        <div class="container" ng-app="myApps" ng-controller="myCtrl">
+            <!-- Button trigger modal -->
+
+
+
+
+
+
+
+
+
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                <tr class="success">
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>标签</th>
+                    <th>内容简介</th>
+                    <th>创建时间</th>
+
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(k,v) in fileList.file">
+                    <td>{{k+1}}</td>
+                    <td>{{v.name}}</td>
+                    <td><i class="fa fa-file " style="color:green" aria-hidden="true" ng-if="v.type=='file'"></i><i class="fa fa-folder" style="color:green;" aria-hidden="true" ng-if="!v.type=='dir'"></i></td>
+
+                    <td>{{v.size}}</td>
+                    <td><i class="fa fa-check " style="color:green" aria-hidden="true" ng-if="v.readable"></i><i class="fa fa-times" style="color:red;" aria-hidden="true" ng-if="!v.readable"></i></td>
+                    <td><i class="fa fa-check " style="color:green" aria-hidden="true" ng-if="v.writeable"></i><i class="fa fa-times" style="color:red" aria-hidden="true" ng-if="!v.writeable"></i></td>
+
+                    <td>
+                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button>
+
+                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i></button>
+
+
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a type="button" class="btn btn-primary btn-xs" title="添加专题" ng-click="addTopic()"><i class="fa fa-plus"></i> 添加专题</a>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="input1" class="col-sm-2 control-label">专题名称:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="input1" placeholder="输入名称" ng-model="topic.name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input2" class="col-sm-2 control-label">类型:</label>
+                                    <div class="col-sm-10">
+                                        <select name="" class="form-control" id="input2" ng-options=" v.id as v.name for v in types" ng-model="type">
+                                            <option value="">请选择类型</option>
+
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input3" class="col-sm-2 control-label">标签:</label>
+                                    <div class="col-sm-10">
+                                        <!--<input type="text" class="form-control" id="input3" placeholder="请选择标签" ng-model="topic.tag">-->
+                                        <span class="text-muted">select2-model:</span> {{ cS2 | json }}
+                                        <input select2 ng-model="topic.tags" select2-model="cS2" config="config3" multiple placeholder="支持多选哦" class="form-control" type="text"/>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="sel_menu2" class="col-sm-2 control-label">分类:</label>
+                                    <div class="col-sm-10">
+                                        <!--<input type="text" class="form-control" id="input4" placeholder="请选择分类" ng-model="topic.class">-->
+                                        <!--<select name="" class="form-control" id="sel_menu2" multiple="multiple" ng-options=" v.id as v.name for v in classes" ng-model="topic.class">-->
+
+                                        <!--</select>-->
+                                        <!--<select select2 class="form-control" placeholder="请选择分类" ng-options=" v.id as v.name for v in classes" ng-model="topic.class">-->
+
+                                        <!--</select>-->
+                                        <select select2 ng-model="topic.class" class="form-control" placeholder="请选择分类">
+
+                                            <option value="{{ item.id }}" ng-repeat="item in classes">{{ item.name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="input5" class="col-sm-2 control-label">内容:</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="" class="form-control"  id="input5" ng-model="topic.content"></textarea>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                            </form>
+                            {{topic.class}}
+                            {{topic.tags}}
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" ng-click="createFile(act)">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--footer section start-->
+        <include file="Common/footer_section"/>
+        <!--footer section end-->
+    </div>
+    <!-- main content end-->
+</section>
+
+<script>
+    //多选
+//    $("#sel_menu2").select2({
+//        tags: true,
+//        maximumSelectionLength: 3  //最多能够选择的个数
+//    });
+
+
+
+
+
+
+
+    var app=angular.module('myApps',[]);
+    app.directive('select2', function (select2Query) {
+        return {
+            restrict: 'A',
+            scope: {
+                config: '=',
+                ngModel: '=',
+                select2Model: '='
+            },
+            link: function (scope, element, attrs) {
+                // 初始化
+                var tagName = element[0].tagName,
+                    config = {
+                        allowClear: true,
+                        multiple: !!attrs.multiple,
+                        placeholder: attrs.placeholder || ' '   // 修复不出现删除按钮的情况
+                    };
+
+                // 生成select
+                if(tagName === 'SELECT') {
+                    // 初始化
+                    var $element = $(element);
+                    delete config.multiple;
+
+                    $element
+                        .prepend('<option value=""></option>')
+                        .val('')
+                        .select2(config);
+
+                    // model - view
+                    scope.$watch('ngModel', function (newVal) {
+                        setTimeout(function () {
+                            $element.find('[value^="?"]').remove();    // 清除错误的数据
+                            $element.select2('val', newVal);
+                        },0);
+                    }, true);
+                    return false;
+                }
+
+                // 处理input
+                if(tagName === 'INPUT') {
+                    // 初始化
+                    var $element = $(element);
+
+                    // 获取内置配置
+                    if(attrs.query) {
+                        scope.config = select2Query[attrs.query]();
+                    }
+
+                    // 动态生成select2
+                    scope.$watch('config', function () {
+                        angular.extend(config, scope.config);
+                        $element.select2('destroy').select2(config);
+                    }, true);
+
+                    // view - model
+                    $element.on('change', function () {
+                        scope.$apply(function () {
+                            scope.select2Model = $element.select2('data');
+                        });
+                    });
+
+                    // model - view
+                    scope.$watch('select2Model', function (newVal) {
+                        $element.select2('data', newVal);
+                    }, true);
+
+                    // model - view
+                    scope.$watch('ngModel', function (newVal) {
+                        // 跳过ajax方式以及多选情况
+                        if(config.ajax || config.multiple) { return false }
+
+                        $element.select2('val', newVal);
+                    }, true);
+                }
+            }
+        }
+    });
+
+    /**
+     * select2 内置查询功能
+     */
+    app.factory('select2Query', function ($timeout) {
+        return {
+            testAJAX: function () {
+                var config = {
+                    minimumInputLength: 1,
+                    ajax: {
+                        url: "http://api.rottentomatoes.com/api/public/v1.0/movies.json",
+                        dataType: 'jsonp',
+                        data: function (term) {
+                            return {
+                                q: term,
+                                page_limit: 10,
+                                apikey: "ju6z9mjyajq2djue3gbvv26t"
+                            };
+                        },
+                        results: function (data, page) {
+                            return {results: data.movies};
+                        }
+                    },
+                    formatResult: function (data) {
+                        return data.title;
+                    },
+                    formatSelection: function (data) {
+                        return data.title;
+                    }
+                };
+
+                return config;
+            }
+        }
+    });
+
+    app.controller('myCtrl',['$scope','$http','$timeout',function ($scope,$http,$timeout) {
+
+        $scope.config1 = {
+            data: [],
+            placeholder: '尚无数据'
+        };
+
+        $timeout(function () {
+            $scope.config1.data = [{id:1,text:'bug'},{id:2,text:'duplicate'},{id:3,text:'invalid'},{id:4,text:'wontfix'}]
+            $scope.config1.placeholder = '加载完毕'
+        }, 1000);
+
+
+        $scope.config2 = [
+            {id: 6, text: '来自ng-repeat'},
+            {id: 7, text: '来自ng-repeat'},
+            {id: 8, text: '来自ng-repeat'}
+        ];
+
+        $scope.config3 = {
+            data: [{id:1,text:'bug'},{id:2,text:'duplicate'},{id:3,text:'invalid'},{id:4,text:'wontfix'}]
+            // 其他配置略，可以去看看内置配置中的ajax配置
+        };
+        //console.log($scope.role);
+        var url="{:U(MODULE_NAME.'/FileManage/getFileList')}";
+
+        $http.get(url).then(function ($resp) {
+            $scope.fileList=$resp.data;
+        });
+        $scope.createFileModel=function () {
+            $scope.title="新建文件";
+            $scope.act='createfile';
+            $('#myModal').modal('show')
+        }
+
+        $scope.createFolderModel=function () {
+            $scope.title="新建文件夹";
+            $scope.act='createfolder';
+            $('#myModal').modal('show')
+        }
+
+
+
+        $scope.addTopic=function () {
+            //$addTopicUrl="{:U(MODULE_NAME.'/TopicManage/addTopic')}/act/"+act+'/name/'+$scope.file.name+'/path/'+$scope.fileList.path;
+            $scope.title="新建专题";
+            //$scope.act='createfile';
+            $('#myModal').modal('show')
+
+            //alert(11111)
+        }
+
+        $scope.types=[
+            {id:1,name:'书单'},
+            {id:2,name:'奖项'}
+        ];
+        $scope.classes=[
+            {id:1,name:'文学'},
+            {id:2,name:'法学'},
+            {id:3,name:'公安'},
+            {id:4,name:'经济'},
+            {id:5,name:'金融'},
+            {id:6,name:'法律'},
+            {id:7,name:'hah'},
+
+        ];
+
+
+        $scope.createFile=function (act) {
+            $createFileUrl="{:U(MODULE_NAME.'/FileManage/createFile')}/act/"+act+'/name/'+$scope.file.name+'/path/'+$scope.fileList.path;
+
+            $http.get($createFileUrl).then(function ($resp) {
+
+                if($resp.data.status){
+                    $http.get(url).then(function ($resp) {
+                        $scope.fileList=$resp.data;
+                    });
+                    layer.alert($resp.data.msg)
+                    $('#myModal').modal('hide')
+                }else{
+                    layer.alert($resp.data.msg)
+                }
+
+            })
+
+//                if(act==1){
+//
+//                    $createFileUrl="{:U(MODULE_NAME.'/FileManage/createFile')}/act/"+act;
+//                    alert('file')
+//
+//                }else{
+//                    alert('folder')
+//
+//                }
+
+
+
+
+
+        }
+
+        $scope.deleteMessage=function () {
+
+            obj=$('#home').find("input:checked");
+            check_val = [];
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val.push(obj[k].value);
+            }
+            if(check_val.length==0){
+                layer.alert('您没有选择任何信息!');
+                return false;
+            }
+            var strify = JSON.stringify(check_val);
+            var deleteMessageUrl="{:U(MODULE_NAME.'/MessageManage/deleteMessage')}";
+            $http({
+                method:'post',
+                url:deleteMessageUrl,
+                data:$.param({data:strify}),
+                headers:{'Content-type':'application/x-www-form-urlencoded'}
+            }).then(function ($resp) {
+                if ($resp.data.status){
+                    $http.get(url).then(function ($res) {
+                        $scope.libMessages=$res.data;
+                    })
+                    layer.alert($resp.data.msg);
+                }else{
+                    layer.alert($resp.data.msg);
+                }
+
+            })
+        }
+
+    }])
+
+</script>
+
+
+
+
+
+
+<include file="Common/jsfooter_section"/>
+<script src="__PUBLIC__/js/multi-select/jquery.multi-select.js"></script>
+<script>
+    $('#my_multi_select3').multiSelect()
+</script>
+</body>
+</html>
+
+
+</html>
