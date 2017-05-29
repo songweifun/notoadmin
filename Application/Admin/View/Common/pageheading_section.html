@@ -3,9 +3,12 @@
 
     <ul class="breadcrumb">
         <li>
-            <a href="#">专题管理</a>
+
+            <block name="catetory1">
+                <a href="__APP__/Admin/{$cate}/{$menu}">{$catename}</a>
+            </block>
         </li>
-        <li class="active"> 专题列表 </li>
+        <li class="active"> <block name="category2">{$menuname}</block> </li>
     </ul>
 
 </div>

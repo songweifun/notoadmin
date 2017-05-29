@@ -29,7 +29,13 @@ class FileManageController extends CommonController
     }
     //获得文件文件夹列表接口
     public function getFileList(){
-        echo json_encode(readDirectory('Upload'));
+        //echo "<pre>";
+        //print_r(getDirArr('Upload'));die;
+        //echo getDirSize('Upload');die;
+        $path=I('post.path')?I('post.path'):'Upload';
+        //$path=preg_replace('/\$/','/',$path);
+        //echo $path;die;
+        echo json_encode(readDirectory($path));
         die;
     }
 
@@ -37,46 +43,179 @@ class FileManageController extends CommonController
 
     public function createFile(){
 
-        $name=I('get.name');
-        $path=I('get.path');
+
+        $path=I('post.path');
         $act=I('get.act');
-        $pathname=$path.'/'.$name;
-        $pattern='/[\/\*<>\?\|]/';
+
         if($act=='createfile'){
-            //判断有无特殊字符
-            if(!preg_match($pattern,$name)){
-                //判断文件名称是否已存在
-                if(!file_exists($pathname)){
-                    if(touch($pathname)){
-                        //创建问价
-                        echo json_encode(array('status'=>true,'msg'=>'添加文件成功'));
-                        die;
+            $name=I('post.name');
+            $pathname=$path.'/'.$name;
 
-                    }else{
-                        echo json_encode(array('status'=>true,'msg'=>'添加文件失败'));
-                        die;
+            echo json_encode(createFile($pathname));
+            die;
 
-                    }
-
-                }else{
-                    //文件同名
-                    echo json_encode(array('status'=>false,'msg'=>'已存在同名文件'));
-                    die;
-                }
-
-            }else{
-                //文件名非法
-                echo json_encode(array('status'=>false,'msg'=>'文件名非法'));
-                die;
-            }
-
-        }else{
+        }else if($act=='createfolder'){
             //添加文件夹
-            echo json_encode(array('status'=>true,'msg'=>'添加文件夹成功'));
+            $name=I('post.name');
+            $pathname=$path.'/'.$name;
+            echo json_encode(creteDir($pathname));
+
+            die;
+
+        }else if($act=='renameFile'){
+
+            $path=I('post.path');
+
+            $newfilename=$path.'/'.I('post.newname');
+            $oldfilename=$path.'/'.I('post.oldname');
+
+            echo json_encode(renameFile($oldfilename,$newfilename));
+            die;
+
+        }else if($act=='renameFolder'){
+            $path=I('post.path');
+
+            $newfilename=$path.'/'.I('post.newname');
+            $oldfilename=$path.'/'.I('post.oldname');
+
+            echo json_encode(renameFolder($oldfilename,$newfilename));
+            die;
         }
 
 
 
+    }
+    //查看文件接口
+    public function getFileContent(){
+        $filename=I('post.filename');
+        $path=I('post.path');
+        //echo $filename;die();
+        $content=file_get_contents($path.'/'.$filename);
+        //$newContent=highlight_string($content,true);
+
+        //echo json_encode($newContent);
+        echo $content;
+    }
+    //编辑文件接口
+    public function editFileHandler(){
+        $filename=I('post.filename');
+        $path=I('post.path');
+        $filecontent=$_POST['filecontent'];
+        if(file_put_contents($path.'/'.$filename,$filecontent)){
+            echo json_encode(array('status'=>true,'msg'=>'编辑成功'));
+
+        }else{
+            echo json_encode(array('status'=>false,'msg'=>'编辑失败'));
+        }
+        die();
+
+    }
+    //删除文件接口
+    public function deleteFile(){
+        $path=I('post.path');
+        $filename=I('post.filename');
+        $filepath= $path.'/'.$filename;
+        if(unlink($filepath)){
+            echo json_encode(array('status'=>true,'msg'=>'文件删除成功'));
+        }else{
+            echo json_encode(array('status'=>false,'msg'=>'文件删除失败'));
+
+        }
+        die();
+    }
+    //删除文件夹
+    public function deleteFolder(){
+        $path=I('post.path');
+        $folderName=I('post.folderName');
+        $filepath= $path.'/'.$folderName;
+        echo json_encode(deleDir($filepath));
+        die();
+
+    }
+    //下载文件接口
+    public function downloadFile(){
+        $path=I('post.path');
+        $filename=I('post.filename');
+        $filepath= $path.'/'.$filename;
+        //$content=file_get_contents($filepath);
+        //header("Content-Disposition:attachment;filename="+$filename);
+        //header("Content-Length:"+filesize($filepath));
+        //ni_set('output_buffering', 0); 防止报错
+        readfile($filepath);
+
+    }
+
+    //获得目录接口接口
+    public function getDataForTheTree(){
+
+
+
+        $path=I('post.path')?I('post.path'):'Upload';
+        $arr=getDirArr($path);
+        $arr2[0]['name']='Upload';//组装上去的
+        $arr2[0]['path']='Upload/';
+        $arr2[0]['children']=$arr;
+       echo json_encode($arr2);die;
+
+    }
+
+    //复制文件文件夹
+    public function copyFileHandler(){
+        $act= I('post.act');
+        if($act=='copyFolder'){
+            //复制文件夹
+            $dest=I('post.dest');
+            $src=I('post.src');
+            if(copyFolder($src,$dest)){
+                echo json_encode(array('status'=>true,'msg'=>'文件夹复制成功'));
+
+            }else{
+                echo json_encode(array('status'=>false,'msg'=>'文件夹复制失败'));
+
+            }
+            die;
+
+
+        }elseif ($act=='copyFile'){
+            //复制文件
+            $dest=I('post.dest');
+            $src=I('post.src');
+
+            echo json_encode(copyFile($src,$dest));
+
+
+            die;
+        }else if($act=='cutFolder'){
+            //剪切文件夹 rename实现
+            $dest=I('post.dest');
+            $src=I('post.src');
+            //echo $src.'-------'.$dest;die;
+            echo json_encode(cutFolder($src,$dest));
+            die;
+
+        }else if($act=='cutFile'){
+            //剪切文件
+            $dest=I('post.dest');
+            $src=I('post.src');
+            //echo $src.'-------'.$dest;die;
+            echo json_encode(cutFile($src,$dest));
+            die;
+        }
+    }
+    //文件上传处理
+    public function uploadFile(){
+        $path=I('post.path');
+        $fileInfo=$_FILES['myFile'];
+        echo  json_encode(uploadFileHandler($path,$fileInfo));
+        //print_r($_FILES);
+        //print_r($_POST);
+        //$result=uploadFileHandler($path,$fileInfo);
+        //print_r($result);
+//        if($result['status']){
+//            $this->success($result['msg'],U(MODULE_NAME.'/FileManage/index'));
+//        }else{
+//            $this->error($result['msg'],U(MODULE_NAME.'/FileManage/index'));
+//        }
     }
 
 }

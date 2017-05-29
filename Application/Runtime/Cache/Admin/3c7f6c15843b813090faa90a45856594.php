@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
-    <title>用户列表</title>
+    <title><?php echo ($menuname); ?></title>
     <script src="/notoadmin/Application/Admin/View/Public/js/jquery-1.10.2.min.js"></script>
 
     <!-- bootstrap -->
@@ -39,6 +39,20 @@
     <![endif]-->
     <script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/layer/layer.js"></script>
     <script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/angular.min.js"></script>
+    <!-- cikonss -->
+    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/css/cikonss/cikonss.css">
+    <!-- select2 -->
+    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/angularjs-select2/common/common.css">
+    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/angularjs-select2/common/plugins/select2/select2.css" />
+    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/angularjs-select2/common/plugins/select2/select2-bootstrap.css" />
+    <script src="/notoadmin/Application/Admin/View/Public/js/angularjs-select2/common/plugins/select2/select2.min.js" type="text/javascript"></script>
+
+    <!-- commonjs -->
+
+    <!-- commoncss -->
+    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/css/common.css">
+
+
 
 
 
@@ -302,7 +316,7 @@
             <li>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <img src="/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" alt="" />
-                    范松伟
+                    范老板
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
@@ -338,12 +352,14 @@
 <div class="container" ng-app="myApps" ng-controller="myCtrl">
     <div class="row">
         <div class="table-responsive" class="col-md-8">
-        <div class="totol " style=" width: 100%;">
-            <form action="<?php echo U('UserManage/index');?>" method="post" style="float:left;padding-left:80%;">
+
+        <div class="totol " style="float:right;">
+            <form action="<?php echo U('UserManage/index');?>" method="post">
                 <input type="text" class="search-input" name="searchValue"  required placeholder="一卡通号/姓名/手机号" value=""/>
-                <input type="submit" value="检索"  class="btn btn-primary btn-sm" style="margin-left:10px;width:60px;float:right;"  />
+                <input type="submit" value="检索"  class="btn btn-primary btn-sm"   />
             </form>
         </div>
+
             <table class="table table-hover table-bordered table-striped table-condensed" >
                 <thead>
                     <tr class="success hui_top" >
@@ -414,12 +430,12 @@
             <div style="float:right;">
             <?php if($page_count > 1): ?><div class="page">
                     <a href="javascript:void(0);" class="jump">跳转</a>
-                    <input type="text" class="rt number" style="width:40px;">
+                    <input type="text" class="rt number" style="width:80px;">
                     <?php if($_GET['page'] < page_count): ?><a href="javascript:void(0);" class="rt next">&nbsp;Next</a><?php endif; ?>
                     <span class="rt">
                         <span class="current"><?php echo ($page); ?></span>/<span class="all"><?php echo ($page_count); ?></span>
                     </span>
-                    <?php if($_GET['page'] > 1): ?><a class="rt prev">Previous&nbsp;</a><?php endif; ?>
+                    <?php if($_GET['page'] > 1): ?><a href="javascript:void(0);" class="rt prev">Previous&nbsp;</a><?php endif; ?>
                 </div><?php endif; ?>
             </div>
         </div>
@@ -471,10 +487,10 @@
             'dataType':'json',
             'success':function (data) {
                 if (data.code == 200) {
-                    alert(data.msg);
-                    location.reload();//刷新当前页面.
+                    layer.alert(data.msg);
+                    window.location.reload();//刷新当前页面.
                 }else{
-                    alert(data.msg);
+                    layer.alert(data.msg);
                 }
             }
         });
@@ -491,6 +507,7 @@
         $(".result_list input[type='checkbox']:checked").each(function(i){
             valArr[i] = $(this).val();
         });
+
         var vals = valArr.join(',');
         $.ajax({
             'url' :'<?php echo U("UserManage/pass");?>',
@@ -500,10 +517,10 @@
             'success':function(data){
 //                alert(data);
                 if (data.code == 200) {
-                    alert(data.msg);
-                    location.reload();//刷新当前页面.
+                    layer.alert(data.msg);
+                    window.location.reload();//刷新当前页面.
                 }else{
-                    alert(data.msg);
+                    layer.alert(data.msg);
                 }
             }
         });
@@ -550,3 +567,11 @@
 
 <!--Dashboard Charts-->
 <script src="/notoadmin/Application/Admin/View/Public/js/dashboard-chart-init.js"></script>
+
+
+<!-- page分页 -->
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/module/pagination/tm.pagination.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/app.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/service/service.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/directive/directive.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/controller/controller.js"></script>

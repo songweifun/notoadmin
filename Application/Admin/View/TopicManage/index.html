@@ -1,0 +1,179 @@
+<extend name="Common/base" />
+
+<block name="content">
+    <div class="container"  ng-controller="topicManageIndexCtrl">
+        <!-- Button trigger modal -->
+
+
+
+
+
+
+
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                <tr class="success">
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>标签</th>
+                    <th>内容简介</th>
+                    <th>创建时间</th>
+
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(k,v) in topicList">
+                    <td>{{v.id}}</td>
+                    <td>{{v.name}}</td>
+                    <td><i class="fa fa-file " style="color:green" aria-hidden="true" ng-if="v.type==1"></i><i class="fa fa-folder" style="color:green;" aria-hidden="true" ng-if="!v.type==1"></i></td>
+
+                    <td>{{v.tag}}</td>
+                    <td>{{v.content}}</td>
+                    <td>{{v.createtime*1000|date:'yyyy-mm-dd HH:mm:ss'}}</td>
+
+                    <td>
+                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button>
+
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="deleTopic(v.id)"><i class="fa fa-trash-o"></i></button>
+
+
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a type="button" class="btn btn-primary btn-xs" title="添加专题" ng-click="addTopic()"><i class="fa fa-plus"></i> 添加专题</a>
+
+
+            <div style="float: right;margin-right:50px;">
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="input1" class="col-sm-2 control-label">专题名称:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="input1" placeholder="输入名称" ng-model="topic.name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input2" class="col-sm-2 control-label">类型:</label>
+                                    <div class="col-sm-10">
+                                        <select name="" class="form-control" id="input2" ng-options=" v.id as v.name for v in types" ng-model="topic.type">
+                                            <option value="">请选择类型</option>
+
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input3" class="col-sm-2 control-label">标签:</label>
+                                    <div class="col-sm-10">
+                                        <!--<input type="text" class="form-control" id="input3" placeholder="请选择标签" ng-model="topic.tag">-->
+                                        <!--<span class="text-muted">select2-model:</span> {{ cS2 | json }}-->
+                                        <input id="input3" select2  select2-model="cS2" config="config3" multiple placeholder="支持多选哦" class="form-control" type="text" ng-model="topic.tag"/>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="input4" class="col-sm-2 control-label">分类:</label>
+                                    <div class="col-sm-10">
+                                        <!--<input type="text" class="form-control" id="input4" placeholder="请选择分类" ng-model="topic.class">-->
+                                        <!--<select name="" class="form-control" id="sel_menu2" multiple="multiple" ng-options=" v.id as v.name for v in classes" ng-model="topic.class">-->
+
+                                        <!--</select>-->
+                                        <!--<select select2 class="form-control" placeholder="请选择分类" ng-options=" v.id as v.name for v in classes" ng-model="topic.class">-->
+
+                                        <!--</select>-->
+                                        <select id="input4" select2 class="form-control" placeholder="请选择分类" ng-model="topic.class">
+
+                                            <option value="{{ item.id }}" ng-repeat="item in classes">{{ item.name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="input5" class="col-sm-2 control-label">内容:</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="" class="form-control"  id="input5" ng-model="topic.content"></textarea>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                            </form>
+                            {{topic.class}}
+                            {{topic.tag}}
+                            {{topic}}
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" ng-click="addTopicHandler()">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        </div>
+    </div>
+
+</block>
+
+
+
+
+<block name="script">
+
+</block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

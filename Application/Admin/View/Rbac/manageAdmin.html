@@ -1,33 +1,8 @@
-<include file="Common/meta_section"/>
-<body class="sticky-header">
-
-<section>
-    <!-- left side start-->
-    <include file="Common/left-side"/>
-    <!-- left side end-->
-
-    <!-- main content start-->
-    <div class="main-content" >
-
-        <!-- header section start-->
-        <include file="Common:header_section"/>
-        <!-- header section end-->
+<extend name="Common/base" />
+<block name="content">
 
 
-        <!-- page heading start-->
-        <div class="page-heading">
-
-            <ul class="breadcrumb">
-                <li>
-                    <a href="#">权限管理</a>
-                </li>
-                <li class="active"> 馆员管理 </li>
-            </ul>
-
-        </div>
-        <!-- page heading end-->
-
-        <div class="container" ng-app="myApps" ng-controller="myCtrl">
+<div class="container" ng-controller="rbacManageAdminCtrl">
 
             <div class="row">
                 <div class="table-responsive" class="col-md-8">
@@ -124,94 +99,7 @@
 
 
         </div>
+</block>
 
 
-
-
-        <!--footer section start-->
-        <include file="Common/footer_section"/>
-        <!--footer section end-->
-    </div>
-    <!-- main content end-->
-</section>
-
-<script>
-    var m=angular.module('myApps',[]);
-    m.controller('myCtrl',['$scope','$http',function ($scope,$http) {
-
-
-        //获取adminlist异步请求
-        $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getAdminList").then(function ($resp) {
-            $scope.adminList=$resp.data;
-        })
-        //获取父节点异步请求
-        $http.get("{:U(MODULE_NAME.'/Rbac/manageRole')}/action/getRoleList").then(function ($resp) {
-            $scope.roleList=$resp.data;
-        })
-
-        $scope.admin={};
-        //添加官员
-        $scope.addAdmin=function () {
-            //console.log($scope.node);
-            var url="{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/addAdmin";
-
-            //alert($);
-            $http({
-                method:'post',
-                url:url,
-                data:$.param($scope.admin),
-                headers:{'Content-type':'application/x-www-form-urlencoded'}
-            }).then(function ($resp) {
-                if ($resp.data.status){
-                    layer.alert($resp.data.msg);
-                    $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getAdminList").then(function ($resp) {
-                        $scope.adminList=$resp.data;
-                    });
-                    //window.location.href="{:U(MODULE_NAME.'/Rbac/ManageRole')}";
-                    //location.reload();
-                    $('#myModal').modal('hide');
-
-                    $scope.admin={};
-
-                }else{
-                    layer.msg($resp.data.msg);
-                }
-
-            })
-        }
-        //删除官员
-        $scope.deleteAdmin=function (id) {
-
-            layer.confirm('确定要删除此用吗?', {icon: 3, title:'提示'}, function(){
-                //do something
-
-                $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/deleteAdmin/id/"+id).then(function ($resp) {
-                    if ($resp.data.status){
-                        layer.alert($resp.data.msg);
-                        $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getAdminList").then(function ($resp) {
-                            $scope.adminList=$resp.data;
-                        });
-
-                    }else{
-                        layer.msg($resp.data.msg);
-                    }
-                })
-            });
-
-        }
-        //编辑官员
-        $scope.editAdmin=function (id) {
-            $('#myModal').modal('show');
-            $http.get("{:U(MODULE_NAME.'/Rbac/manageAdmin')}/action/getOneAdmin/id/"+id).then(function ($resp) {
-                $scope.admin=$resp.data;
-                
-            })
-
-        }
-    }])
-
-</script>
-
-
-<include file="Common/jsfooter_section"/>
 

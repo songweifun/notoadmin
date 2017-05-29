@@ -109,25 +109,20 @@ class RbacController extends CommonController
         $adminNode=M('adminNode');
         //获得nodeList接口
         if($action=='getNodeList'){
+//            $totalcount=$adminNode->count();
+//            $page=I('get.page');
+//            $pagesize=I('get.pagesize');
+//            $start=($page-1)*$pagesize;
+//            $nodeList=M('adminNode')->order('sort')->limit($start,$pagesize)->select();
+//            $nodeList=Ancestry($nodeList,0);
+//
+//            echo json_encode(array('result'=>$nodeList,'totalcount'=>$totalcount));
+
             $nodeList=M('adminNode')->order('sort')->select();
             $nodeList=Ancestry($nodeList,0);
-            //$adapter = new ArrayAdapter($nodeList);
-            //$pagerfanta = new Pagerfanta($adapter);
-            //$pagerfanta->setMaxPerPage(45);
-            //$page=I('get.page');
-            //$pagerfanta->setCurrentPage(1);
-            //$nbResults = $pagerfanta->getNbResults();
 
-
-             //$currentPageResults = $pagerfanta->getCurrentPageResults();
-
-             //$pagerfanta->getAdapter();
-
-            //echo $pagerfanta->haveToPaginate();
-            //echo $pagerfanta;
-
-            //die;
             echo json_encode($nodeList);
+
             die;
 
 

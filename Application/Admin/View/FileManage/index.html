@@ -1,46 +1,15 @@
-<include file="Common/meta_section"/>
-<link rel="stylesheet" href="__PUBLIC__/js/multi_select/css/multi-select.css">
+<extend name="Common/base" />
 
-</head>
-<body class="sticky-header">
-
-<section>
-    <!-- left side start-->
-    <include file="Common/left-side"/>
-    <!-- left side end-->
-
-    <!-- main content start-->
-    <div class="main-content" >
-
-        <!-- header section start-->
-        <include file="Common:header_section"/>
-        <!-- header section end-->
+<block name="content">
+    <div class="container"  ng-controller="fileManageIndexCtrl">
 
 
-        <!-- page heading start-->
-        <div class="page-heading">
-
-            <ul class="breadcrumb">
-                <li>
-                    <a href="#">文件管理</a>
-                </li>
-                <li class="active"> 管理文件 </li>
-            </ul>
-
-        </div>
-
-        <div class="container" ng-app="myApps" ng-controller="myCtrl">
-            <!-- Button trigger modal -->
-
-
-
-
-            <div>
-                <a type="button" class="btn btn-default " n-click="" title="主目录"><i class="fa fa-home"></i></a>
+        <div>
+                <a type="button" class="btn btn-default " ng-click="catePreFolder()" title="主目录"><i class="fa fa-home"></i></a>
                 <a type="button" class="btn btn-default" ng-click="createFileModel()" title="新建文件"><i class="fa fa-file"></i></a>
                 <a type="button" class="btn btn-default" ng-click="createFolderModel()" title="新建文件夹"><i class="fa fa-folder"></i></a>
-                <a type="button" class="btn btn-default "><i class="fa fa-upload" title="上传"></i></a>
-                <a type="button" class="btn btn-default "><i class="fa fa-backward" title="返回上一层"></i></a>
+                <a type="button" class="btn btn-default" ng-click="uploadFileMotal()" title="上传文件"><i class="fa fa-upload"></i></a>
+                <a type="button" class="btn btn-default " ng-click="catePreFolder(oldDirPath)" title="返回上一层"><i class="fa fa-backward"  ></i></a>
 
 
                 <!-- Modal -->
@@ -98,7 +67,7 @@
                 <tr ng-repeat="(k,v) in fileList.file">
                     <td>{{k+1}}</td>
                     <td>{{v.name}}</td>
-                    <td><i class="fa fa-file " style="color:green" aria-hidden="true" ng-if="v.type=='file'"></i><i class="fa fa-folder" style="color:green;" aria-hidden="true" ng-if="!v.type=='dir'"></i></td>
+                    <td><i class="fa fa-file " style="color:green" aria-hidden="true" ng-if="v.type=='file'"></i><i class="fa fa-folder" style="color:yellow" aria-hidden="true" ng-if="v.type=='dir'"></i></td>
 
                     <td>{{v.size}}</td>
                     <td><i class="fa fa-check " style="color:green" aria-hidden="true" ng-if="v.readable"></i><i class="fa fa-times" style="color:red;" aria-hidden="true" ng-if="!v.readable"></i></td>
@@ -108,135 +77,292 @@
                     <td>{{v.modifytime*1000|date:'yyyy-MM-dd'}}</td>
                     <td>{{v.visttime*1000|date:'yyyy-MM-dd'}}</td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></button>
-                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button>
-                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-file-o"></i></button>
-                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-copy"></i></button>
-                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-scissors"></i></button>
-                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-trash-o"></i></button>
-                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-download"></i></button>
+                        <a type="button" class="btn btn-primary btn-xs" title="查看" ng-click="v.type=='file'?catFile(v.name):cateFolder(v.name)"><i class="fa fa-eye"></i></a>
+                        <button type="button" class="btn btn-primary btn-xs" title="编辑" ng-click="editFile(v.name)" ng-disabled="v.type=='dir'"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-primary btn-xs" title="重命名"  ng-click="v.type=='file'?renameFile(v.name):renameFolder(v.name)"><i class="fa fa-file-o"></i></button>
+                        <button type="button" class="btn btn-primary btn-xs" title="复制" ng-click="v.type=='file'?copyFile(v.name):copyFolder(v.name)"><i class="fa fa-copy"></i></button>
+                        <button type="button" class="btn btn-primary btn-xs" title="剪切" ng-click="v.type=='file'?cutFile(v.name):cutFolder(v.name)"><i class="fa fa-scissors"></i></button>
+                        <button type="button" class="btn btn-primary btn-xs" title="删除" ng-click="v.type=='file'?trashFile(v.name):trashFolder(v.name)"><i class="fa fa-trash-o"></i></button>
+                        <button type="button" class="btn btn-primary btn-xs" title="下载" ng-click="downloadFile(v.name)"><i class="fa fa-download"></i></button>
 
 
                     </td>
                 </tr>
+
+                <!--<tr ng-repeat="(k,v) in fileList.dir">-->
+                    <!--<td>{{k+1}}</td>-->
+                    <!--<td>{{v.name}}</td>-->
+                    <!--<td><i class="fa fa-file " style="color:green" aria-hidden="true" ng-if="v.type=='file'"></i><i class="fa fa-folder" style="color:green;" aria-hidden="true" ng-if="v.type=='dir'"></i></td>-->
+
+                    <!--<td>{{v.size}}</td>-->
+                    <!--<td><i class="fa fa-check " style="color:green" aria-hidden="true" ng-if="v.readable"></i><i class="fa fa-times" style="color:red;" aria-hidden="true" ng-if="!v.readable"></i></td>-->
+                    <!--<td><i class="fa fa-check " style="color:green" aria-hidden="true" ng-if="v.writeable"></i><i class="fa fa-times" style="color:red" aria-hidden="true" ng-if="!v.writeable"></i></td>-->
+                    <!--<td><i class="fa fa-check " style="color:green"aria-hidden="true" ng-if="v.executable"></i><i class="fa fa-times"  style="color:red"aria-hidden="true" ng-if="!v.executable"></i></td>-->
+                    <!--<td>{{v.createtime*1000|date:'yyyy-MM-dd'}}</td>-->
+                    <!--<td>{{v.modifytime*1000|date:'yyyy-MM-dd'}}</td>-->
+                    <!--<td>{{v.visttime*1000|date:'yyyy-MM-dd'}}</td>-->
+                    <!--<td>-->
+                        <!--<a type="button" class="btn btn-primary btn-xs" title="查看" ng-click="catFile(v.name)"><i class="fa fa-eye"></i></a>-->
+                        <!--<button type="button" class="btn btn-primary btn-xs" title="编辑" ng-click="editFile(v.name)"><i class="fa fa-edit"></i></button>-->
+                        <!--<button type="button" class="btn btn-primary btn-xs" title="重命名" ng-click="renameFile(v.name)"><i class="fa fa-file-o"></i></button>-->
+                        <!--<button type="button" class="btn btn-primary btn-xs"><i class="fa fa-copy"></i></button>-->
+                        <!--<button type="button" class="btn btn-primary btn-xs"><i class="fa fa-scissors"></i></button>-->
+                        <!--<button type="button" class="btn btn-primary btn-xs" title="删除" ng-click="trashFile(v.name)"><i class="fa fa-trash-o"></i></button>-->
+                        <!--<button type="button" class="btn btn-primary btn-xs" title="下载" ng-click="downloadFile(v.name)"><i class="fa fa-download"></i></button>-->
+
+
+                    <!--</td>-->
+                <!--</tr>-->
+
+
+
                 </tbody>
             </table>
 
+
+
+
+        <div class="modal fade bs-example-modal-lg" id="modalid" >
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">【{{title}}】</h4>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <code class="">
+                             <textarea name="" id="" cols="30" rows="20" ng-model="filecontent" class="form-control" ng-readonly="act=='catFile'"></textarea>
+                        </code>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            关闭
+                        </button>
+                        <button type="button" class="btn btn-primary" ng-click="editFileHandler(filename)" ng-if="act!='catFile'">保存</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+
+
+        <!-- imageShowMotal modal -->
+
+
+
+
+        <div class="modal fade bs-example-modal-lg" id="imageShowMotal" >
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">【{{title}}】</h4>
+                    </div>
+                    <div class="modal-body row">
+
+
+
+
+                        <div class="col-md-12 img-modal">
+                            <img src="__ROOT__/Upload/2.jpg" alt="">
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            关闭
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+        <!-- 复制到model -->
+        <div class="modal fade bs-example-modal-lg" id="copyToWhere" >
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">【{{title}}】</h4>
+                    </div>
+                    <div class="modal-body row">
+
+
+
+
+                        <!--<div class="col-md-12">-->
+                            <!--<div class="panel">-->
+                                <!--<div class="panel-heading">-->
+                                    <!--Tree Style #2-->
+                                    <!--<span class="tools pull-right">-->
+                                <!--<a class="fa fa-chevron-down" href="javascript:;"></a>-->
+                                <!--<a class="fa fa-times" href="javascript:;"></a>-->
+                            <!--</span>-->
+                                <!--</div>-->
+                                <!--<div class="panel-body">-->
+                                    <!--<div id="FlatTree2" class="tree">-->
+                                        <!--<div class = "tree-folder" style="display:none;">-->
+                                            <!--<div class="tree-folder-header">-->
+                                                <!--<i class="fa fa-folder"></i>-->
+                                                <!--<div class="tree-folder-name"></div>-->
+                                            <!--</div>-->
+                                            <!--<div class="tree-folder-content"></div>-->
+                                            <!--<div class="tree-loader" style="display:none"></div>-->
+                                        <!--</div>-->
+                                        <!--<div class="tree-item" style="display:none;">-->
+                                            <!--<i class="tree-dot"></i>-->
+                                            <!--<div class="tree-item-name"></div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!-- as a Dom element -->
+
+
+
+
+
+
+                        <div class="col-sm-12">
+                                <treecontrol class="tree-classic"
+                                             tree-model="dataForTheTree"
+                                             options="treeOptions"
+                                             on-selection="showSelected(node.path)"
+                                             selected-node="node1">
+                                    {{node.name}}
+                                </treecontrol>
+                        </div>
+
+
+                        <div class="col-sm-8 col-sm-offset-0" style="font-size: large;color: blue;">
+                            <hr>
+                            <p> {{title}}：{{fileList.path+'/'+filename}}</p>
+                            <p> 复制到: {{selectedNode}}</p>
+                        </div>
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            关闭
+                        </button>
+                        <button type="button" class="btn btn-primary" ng-click="copyFileHandler(act)" ng-if="act!='catFile'">确定</button>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+        <!-- 复制到motel end -->
+
+
+
+        <!-- Modal -->
+        <!--<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" >-->
+            <!--<div class="modal-dialog" role="document">-->
+                <!--<div class="modal-content">-->
+                    <!--<div class="modal-header">-->
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                        <!--<h4 class="modal-title" >上传文件</h4>-->
+                    <!--</div>-->
+                    <!--<form action="{:U(MODULE_NAME.'/FileManage/uploadFile')}" method="post" enctype="multipart/form-data">-->
+                    <!--<div class="modal-body">-->
+                        <!--<input type="file" class="form-control"  name="myFile">-->
+                        <!--<input type="hidden" ng-value="fileList.path" name="path">-->
+
+                    <!--</div>-->
+                    <!--<div class="modal-footer">-->
+                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                        <!--<button type="submit" class="btn btn-primary" >上传</button>-->
+                    <!--</div>-->
+                    <!--</form>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
+
+
+        <!-- 上传文件motal -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" >上传文件</h4>
+                    </div>
+                        <div class="modal-body">
+                            <input type="file" class="form-control"  name="myFile"   id="uploadfilevalue" >
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" ng-click="uploadFileHandler()">上传</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
         </div>
 
 
+        <!-- 上传文件motal -->
 
 
 
-        <!--footer section start-->
-        <include file="Common/footer_section"/>
-        <!--footer section end-->
+
+
+
+
     </div>
-    <!-- main content end-->
-</section>
-
-<script>
-
-        var m=angular.module('myApps',[]);
-        m.controller('myCtrl',['$scope','$http',function ($scope,$http) {
-            //console.log($scope.role);
-            var url="{:U(MODULE_NAME.'/FileManage/getFileList')}";
-
-            $http.get(url).then(function ($resp) {
-                $scope.fileList=$resp.data;
-            });
-            $scope.createFileModel=function () {
-                $scope.title="新建文件";
-                $scope.act='createfile';
-                $('#myModal').modal('show')
-            }
-
-            $scope.createFolderModel=function () {
-                $scope.title="新建文件夹";
-                $scope.act='createfolder';
-                $('#myModal').modal('show')
-            }
-
-
-            $scope.createFile=function (act) {
-                $createFileUrl="{:U(MODULE_NAME.'/FileManage/createFile')}/act/"+act+'/name/'+$scope.file.name+'/path/'+$scope.fileList.path;
-
-                $http.get($createFileUrl).then(function ($resp) {
-
-                    if($resp.data.status){
-                        $http.get(url).then(function ($resp) {
-                            $scope.fileList=$resp.data;
-                        });
-                        layer.alert($resp.data.msg)
-                        $('#myModal').modal('hide')
-                    }else{
-                        layer.alert($resp.data.msg)
-                    }
-
-                })
-
-//                if(act==1){
-//
-//                    $createFileUrl="{:U(MODULE_NAME.'/FileManage/createFile')}/act/"+act;
-//                    alert('file')
-//
-//                }else{
-//                    alert('folder')
-//
-//                }
-
-
-
-
-
-            }
-
-            $scope.deleteMessage=function () {
-
-                obj=$('#home').find("input:checked");
-                check_val = [];
-                for(k in obj){
-                    if(obj[k].checked)
-                        check_val.push(obj[k].value);
-                }
-                if(check_val.length==0){
-                    layer.alert('您没有选择任何信息!');
-                    return false;
-                }
-                var strify = JSON.stringify(check_val);
-                var deleteMessageUrl="{:U(MODULE_NAME.'/MessageManage/deleteMessage')}";
-                $http({
-                    method:'post',
-                    url:deleteMessageUrl,
-                    data:$.param({data:strify}),
-                    headers:{'Content-type':'application/x-www-form-urlencoded'}
-                }).then(function ($resp) {
-                    if ($resp.data.status){
-                        $http.get(url).then(function ($res) {
-                            $scope.libMessages=$res.data;
-                        })
-                        layer.alert($resp.data.msg);
-                    }else{
-                        layer.alert($resp.data.msg);
-                    }
-
-                })
-            }
-
-        }])
-
-</script>
+</block>
 
 
 
 
 
 
-<include file="Common/jsfooter_section"/>
-<script src="__PUBLIC__/js/multi-select/jquery.multi-select.js"></script>
-<script>
-    $('#my_multi_select3').multiSelect()
-</script>
-</body>
-</html>
+<block name="script">
+    <script>
+        jQuery(document).ready(function() {
+            TreeView.init();
+        });
+
+
+    </script>
+
+
+</block>
+
+
+
+
+
+
+
 

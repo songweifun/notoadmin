@@ -1,33 +1,7 @@
-<include file="Common/meta_section"/>
-<body class="sticky-header">
+<extend name="Common/base" />
+<block name="content">
 
-<section>
-    <!-- left side start-->
-    <include file="Common/left-side"/>
-    <!-- left side end-->
-
-    <!-- main content start-->
-    <div class="main-content" >
-
-        <!-- header section start-->
-        <include file="Common:header_section"/>
-        <!-- header section end-->
-
-
-        <!-- page heading start-->
-        <div class="page-heading">
-
-            <ul class="breadcrumb">
-                <li>
-                    <a href="#">权限管理</a>
-                </li>
-                <li class="active"> 添加角色 </li>
-            </ul>
-
-        </div>
-        <!-- page heading end-->
-
-        <div class="container" ng-app="myApps" ng-controller="myCtrl">
+<div class="container"  ng-controller="rbacManageNodeCtrl">
 
             <div class="row">
                 <div class="table-responsive" class="col-md-8">
@@ -60,6 +34,9 @@
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                 <i class="fa fa-plus"></i> 添加权限
             </button>
+            <div style="float: right;margin-right:50px;">
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
 
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -156,102 +133,8 @@
 
 
         </div>
+</block>
 
 
 
-
-        <!--footer section start-->
-        <include file="Common/footer_section"/>
-        <!--footer section end-->
-    </div>
-    <!-- main content end-->
-</section>
-
-<script>
-    var m=angular.module('myApps',[]);
-    m.controller('myCtrl',['$scope','$http',function ($scope,$http) {
-
-        $scope.leixing=[
-            {value:1,name:'项目'},
-            {value:2,name:'模块'},
-            {value:3,name:'方法'}
-        ]
-        //获取nodelist异步请求
-        $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getNodeList").then(function ($resp) {
-            $scope.nodeList=$resp.data;
-        })
-        //获取父节点异步请求
-        $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getPidNodeList").then(function ($resp) {
-            $scope.nodePidList=$resp.data;
-        })
-
-        $scope.node={};
-        $scope.node.status=1;
-        $scope.node.pid=1;
-        $scope.addNode=function () {
-            //console.log($scope.node);
-            var url="{:U(MODULE_NAME.'/Rbac/manageNode')}/action/addNode"
-
-            //alert(url);
-            $http({
-                method:'post',
-                url:url,
-                data:$.param($scope.node),
-                headers:{'Content-type':'application/x-www-form-urlencoded'}
-            }).then(function ($resp) {
-                if ($resp.data.status){
-                    layer.alert($resp.data.msg);
-                    //获取nodelist异步请求
-                    $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getNodeList").then(function ($resp) {
-                        $scope.nodeList=$resp.data;
-                    })
-                    //获取父节点异步请求
-                    $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getPidNodeList").then(function ($resp) {
-                        $scope.nodePidList=$resp.data;
-                    })
-                    //window.location.href="{:U(MODULE_NAME.'/Rbac/ManageRole')}";
-                    //location.reload();
-                    $('#myModal').modal('hide');
-
-                    $scope.node={};
-                    $scope.node.status=1;
-
-                }else{
-                    layer.msg($resp.data.msg);
-                }
-
-            })
-        }
-
-        $scope.deleteNode=function (id) {
-
-            layer.confirm('确定要删除此用吗?', {icon: 3, title:'提示'}, function(){
-                //do something
-
-                $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/deleteNode/id/"+id).then(function ($resp) {
-                    if ($resp.data.status){
-                        layer.alert($resp.data.msg);
-                        //获取nodelist异步请求
-                        $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getNodeList").then(function ($resp) {
-                            $scope.nodeList=$resp.data;
-                        })
-                        //获取父节点异步请求
-                        $http.get("{:U(MODULE_NAME.'/Rbac/manageNode')}/action/getPidNodeList").then(function ($resp) {
-                            $scope.nodePidList=$resp.data;
-                        })
-
-                    }else{
-                        layer.msg($resp.data.msg);
-                    }
-                })
-
-                //alert(id)
-            });
-        }
-    }])
-
-</script>
-
-
-<include file="Common/jsfooter_section"/>
 

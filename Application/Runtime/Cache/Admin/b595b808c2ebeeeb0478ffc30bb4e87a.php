@@ -293,7 +293,7 @@
             <li>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <img src="/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" alt="" />
-                    范松伟
+                    范老板
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">

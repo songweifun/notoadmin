@@ -76,6 +76,24 @@ function AncestryNoTree($data , $pid=0,$count=1) {
     return $ancestry;
 }
 
+/***
+ * 获得文件的扩展名
+ * @param $filename
+ * @return string
+ */
+function getExt($filename){
+    return strtolower(pathinfo($filename,PATHINFO_EXTENSION));
+}
+
+/**
+ * 获得谓一致用于组装name
+ * @param int $length
+ * @return string
+ */
+function getUniqidName($length=10){
+    return substr(md5(uniqid(microtime(true),true)),0,$length);
+}
+
 function getBookDeatil($book_id){
     //初始化
 //    $ch = curl_init();
