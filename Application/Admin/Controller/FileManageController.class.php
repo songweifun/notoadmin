@@ -204,6 +204,7 @@ class FileManageController extends CommonController
     }
     //文件上传处理
     public function uploadFile(){
+        //print_r($_FILES);die;
         $path=I('post.path');
         $fileInfo=$_FILES['myFile'];
         echo  json_encode(uploadFileHandler($path,$fileInfo));

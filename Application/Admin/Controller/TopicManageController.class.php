@@ -60,4 +60,9 @@ class TopicManageController extends CommonController
         die();
     }
 
+    //上传
+    public function fileUpload(){
+        print_r($_FILES);
+    }
+
 }

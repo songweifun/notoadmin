@@ -2,8 +2,20 @@
  * Created by daivd on 2017/5/27.
  */
 
+/*********************************专题管理控制器*************************************/
+app.controller('topicManageIndexCtrl',['$scope','$http','$timeout','FileUploader',function ($scope,$http,$timeout,FileUploader) {
 
-app.controller('topicManageIndexCtrl',['$scope','$http','$timeout',function ($scope,$http,$timeout) {
+    //angualr-upload-file
+    var uploader = $scope.uploader = new FileUploader({
+        url: apiUrl+'/Admin/TopicManage/fileUpload/uploadType/topicCover'
+    });
+    uploader.filters.push({
+        name: 'imageFilter',
+        fn: function(item /*{File|FileLikeObject}*/, options) {
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+        }
+    });
 
     $scope.paginationConf = {
         currentPage: 1,
@@ -106,13 +118,32 @@ app.controller('topicManageIndexCtrl',['$scope','$http','$timeout',function ($sc
 }]);
 
 //************************************************************文件管理控制器***********************************//
-app.controller('fileManageIndexCtrl',['$scope','$http','$timeout',function ($scope,$http,$timeout) {
+app.controller('fileManageIndexCtrl',['$scope','$http','$timeout','FileUploader',function ($scope,$http,$timeout,FileUploader) {
 
     //文件上传
     var uploadUrl=apiUrl+'Admin/FileManage/uploadFile';
+    //angular-upload-file处理
+    // $scope.uploadStatus = false; //定义两个上传后返回的状态，成功获失败
+    //
     // var uploader = $scope.uploader = new FileUploader({
-    //     url: uploadUrl
+    //     url: uploadUrl,
+    //     queueLimit: 1,     //文件个数
+    //     removeAfterUpload: true   //上传后删除文件
     // });
+    // $scope.clearItems = function(){    //重新选择文件时，清空队列，达到覆盖文件的效果
+    //     uploader.clearQueue();
+    // }
+    //
+    // uploader.onAfterAddingFile = function(fileItem) {
+    //     $scope.fileItem = fileItem._file;    //添加文件之后，把文件信息赋给scope
+    // };
+    //
+    // uploader.onSuccessItem = function(fileItem, response, status, headers) {
+    //     $scope.uploadStatus = true;   //上传成功则把状态改为true
+    // };
+    // $scope.UploadFile = function(){
+    //     uploader.uploadAll();
+    // }
     //var dirpath=$scope.dirpath?$scope.dirpath:0;
     var url="http://localhost/notoadmin/index.php/Admin/FileManage/getFileList"
 
