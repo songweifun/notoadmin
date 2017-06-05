@@ -1,10 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div style="display: inline-block">
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-xs"  ng-click="clickButton()">{{buttonMotalConf.buttonText}}</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal_{{editId}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{buttonMotalConf.motalTitle}}</h4>
+                </div>
+                <div class="modal-body">
+
+                    <!--<form class="form-horizontal" name="myForm">
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">用户名</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control"  placeholder="用户名" ng-model="admin.user_name" required name="user_name" >
+                            </div>
+                            <div class="col-sm-1">
+                                <i class="fa fa-check btn-success" ng-show="myForm.user_name.$dirty && myForm.user_name.$valid"></i>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="!admin.id">
+                            <label  class="col-sm-3 control-label">密码</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control"  placeholder="密码" ng-model="admin.password" name="password" required>
+                            </div>
+                            <div class="col-sm-1">
+                                <i class="fa fa-check btn-success" ng-show="myForm.password.$dirty && myForm.password.$valid"></i>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">所属用户组</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" ng-model="admin.role_id" ng-options="v.id as v.name for v in roleList">
+
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <input type="hidden" ng-model="admin.id">
+
+
+
+
+                    </form>
+                    -->
+                    <!--{{buttonMotalConf}}-->
+
+
+
+
+                    <!--{{returnValue}}-->
+
+                    <form class="form-horizontal" name="myForm" novalidate="novalidate">
+                    <div ng-repeat="(k,v) in buttonMotalConf.motalItems">
+
+                        <div ng-switch="v.widget">
+
+                            <!-- input -->
+                            <div ng-switch-when="input">
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label"><i class="fa fa-asterisk" ng-show="v.required" style="color: red;"></i> {{v.title}}</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control"  placeholder="{{v.title}}" ng-model="$parent.returnValue[v.field]" required name="postdbltag{{v.field}}rtag" ng-pattern="{{v.pattern}}" ng-minlength="v.minlength" ng-maxlength="v.maxlength" ng-required='v.required'>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <i class="fa fa-check btn-success" ng-show="myForm.postdbltag{{v.field}}rtag.$dirty && myForm.postdbltag{{v.field}}rtag.$valid"></i>
+                                        <p  ng-show="myForm.postdbltag{{v.field}}rtag.$invalid && myForm.postdbltag{{v.field}}rtag.$touched" class="">参数不为空</p>
+                                        <p  ng-show="myForm.postdbltag{{v.field}}rtag.$error.pattern && myForm.postdbltag{{v.field}}rtag.$dirty" class="">参数格式不正确</p>
+                                        <p  ng-show="myForm.postdbltag{{v.field}}rtag.$error.minlength && myForm.postdbltag{{v.field}}rtag.$dirty" class="">参数不能少于{{v.minlength}}位</p>
+                                        <p  ng-show="myForm.postdbltag{{v.field}}rtag.$error.maxlength && myForm.postdbltag{{v.field}}rtag.$dirty" class="">参数不能大于{{v.maxlength}}位</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- input end -->
+                            <!-- radio start -->
+                            <div ng-switch-when="radio">
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label"><i class="fa fa-asterisk" ng-show="v.required" style="color: red;"></i> {{v.title}}</label>
+                                    <div class="col-sm-8">
+
+
+                                            <label class="radio-inline" ng-repeat="(kk,vv) in v.zdValue">
+                                                <input type="radio" value="{{vv.id}}"  placeholder="{{v.title}}" ng-model="$parent.returnValue[v.field]"  name="postdbltag{{v.field}}rtag" ng-pattern="{{v.pattern}}" ng-minlength="v.minlength" ng-maxlength="v.maxlength" ng-required='v.required' > {{vv.name}}
+                                            </label>
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <!-- radio end -->
+
+                            <!-- select2 -->
+                            <div ng-switch-when="select2">
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label"><i class="fa fa-asterisk" ng-show="v.required" style="color: red;"></i> {{v.title}}</label>
+                                    <div class="col-sm-8">
+                                        <select id="input4" select2 class="form-control" placeholder="{{v.title}}" ng-model="$parent.returnValue[v.field]" name="postdbltag{{v.field}}rtag" ng-pattern="{{v.pattern}}" ng-minlength="v.minlength" ng-maxlength="v.maxlength" ng-required='v.required'>
+                                            <option value="0">顶级分组</option>
+                                            <option value="{{ vvv.id }}" ng-repeat="(kkk,vvv) in v.zdValue">{{ vvv.name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- select2 end -->
+
+
+
+
+
+                        </div><!-- swiith -->
+
+
+
+
+                    </div><!-- repeat -->
+                    </form>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" ng-click="addItem()" ng-disabled="myForm.$invalid">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal end -->
+
+</div>

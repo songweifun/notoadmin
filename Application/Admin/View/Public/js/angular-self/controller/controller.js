@@ -1346,6 +1346,155 @@ app.controller('rbacManageLibrayCtrl',['$scope','$http','$timeout','FileUploader
 }]);
 
 
+/**************************************************************用户组管理*****************************************/
+
+app.controller('rbacManageGroupCtrl',['$scope','$http','$timeout','FileUploader',function ($scope,$http,$timeout,FileUploader) {
+    $scope.name='fansongwei';
+    var getAllGroupUrl=apiUrl+"Admin/Rbac/manageGroup/action/getGroupListAll"
+    $http.get(getAllGroupUrl).then(function ($resp) {
+
+        $scope.groupList=$resp.data;
+        //alert($scope.groupList[0].name)
+
+
+    });
+    $scope.$watch('groupList',function () {
+
+
+    //配置开始
+    $scope.btnMotalPageConf={
+        //表格配置
+
+
+
+
+
+        tableData:{
+            thead:[//表头
+                {field:"id",name:"编号"},
+                {field:'lname',name:"名称"},
+                {field:'sub_name',name:"所属组"},
+                {field:'status',name:"描述"},
+                {field:'create_time',name:"创建时间"},
+
+            ],
+            tbody:{}, //表数据
+            handle:{//操作url
+                edit:apiUrl+'Admin/Rbac/manageLibrary/action/editLibrary',
+                delete:apiUrl+'Admin/Rbac/manageLibrary/action/deleteLibrary'
+            },
+            editBtnMotelConf: {
+                buttonText: '编辑',//按钮文字
+                motalTitle: '编辑成员馆',//motal 标题
+                motalItems: [//motal中的显示项目
+                    {
+                        field: 'lname',
+                        title: '名称',
+                        widget: 'input',
+                        minlength: 0,
+                        maxlength: 50,
+                        required: true,
+                        pattern: '',
+                        zdValue: ''
+                    },
+                    {
+                        field: 'sub_name',
+                        title: '简称',
+                        widget: 'input',
+                        minlength: 3,
+                        maxlength: 7,
+                        required: true,
+                        pattern: '',
+                        zdValue: ''
+                    },
+                    {
+                        field: 'status',
+                        title: '状态',
+                        widget: 'radio',
+                        minlength: 0,
+                        maxlength: 50,
+                        required: '',
+                        pattern: '',
+                        zdValue: [{text: "开启", value: 1}, {text: '关闭', value: 0}]
+                    },
+                ],
+                handleUrl: apiUrl + 'Admin/Rbac/manageLibrary/action/editLibrary',//保存按钮增加编辑url
+                getOneItemUrl:apiUrl+'Admin/Rbac/manageLibrary/action/getOneItem',//编辑时获得单个item信息的链接
+                onChange: function(){
+                    //回调分页
+                    url=apiUrl+"Admin/Rbac/manageLibrary/action/getLibraryList/page/"+$scope.btnMotalPageConf.paginationConf.currentPage+"/pagesize/"+$scope.btnMotalPageConf.paginationConf.itemsPerPage;
+                    //$scope.backUrl=url;
+                    //alert($scope.backUrl);
+
+
+                    $http.get(url).then(function ($resp) {
+                        $scope.btnMotalPageConf.tableData.tbody=$resp.data.result;//tbody
+                        $scope.btnMotalPageConf.paginationConf.totalItems=$resp.data.totalcount;
+                    });
+                }
+
+            }
+
+
+
+
+        },
+
+
+        //按钮模态框配置
+
+        buttonMotalConf:{
+            buttonText:'添加用户组',//按钮文字
+            motalTitle:'添加用户组',//motal 标题
+            motalItems:[//motal中的显示项目
+                {field:'name',title:'名称',widget: 'input',minlength   :  0,maxlength:50,required:true,pattern:'',zdValue:''},
+                {field:'pid',title:'所属组',widget: 'select2',minlength   :  0,maxlength:50,required:true,pattern:'',zdValue: $scope.groupList},
+                {field:'descr',title:'描述',widget: 'textarea',minlength   :  0,maxlength:50,required:'',pattern:'',zdValue:[{id:"开启",name:1},{id:'关闭',name:0}]},
+            ],
+            handleUrl:apiUrl+'Admin/Rbac/manageGroup/action/addGroup',//保存按钮增加编辑url
+
+            onChange: function(){
+                //回调分页
+                url=apiUrl+"Admin/Rbac/manageGroup/action/getGroupList/page/"+$scope.btnMotalPageConf.paginationConf.currentPage+"/pagesize/"+$scope.btnMotalPageConf.paginationConf.itemsPerPage;
+
+                $http.get(url).then(function ($resp) {
+                    $scope.btnMotalPageConf.tableData.tbody=$resp.data.result;//tbody
+                    $scope.btnMotalPageConf.paginationConf.totalItems=$resp.data.totalcount;
+                });
+            }
+
+
+        },
+        //分页配置
+        paginationConf : {
+            currentPage: 1,
+            totalItems: 8000,
+            itemsPerPage: 15,
+            pagesLength: 10,
+            perPageOptions: [10, 20, 30, 40, 50],
+            onChange: function(){//回调函数
+                url=apiUrl+"Admin/Rbac/manageGroup/action/getGroupList/page/"+$scope.btnMotalPageConf.paginationConf.currentPage+"/pagesize/"+$scope.btnMotalPageConf.paginationConf.itemsPerPage;
+                //$scope.backUrl=url;
+                //alert($scope.backUrl);
+
+
+                $http.get(url).then(function ($resp) {
+                    $scope.btnMotalPageConf.tableData.tbody=$resp.data.result;//tbody
+                    $scope.btnMotalPageConf.paginationConf.totalItems=$resp.data.totalcount;
+                });
+            }
+
+        }
+
+
+
+
+    };
+    //配置结束
+    })
+
+}]);
+
 
 
 

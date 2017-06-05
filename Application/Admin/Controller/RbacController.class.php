@@ -288,7 +288,7 @@ class RbacController extends CommonController
 
     }
 
-    //成员馆管理
+    //成员馆管理 组织
 
     public function manageLibrary(){
         $action=I('get.action')?I('get.action'):I('post.action');
@@ -352,6 +352,22 @@ class RbacController extends CommonController
         $this->display();
 
 
+
+    }
+    //用户组管理
+    public function manageGroup(){
+        $action=I('get.action');
+        if($action=='getGroupListAll'){
+            echo json_encode(M('admin_group')->select());
+            die;
+        }elseif ($action=='getGroupList'){
+            echo json_encode(array('result'=>'','totalcount'=>0));
+            die;
+        }
+
+        $this->menu  =  ACTION_NAME;
+        $this->menuname="用户组管理";
+        $this->display();
 
     }
 
