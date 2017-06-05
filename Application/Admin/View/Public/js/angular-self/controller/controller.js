@@ -36,7 +36,7 @@ app.controller('topicManageIndexCtrl',['$scope','$http','$timeout','FileUploader
 
     $scope.paginationConf.onChange= function(){
         //alert($scope.paginationConf.itemsPerPage)
-        url="http://localhost/notoadmin/index.php/Admin/TopicManage/getTopicList/page/"+$scope.paginationConf.currentPage+"/pagesize/"+$scope.paginationConf.itemsPerPage;
+        url=apiUrl+"Admin/TopicManage/getTopicList/page/"+$scope.paginationConf.currentPage+"/pagesize/"+$scope.paginationConf.itemsPerPage;
 
         $http.get(url).then(function ($resp) {
             $scope.topicList=$resp.data.result;
@@ -1128,6 +1128,223 @@ app.controller('rbacManageAdminCtrl',['$scope','$http','$timeout',function ($sco
     }
 
 }]);
+
+
+
+/****************************************************************成员馆管理控制器************************************/
+app.controller('rbacManageLibrayCtrl',['$scope','$http','$timeout','FileUploader',function ($scope,$http,$timeout,FileUploader) {
+    // $scope.name="fansongwei";
+    // $scope.tableData={};
+
+    // url=apiUrl+'Admin/Rbac/manageLibrary/action/getLibraryList';
+    // $http.get(url).then(function ($resp) {
+    //     $scope.data=$resp.data.result;
+    //
+    // })
+    //分页配置
+    // $scope.paginationConf = {
+    //     currentPage: 1,
+    //     totalItems: 8000,
+    //     itemsPerPage: 15,
+    //     pagesLength: 10,
+    //     perPageOptions: [10, 20, 30, 40, 50]
+    //
+    // };
+
+    //分页回调 tbody
+    // $scope.paginationConf.onChange= function(){
+    //     url=apiUrl+"Admin/Rbac/manageLibrary/action/getLibraryList/page/"+$scope.paginationConf.currentPage+"/pagesize/"+$scope.paginationConf.itemsPerPage;
+    //     $scope.backUrl=url;
+    //     //alert($scope.backUrl);
+    //
+    //
+    //     $http.get(url).then(function ($resp) {
+    //         $scope.tableData.tbody=$resp.data.result;//tbody
+    //         $scope.paginationConf.totalItems=$resp.data.totalcount;
+    //     });
+    // }
+    //thead
+    // $scope.tableData.thead=[
+    //     {field:"id",name:"编号"},
+    //     {field:'lname',name:"名称"},
+    //     {field:'sub_name',name:"简称"},
+    //     {field:'status',name:"状态"},
+    //
+    // ]
+
+    // $scope.buttonMotalData={};
+    // $scope.buttonMotalData.motalItems=[
+    //          {field:'lname',title:'名称',widget: 'input',minlength   :  0,maxlength:50,required:true,pattern:'',zdValue:''},
+    //          {field:'sub_name',title:'简称',widget: 'input',minlength   :  3,maxlength:7,required:true,pattern:'',zdValue:''},
+    //          {field:'status',title:'状态',widget: 'radio',minlength   :  0,maxlength:50,required:'',pattern:'',zdValue:[{text:"开启",value:1},{text:'关闭',value:0}]},
+    // ];
+
+    //按钮弹框配置项
+    // $scope.buttonMotalConf={
+    //     buttonText:'添加成员馆',//按钮文字
+    //     motalTitle:'添加成员馆motal',//motal 标题
+    //     motalItems:[//motal中的显示项目
+    //         {field:'lname',title:'名称',widget: 'input',minlength   :  0,maxlength:50,required:true,pattern:'',zdValue:''},
+    //         {field:'sub_name',title:'简称',widget: 'input',minlength   :  3,maxlength:7,required:true,pattern:'',zdValue:''},
+    //         {field:'status',title:'状态',widget: 'radio',minlength   :  0,maxlength:50,required:'',pattern:'',zdValue:[{text:"开启",value:1},{text:'关闭',value:0}]},
+    //     ],
+    //     handleUrl:apiUrl+'Admin/Rbac/manageLibrary/action/addLibrary',//增加编辑url
+    //     // backUrl:$scope.backUrl,//跟新数据的url
+    //     // refreshData:$scope.tableData.tbody,//列表数据
+    //     // totalItem:$scope.paginationConf.totalItems//条目总数
+    //     onChange:$scope.paginationConf.onChange //回调重刷分页
+    //
+    //
+    // };
+
+//配置开始
+    $scope.btnMotalPageConf={
+        //表格配置
+
+
+
+
+
+        tableData:{
+        thead:[//表头
+                {field:"id",name:"编号"},
+                {field:'lname',name:"名称"},
+                {field:'sub_name',name:"简称"},
+                {field:'status',name:"状态"},
+
+            ],
+        tbody:{}, //表数据
+         handle:{//操作url
+            edit:apiUrl+'Admin/Rbac/manageLibrary/action/editLibrary',
+            delete:apiUrl+'Admin/Rbac/manageLibrary/action/deleteLibrary'
+         },
+            editBtnMotelConf: {
+                buttonText: '编辑',//按钮文字
+                motalTitle: '编辑成员馆',//motal 标题
+                motalItems: [//motal中的显示项目
+                    {
+                        field: 'lname',
+                        title: '名称',
+                        widget: 'input',
+                        minlength: 0,
+                        maxlength: 50,
+                        required: true,
+                        pattern: '',
+                        zdValue: ''
+                    },
+                    {
+                        field: 'sub_name',
+                        title: '简称',
+                        widget: 'input',
+                        minlength: 3,
+                        maxlength: 7,
+                        required: true,
+                        pattern: '',
+                        zdValue: ''
+                    },
+                    {
+                        field: 'status',
+                        title: '状态',
+                        widget: 'radio',
+                        minlength: 0,
+                        maxlength: 50,
+                        required: '',
+                        pattern: '',
+                        zdValue: [{text: "开启", value: 1}, {text: '关闭', value: 0}]
+                    },
+                ],
+                handleUrl: apiUrl + 'Admin/Rbac/manageLibrary/action/editLibrary',//保存按钮增加编辑url
+                getOneItemUrl:apiUrl+'Admin/Rbac/manageLibrary/action/getOneItem',//编辑时获得单个item信息的链接
+                onChange: function(){
+                    //回调分页
+                    url=apiUrl+"Admin/Rbac/manageLibrary/action/getLibraryList/page/"+$scope.btnMotalPageConf.paginationConf.currentPage+"/pagesize/"+$scope.btnMotalPageConf.paginationConf.itemsPerPage;
+                    //$scope.backUrl=url;
+                    //alert($scope.backUrl);
+
+
+                    $http.get(url).then(function ($resp) {
+                        $scope.btnMotalPageConf.tableData.tbody=$resp.data.result;//tbody
+                        $scope.btnMotalPageConf.paginationConf.totalItems=$resp.data.totalcount;
+                    });
+                }
+
+            }
+
+
+
+
+        },
+
+
+        //按钮模态框配置
+
+        buttonMotalConf:{
+            buttonText:'添加成员馆',//按钮文字
+            motalTitle:'添加成员馆motal',//motal 标题
+            motalItems:[//motal中的显示项目
+                {field:'lname',title:'名称',widget: 'input',minlength   :  0,maxlength:50,required:true,pattern:'',zdValue:''},
+                {field:'sub_name',title:'简称',widget: 'input',minlength   :  3,maxlength:7,required:true,pattern:'',zdValue:''},
+                {field:'status',title:'状态',widget: 'radio',minlength   :  0,maxlength:50,required:'',pattern:'',zdValue:[{text:"开启",value:1},{text:'关闭',value:0}]},
+            ],
+            handleUrl:apiUrl+'Admin/Rbac/manageLibrary/action/addLibrary',//保存按钮增加编辑url
+            // backUrl:$scope.backUrl,//跟新数据的url
+            // refreshData:$scope.tableData.tbody,//列表数据
+            // totalItem:$scope.paginationConf.totalItems//条目总数
+            onChange: function(){
+                //回调分页
+                url=apiUrl+"Admin/Rbac/manageLibrary/action/getLibraryList/page/"+$scope.btnMotalPageConf.paginationConf.currentPage+"/pagesize/"+$scope.btnMotalPageConf.paginationConf.itemsPerPage;
+                //$scope.backUrl=url;
+                //alert($scope.backUrl);
+
+
+                $http.get(url).then(function ($resp) {
+                    $scope.btnMotalPageConf.tableData.tbody=$resp.data.result;//tbody
+                    $scope.btnMotalPageConf.paginationConf.totalItems=$resp.data.totalcount;
+                });
+            }
+
+
+        },
+        //分页配置
+        paginationConf : {
+            currentPage: 1,
+            totalItems: 8000,
+            itemsPerPage: 15,
+            pagesLength: 10,
+            perPageOptions: [10, 20, 30, 40, 50],
+            onChange: function(){//回调函数
+                url=apiUrl+"Admin/Rbac/manageLibrary/action/getLibraryList/page/"+$scope.btnMotalPageConf.paginationConf.currentPage+"/pagesize/"+$scope.btnMotalPageConf.paginationConf.itemsPerPage;
+                //$scope.backUrl=url;
+                //alert($scope.backUrl);
+
+
+                $http.get(url).then(function ($resp) {
+                    $scope.btnMotalPageConf.tableData.tbody=$resp.data.result;//tbody
+                    $scope.btnMotalPageConf.paginationConf.totalItems=$resp.data.totalcount;
+                });
+            }
+
+        }
+
+
+
+
+    };
+    //配置结束
+
+
+
+
+
+
+
+
+
+
+
+
+}]);
+
 
 
 

@@ -142,3 +142,106 @@ angular.module('myApps')
             }
         };
     }]);
+
+//表格
+angular.module('myApps')
+    .directive('appBaoheTable',[function () {
+        return {
+            restrict:'E',
+            templateUrl:"/notoadmin/view/template/baoheTable.html",
+            //template:"<h1>good</h1>"
+            scope:{
+                // data:"=data",
+                // buttonMotalData:"=",
+                // backUrl:'=',
+                // totalItem:'=',
+                // buttonMotalConf:'=',
+                // pageConf:'=',
+                btnMotalPageConf:'='
+            },
+            controller:['$scope','$http',function ($scope,$http) {
+                $scope.deleteItem=function ($id) {
+                    //alert($id);
+                    layer.confirm('你确定要删除此文件吗?', {icon: 3, title:'提示'}, function(index){
+                        $http.get($scope.btnMotalPageConf.tableData.handle.delete+'/id/'+$id).then(function ($resp) {
+                            if($resp.data.status){
+                                layer.alert($resp.data.msg)
+                                $scope.btnMotalPageConf.buttonMotalConf.onChange();//回调函数
+                                //$('#myModal').modal('hide')
+                            }else{
+                                layer.alert($resp.data.msg)
+                            }
+
+                        })
+                    })
+                }
+
+
+            }]
+        }
+    }])
+//按钮模态框
+//表格
+angular.module('myApps')
+    .directive('appBaoheButtonMotal',[function () {
+        return {
+            restrict:'E',
+            templateUrl:"/notoadmin/view/template/baoheButtonMotal.html",
+            //template:"<h1>good</h1>"
+            scope:{
+                // buttonText:"@buttonText",
+                // motalTitle:"@",
+                // motalItems:"=",
+                // handleUrl:'@',
+                // backUrl:'=',
+                // refreshData:'=',
+                // totalItem:'=',
+                buttonMotalConf:'=',
+                editId:'='
+            },
+            controller:['$scope','$http',function ($scope,$http) {
+                $scope.returnValue={}
+
+                $scope.clickButton=function () {
+                    var id=$scope.editId?$scope.editId:'';//以便定位不同的Motal
+                    $('#myModal_'+id).modal('show')
+                    //alert($scope.editId)
+                    if(id){
+                        $http.get($scope.buttonMotalConf.getOneItemUrl+'/id/'+$scope.editId).then(function ($resp) {
+                            $scope.returnValue=$resp.data;
+
+                        })
+
+                    }
+
+                }
+
+                $scope.addItem=function () {
+                    //alert($scope.buttonMotalConf.backUrl)
+                    var id=$scope.editId?$scope.editId:'';//以便定位不同的Motal
+
+                    $http({
+                        method:'post',
+                        url:$scope.buttonMotalConf.handleUrl+'/id/'+$scope.editId,
+                        data:$.param($scope.returnValue),
+                        headers:{'Content-type':'application/x-www-form-urlencoded'}
+                    }).then(function ($resp) {
+                        if($resp.data.status){
+                            layer.alert($resp.data.msg)
+                            // $http.get($scope.buttonMotalConf.backUrl).then(function ($resp) {
+                            //     $scope.buttonMotalConf.refreshData=$resp.data.result;
+                            //     $scope.buttonMotalConf.totalItem=$resp.data.totalcount
+                            // });
+                            $scope.buttonMotalConf.onChange();//回调函数
+                            $('#myModal_'+id).modal('hide')
+                        }else{
+                            layer.alert($resp.data.msg)
+                        }
+
+                    })
+                    //alert($scope.handleUrl);
+                }
+
+            }]
+        }
+    }])

@@ -1,0 +1,40 @@
+<div>
+    <table class="table table-hover table-bordered table-condensed table-striped">
+        <thead>
+        <tr class="success">
+            <th ng-repeat="(kk,vv) in btnMotalPageConf.tableData.thead">{{vv.name}}</th>
+            <th>操作</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="(k,v) in btnMotalPageConf.tableData.tbody">
+            <td ng-repeat="(kkk,vvv) in btnMotalPageConf.tableData.thead"  ng-bind="v[vvv.field]"></td>
+            <!--<td ng-bind="v.id"></td>-->
+            <!--<td ng-bind="v.lname"></td>-->
+            <!--<td ng-bind="v.sub_name"></td>-->
+            <!--<td ng-bind="v.status"></td>-->
+            <td>
+                <button class="btn btn-primary btn-xs" ng-click="deleteItem(v.id)">删除</button>
+                <!--<button class="btn btn-primary btn-xs" ng-click="editItem(v.id)">编辑</button>-->
+                <app-baohe-button-motal button-motal-conf="btnMotalPageConf.tableData.editBtnMotelConf" edit-id="v.id"></app-baohe-button-motal>
+
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <!--//按钮模态指令-->
+    <!--<app-baohe-button-motal button-motal-conf="buttonMotalConf" button-text="添加成员馆" motal-title="添加成员馆" motal-items="buttonMotalData.motalItems" handle-url="apiUrl+'Admin/Rbac/manageLibrary/action/addLibrary'" back-url="backUrl" refresh-data="tableData.tbody" total-item="totalItem"></app-baohe-button-motal>-->
+    <app-baohe-button-motal button-motal-conf="btnMotalPageConf.buttonMotalConf" ></app-baohe-button-motal>
+
+    <!-- 分页 -->
+    <tm-pagination conf="btnMotalPageConf.paginationConf"></tm-pagination>
+
+
+
+
+
+</div>

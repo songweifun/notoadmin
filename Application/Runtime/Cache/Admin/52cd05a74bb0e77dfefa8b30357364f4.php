@@ -7,23 +7,19 @@
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="#" type="image/png">
-    <title>用户列表</title>
+    <title><?php echo ($menuname); ?></title>
     <script src="/notoadmin/Application/Admin/View/Public/js/jquery-1.10.2.min.js"></script>
 
     <!-- bootstrap -->
 
     <link href="/notoadmin/Application/Admin/View/Public/css/bootstrap.css" rel="stylesheet">
-    <!--icheck-->
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/square.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/red.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/blue.css" rel="stylesheet">
+    <script src="/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
+
+
 
     <!--dashboard calendar-->
     <link href="/notoadmin/Application/Admin/View/Public/css/clndr.css" rel="stylesheet">
 
-    <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.css">
 
     <!--common-->
     <link href="/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
@@ -39,6 +35,28 @@
     <![endif]-->
     <script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/layer/layer.js"></script>
     <script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/angular.min.js"></script>
+    <!-- cikonss -->
+    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/css/cikonss/cikonss.css">
+    <!-- select2 -->
+    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/angularjs-select2/common/common.css">
+    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/angularjs-select2/common/plugins/select2/select2.css" />
+    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/angularjs-select2/common/plugins/select2/select2-bootstrap.css" />
+    <script src="/notoadmin/Application/Admin/View/Public/js/angularjs-select2/common/plugins/select2/select2.min.js" type="text/javascript"></script>
+
+    <!-- commonjs -->
+
+    <!-- commoncss -->
+    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/css/common.css">
+
+    <!-- tree view -->
+    <!--external css-->
+    <link rel="stylesheet" type="text/css" href="/notoadmin/Application/Admin/View/Public/js/fuelux/css/tree-style.css" />
+    <link href="/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
+    <link href="/notoadmin/Application/Admin/View/Public/css/style-responsive.css" rel="stylesheet">
+
+
+
+
 
 
 
@@ -302,7 +320,7 @@
             <li>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <img src="/notoadmin/Application/Admin/View/Public/images/photos/user-avatar.png" alt="" />
-                    范松伟
+                    范老板
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
@@ -337,10 +355,10 @@
 <div class="container" ng-app="myApps" ng-controller="myCtrl">
     <div class="row">
         <div class="table-responsive" class="col-md-8">
-        <div class="totol " style=" width: 100%;">
-            <form action="<?php echo U('UserManage/index');?>" method="post" style="float:left;padding-left:80%;">
+        <div class="totol " style=" float:right;">
+            <form action="<?php echo U('UserManage/index');?>" method="post">
                 <input type="text" class="search-input" name="searchValue"  required placeholder="订单号/一卡通号/姓名" value=""/>
-                <input type="submit" value="检索" class="btn btn-primary btn-sm" style="margin-left:10px;width:60px;float:right;"  />
+                <input type="submit" value="检索" class="btn btn-primary btn-sm"  />
             </form>
         </div>
             <table class="table table-hover table-bordered table-striped table-condensed" >
@@ -417,12 +435,12 @@
             <!--分页-->
             <?php if($page_count > 1): ?><div class="page">
                     <a href="javascript:void(0);" class="jump">跳转</a>
-                    <input type="text" class="rt number">
+                    <input type="text" class="rt number" style="width:80px;">
                     <?php if($_GET['page'] < page_count): ?><a href="javascript:void(0);" class="rt next">&nbsp;Next</a><?php endif; ?>
                     <span class="rt">
                         <span class="current"><?php echo ($page); ?></span>/<span class="all"><?php echo ($page_count); ?></span>
                     </span>
-                    <?php if($_GET['page'] > 1): ?><a class="rt prev">Previous&nbsp;</a><?php endif; ?>
+                    <?php if($_GET['page'] > 1): ?><a href="javascript:void(0);" class="rt prev">Previous&nbsp;</a><?php endif; ?>
                 </div><?php endif; ?>
             </div>
         </div>
@@ -467,18 +485,19 @@
 
     $(".operation").click(function(){
         var id      =   $(this).attr("data-id");
-        var status   =   $(this).attr("data-state");
+        var status  =   $(this).attr("data-state");
         $.ajax ({
             'url': '<?php echo U("BrowBooksManage/operation");?>',
             'type':'post',
             'data':{'id':id, 'status':status},
             'dataType':'json',
+
             'success':function (data) {
                 if (data.code == 200) {
-                    alert(data.msg);
+                    layer.alert(data.msg);
                     location.reload();//刷新当前页面.
                 }else{
-                    alert(data.msg);
+                    layer.alert(data.msg);
                 }
             }
         });
@@ -495,6 +514,7 @@
         $(".result_list input[type='checkbox']:checked").each(function(i){
             valArr[i] = $(this).val();
         });
+
         var vals = valArr.join(',');
         $.ajax({
             'url' :'<?php echo U("BrowBooksManage/pass");?>',
@@ -504,10 +524,10 @@
             'success':function(data){
 //                alert(data);
                 if (data.code == 200) {
-                    alert(data.msg);
+                    layer.alert(data.msg);
                     location.reload();//刷新当前页面.
                 }else{
-                    alert(data.msg);
+                    layer.alert(data.msg);
                 }
             }
         });
@@ -517,40 +537,41 @@
 <!-- Placed js at the end of the document so the pages load faster -->
 <script src="/notoadmin/Application/Admin/View/Public/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="/notoadmin/Application/Admin/View/Public/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
 <script src="/notoadmin/Application/Admin/View/Public/js/modernizr.min.js"></script>
 <script src="/notoadmin/Application/Admin/View/Public/js/jquery.nicescroll.js"></script>
 
-<!--easy pie chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/easypiechart/jquery.easypiechart.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/easypiechart/easypiechart-init.js"></script>
 
-<!--Sparkline Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/sparkline/jquery.sparkline.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/sparkline/sparkline-init.js"></script>
-
-<!--icheck -->
-<script src="/notoadmin/Application/Admin/View/Public/js/iCheck/jquery.icheck.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/icheck-init.js"></script>
-
-<!-- jQuery Flot Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.tooltip.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.resize.js"></script>
-
-
-<!--Morris Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/morris-chart/raphael-min.js"></script>
-
-<!--Calendar-->
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/clndr.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/evnt.calendar.init.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/moment-2.2.1.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 
 <!--common scripts for all pages-->
 <script src="/notoadmin/Application/Admin/View/Public/js/scripts.js"></script>
 
-<!--Dashboard Charts-->
-<script src="/notoadmin/Application/Admin/View/Public/js/dashboard-chart-init.js"></script>
+<!-- 代码高亮 -->
+
+<link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/google-code-prettify/prettify.css">
+<script src="/notoadmin/Application/Admin/View/Public/js/google-code-prettify/prettify.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/google-code-prettify/run_prettify.js"></script>
+
+
+<!-- angular-tree-control -->
+
+<script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/angular-self/module/angular-tree-control/angular-tree-control.js"></script>
+<link rel="stylesheet" type="text/css" href="/notoadmin/Application/Admin/View/Public/js/angular-self/module/angular-tree-control/css/tree-control.css">
+<link rel="stylesheet" type="text/css" href="/notoadmin/Application/Admin/View/Public/js/angular-self/module/angular-tree-control/css/tree-control-attribute.css">
+
+
+<!-- page分页 -->
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/module/pagination/tm.pagination.js"></script>
+
+<!-- angular-file-upload -->
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/module/angular-file-upload/dist/angular-file-upload.js"></script>
+
+
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/app.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/service/service.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/directive/directive.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/controller/controller.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/filter/filter.js"></script>
+
+<!--tree-->
+<script src="/notoadmin/Application/Admin/View/Public/js/fuelux/js/tree.min.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/tree-init.js"></script>

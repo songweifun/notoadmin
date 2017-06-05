@@ -5,11 +5,11 @@
 
 
         <div>
-                <a type="button" class="btn btn-default " ng-click="catePreFolder()" title="主目录"><i class="fa fa-home"></i></a>
-                <a type="button" class="btn btn-default" ng-click="createFileModel()" title="新建文件"><i class="fa fa-file"></i></a>
-                <a type="button" class="btn btn-default" ng-click="createFolderModel()" title="新建文件夹"><i class="fa fa-folder"></i></a>
-                <a type="button" class="btn btn-default" ng-click="uploadFileMotal()" title="上传文件"><i class="fa fa-upload"></i></a>
-                <a type="button" class="btn btn-default " ng-click="catePreFolder(oldDirPath)" title="返回上一层"><i class="fa fa-backward"  ></i></a>
+                <button type="button" class="btn btn-default " ng-click="catePreFolder()" title="主目录" data-toggle="tooltip" data-placement="top"><i class="fa fa-home"></i></button>
+                <button type="button" class="btn btn-default" ng-click="createFileModel()" title="新建文件" data-toggle="tooltip" data-placement="top"><i class="fa fa-file"></i></button>
+                <button type="button" class="btn btn-default" ng-click="createFolderModel()" title="新建文件夹" data-toggle="tooltip" data-placement="top"><i class="fa fa-folder"></i></button>
+                <a type="button" class="btn btn-default" ng-click="uploadFileMotal()" title="上传文件" data-toggle="tooltip" data-placement="top"><i class="fa fa-upload"></i></a>
+                <a type="button" class="btn btn-default " ng-click="catePreFolder(oldDirPath)" title="返回上一层" data-toggle="tooltip" data-placement="top"><i class="fa fa-backward"  ></i></a>
 
 
                 <!-- Modal -->
@@ -359,7 +359,9 @@
     <script>
         jQuery(document).ready(function() {
             TreeView.init();
+            $('[data-toggle="tooltip"]').tooltip()
         });
+
 
 
     </script>

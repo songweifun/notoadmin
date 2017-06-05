@@ -13,17 +13,13 @@
     <!-- bootstrap -->
 
     <link href="/notoadmin/Application/Admin/View/Public/css/bootstrap.css" rel="stylesheet">
-    <!--icheck-->
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/square.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/red.css" rel="stylesheet">
-    <link href="/notoadmin/Application/Admin/View/Public/js/iCheck/skins/square/blue.css" rel="stylesheet">
+    <script src="/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
+
+
 
     <!--dashboard calendar-->
     <link href="/notoadmin/Application/Admin/View/Public/css/clndr.css" rel="stylesheet">
 
-    <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.css">
 
     <!--common-->
     <link href="/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
@@ -51,6 +47,14 @@
 
     <!-- commoncss -->
     <link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/css/common.css">
+
+    <!-- tree view -->
+    <!--external css-->
+    <link rel="stylesheet" type="text/css" href="/notoadmin/Application/Admin/View/Public/js/fuelux/css/tree-style.css" />
+    <link href="/notoadmin/Application/Admin/View/Public/css/style.css" rel="stylesheet">
+    <link href="/notoadmin/Application/Admin/View/Public/css/style-responsive.css" rel="stylesheet">
+
+
 
 
 
@@ -530,48 +534,43 @@
 <!-- Placed js at the end of the document so the pages load faster -->
 <script src="/notoadmin/Application/Admin/View/Public/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="/notoadmin/Application/Admin/View/Public/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/bootstrap.min.js"></script>
 <script src="/notoadmin/Application/Admin/View/Public/js/modernizr.min.js"></script>
 <script src="/notoadmin/Application/Admin/View/Public/js/jquery.nicescroll.js"></script>
 
-<!--easy pie chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/easypiechart/jquery.easypiechart.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/easypiechart/easypiechart-init.js"></script>
 
-<!--Sparkline Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/sparkline/jquery.sparkline.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/sparkline/sparkline-init.js"></script>
-
-<!--icheck -->
-<script src="/notoadmin/Application/Admin/View/Public/js/iCheck/jquery.icheck.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/icheck-init.js"></script>
-
-<!-- jQuery Flot Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.tooltip.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/flot-chart/jquery.flot.resize.js"></script>
-
-
-<!--Morris Chart-->
-<script src="/notoadmin/Application/Admin/View/Public/js/morris-chart/morris.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/morris-chart/raphael-min.js"></script>
-
-<!--Calendar-->
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/clndr.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/evnt.calendar.init.js"></script>
-<script src="/notoadmin/Application/Admin/View/Public/js/calendar/moment-2.2.1.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 
 <!--common scripts for all pages-->
 <script src="/notoadmin/Application/Admin/View/Public/js/scripts.js"></script>
 
-<!--Dashboard Charts-->
-<script src="/notoadmin/Application/Admin/View/Public/js/dashboard-chart-init.js"></script>
+<!-- 代码高亮 -->
+
+<link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/js/google-code-prettify/prettify.css">
+<script src="/notoadmin/Application/Admin/View/Public/js/google-code-prettify/prettify.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/google-code-prettify/run_prettify.js"></script>
+
+
+<!-- angular-tree-control -->
+
+<script type="text/javascript" src="/notoadmin/Application/Admin/View/Public/js/angular-self/module/angular-tree-control/angular-tree-control.js"></script>
+<link rel="stylesheet" type="text/css" href="/notoadmin/Application/Admin/View/Public/js/angular-self/module/angular-tree-control/css/tree-control.css">
+<link rel="stylesheet" type="text/css" href="/notoadmin/Application/Admin/View/Public/js/angular-self/module/angular-tree-control/css/tree-control-attribute.css">
 
 
 <!-- page分页 -->
 <script src="/notoadmin/Application/Admin/View/Public/js/angular-self/module/pagination/tm.pagination.js"></script>
+
+<!-- angular-file-upload -->
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/module/angular-file-upload/dist/angular-file-upload.js"></script>
+
+
 <script src="/notoadmin/Application/Admin/View/Public/js/angular-self/app.js"></script>
 <script src="/notoadmin/Application/Admin/View/Public/js/angular-self/service/service.js"></script>
 <script src="/notoadmin/Application/Admin/View/Public/js/angular-self/directive/directive.js"></script>
 <script src="/notoadmin/Application/Admin/View/Public/js/angular-self/controller/controller.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/angular-self/filter/filter.js"></script>
+
+<!--tree-->
+<script src="/notoadmin/Application/Admin/View/Public/js/fuelux/js/tree.min.js"></script>
+<script src="/notoadmin/Application/Admin/View/Public/js/tree-init.js"></script>
+<!-- font-awesome -->
+<link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/fonts/css/font-awesome.min.css">
