@@ -2,22 +2,23 @@
     <table class="table table-hover table-bordered table-condensed table-striped">
         <thead>
         <tr class="success">
-            <th ng-repeat="(kk,vv) in btnMotalPageConf.tableData.thead">{{vv.name}}</th>
+            <th ng-repeat="(k,v) in btnMotalPageConf.tableData.thead">{{v.title}}</th>
             <th>操作</th>
 
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="(k,v) in btnMotalPageConf.tableData.tbody">
-            <td ng-repeat="(kkk,vvv) in btnMotalPageConf.tableData.thead"  ng-bind="v[vvv.field]"></td>
-            <!--<td ng-bind="v.id"></td>-->
+        <tr ng-repeat="(kk,vv) in btnMotalPageConf.tableData.tbody">
+            <!--<td ng-repeat="(kkk,vvv) in btnMotalPageConf.tableData.thead"  ng-bind="v[vvv.field]"></td>-->
+            <td ng-repeat="(kkk,vvv) in btnMotalPageConf.tableData.thead"  ng-bind="vvv.zdMessage?vvv.zdMessage[vv[vvv.field]]:vv[vvv.field]"></td>
+            <!--<td ng-repeat="(kkk,vvv) in btnMotalPageConf.tableData.thead"  ng-bind="vv[vvv.field]" ng-if="!vvv.zdMessage"></td>-->
             <!--<td ng-bind="v.lname"></td>-->
             <!--<td ng-bind="v.sub_name"></td>-->
             <!--<td ng-bind="v.status"></td>-->
             <td>
-                <button class="btn btn-primary btn-xs" ng-click="deleteItem(v.id)">删除</button>
+                <button class="btn btn-primary btn-xs" ng-click="deleteItem(vv.id)">删除</button>
                 <!--<button class="btn btn-primary btn-xs" ng-click="editItem(v.id)">编辑</button>-->
-                <app-baohe-button-motal button-motal-conf="btnMotalPageConf.tableData.editBtnMotelConf" edit-id="v.id"></app-baohe-button-motal>
+                <app-baohe-button-motal button-motal-conf="btnMotalPageConf.tableData.editBtnMotelConf" edit-id="vv.id"></app-baohe-button-motal>
 
 
             </td>

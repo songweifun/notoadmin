@@ -358,10 +358,128 @@ class RbacController extends CommonController
     public function manageGroup(){
         $action=I('get.action');
         if($action=='getGroupListAll'){
-            echo json_encode(M('admin_group')->select());
+            //获得所有的分组信息用于下拉菜单
+            $arr=M('admin_group')->select();
+            foreach ($arr as $item) {
+                $result[$item['id']]=$item['name'];
+            }
+            $result[0]="顶级组";
+            //echo "<pre>";
+            //print_r($result);die;
+            echo json_encode(array('zdValue'=>$arr,'zdMessage'=>$result));
             die;
+        }elseif ($action=='getRoleListAll'){
+            //获得所有的角色信息用于下拉菜单
+            $arr=M('admin_role')->select();
+            foreach ($arr as $item) {
+                $result[$item['id']]=$item['name'];
+            }
+            $result[0]="顶级组";
+            //echo "<pre>";
+            //print_r($result);die;
+            echo json_encode(array('zdValue'=>$arr,'zdMessage'=>$result));
+            die;
+
         }elseif ($action=='getGroupList'){
-            echo json_encode(array('result'=>'','totalcount'=>0));
+            //获得所有的分组信息分页使用
+
+
+
+            $page=I('get.page');
+            $pagesize=I('get.pagesize');
+            $start=($page-1)*$pagesize;
+            //echo $start;die;
+            //$end=$page*$pagesize;
+            $totalcount=count(M('admin_group')->select());
+
+            $result=M('admin_group')->limit($start,$pagesize)->select();
+            foreach ($result as $k=>$v){
+                $result[$k]['role_id']=M('admin_group_role')->where(array('group_id'=>$v['id']))->getField('role_id');
+            }
+            echo json_encode(array('result'=>$result,'totalcount'=>$totalcount));
+            die;
+        }elseif ($action=='addGroup'){
+//            echo "<pre>";
+//            print_r($_POST);die;
+            //添加分组
+            $_POST['returnValue']['create_time']=time();
+            if($id=M('admin_group')->add($_POST['returnValue'])){
+                foreach ($_POST['relationValue'] as $k=>$v){
+                    $table=$k;
+                    foreach ($v as $kk=>$vv){
+                        $primarykey=$kk;
+                        $forevalue=M('admin_group')->find($id)[$primarykey];
+                        foreach ($vv as $kkk=>$vvv){
+                            $foreigekey=$kkk;
+                            foreach ($vvv as $kkkk=>$vvvv){
+                                $relationData[$kkkk]=$vvvv;
+                                $relationData[$foreigekey]=$forevalue;
+                            }
+                        }
+                    }
+                }
+                //M($table)->where(array($foreigekey=>$id))->delete();
+                M($table)->add($relationData);
+                echo json_encode(array('status'=>true,'msg'=>'添加成功'));
+            }else{
+                echo json_encode(array('status'=>false,'msg'=>'添加失败'));
+            }
+
+            die;
+        }elseif ($action=='editGroup'){
+            //编辑分组
+            $id=I('get.id');
+            if($id){
+                    M('admin_group')->where(array('id'=>$id))->save($_POST['returnValue']);
+                    foreach ($_POST['relationValue'] as $k=>$v){
+                        $table=$k;
+                        foreach ($v as $kk=>$vv){
+                            $primarykey=$kk;
+                            $forevalue=M('admin_group')->find($id)[$primarykey];
+                            foreach ($vv as $kkk=>$vvv){
+                                $foreigekey=$kkk;
+                                foreach ($vvv as $kkkk=>$vvvv){
+                                    $relationData[$kkkk]=$vvvv;
+                                    $relationData[$foreigekey]=$forevalue;
+                                }
+                            }
+                        }
+                    }
+
+                    //echo $table;die;
+                    if(M($table)->where(array($foreigekey=>$id))->count()<=0){
+                        M($table)->add($relationData);
+                    }else{
+                        M($table)->where(array($foreigekey=>$id))->setField($kkkk,$vvvv);
+                    }
+
+
+                    //die;
+
+
+                    echo json_encode(array('status'=>true,'msg'=>'更新成功'));
+
+
+                    //echo json_encode(array('status'=>false,'msg'=>'更新失败'));
+
+            }
+            die;
+        }elseif ($action=='getOneItem'){
+            //获得单个item信息
+            $id=I('get.id');
+            $relationValue['admin_group_role']['id']['group_id']['role_id']=M('admin_group_role')->where(array('group_id'=>$id))->getField('role_id');
+            //echo "<pre>";
+            //print_r($relationValue);die;
+            echo json_encode(array('returnValue'=>M('admin_group')->find($id),'relationValue'=>$relationValue));
+            die;
+        }elseif ($action=='deleteGroup'){//删除
+            //echo $_GET['id'];
+            $id=I('get.id');
+            if(M('admin_group')->delete($id)){
+                echo json_encode(array('status'=>true,'msg'=>'删除成功'));
+            }else{
+                echo json_encode(array('status'=>false,'msg'=>'删除失败'));
+            }
             die;
         }
 

@@ -200,7 +200,8 @@ angular.module('myApps')
                 editId:'='
             },
             controller:['$scope','$http',function ($scope,$http) {
-                $scope.returnValue={}
+                $scope.returnValue={};
+                $scope.relationValue={};
 
                 $scope.clickButton=function () {
                     var id=$scope.editId?$scope.editId:'';//以便定位不同的Motal
@@ -208,7 +209,8 @@ angular.module('myApps')
                     //alert($scope.editId)
                     if(id){
                         $http.get($scope.buttonMotalConf.getOneItemUrl+'/id/'+$scope.editId).then(function ($resp) {
-                            $scope.returnValue=$resp.data;
+                            $scope.returnValue=$resp.data.returnValue;
+                            $scope.relationValue=$resp.data.relationValue;
 
                         })
 
@@ -223,7 +225,7 @@ angular.module('myApps')
                     $http({
                         method:'post',
                         url:$scope.buttonMotalConf.handleUrl+'/id/'+$scope.editId,
-                        data:$.param($scope.returnValue),
+                        data:$.param({returnValue:$scope.returnValue,relationValue:$scope.relationValue}),
                         headers:{'Content-type':'application/x-www-form-urlencoded'}
                     }).then(function ($resp) {
                         if($resp.data.status){
@@ -232,8 +234,11 @@ angular.module('myApps')
                             //     $scope.buttonMotalConf.refreshData=$resp.data.result;
                             //     $scope.buttonMotalConf.totalItem=$resp.data.totalcount
                             // });
-                            $scope.buttonMotalConf.onChange();//回调函数
+
                             $('#myModal_'+id).modal('hide')
+                            $('#myModal_'+id).on('hidden.bs.modal', function (e) {
+                                $scope.buttonMotalConf.onChange();//回调函数
+                            })
                         }else{
                             layer.alert($resp.data.msg)
                         }

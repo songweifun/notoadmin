@@ -575,3 +575,5 @@
 <!--tree-->
 <script src="/notoadmin/Application/Admin/View/Public/js/fuelux/js/tree.min.js"></script>
 <script src="/notoadmin/Application/Admin/View/Public/js/tree-init.js"></script>
+<!-- font-awesome -->
+<link rel="stylesheet" href="/notoadmin/Application/Admin/View/Public/fonts/css/font-awesome.min.css">

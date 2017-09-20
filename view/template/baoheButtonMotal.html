@@ -57,7 +57,9 @@
 
 
 
-                    <!--{{returnValue}}-->
+                    {{returnValue}}
+                    <br>
+                    {{relationValue}}
 
                     <form class="form-horizontal" name="myForm" novalidate="novalidate">
                     <div ng-repeat="(k,v) in buttonMotalConf.motalItems">
@@ -89,7 +91,7 @@
 
 
                                             <label class="radio-inline" ng-repeat="(kk,vv) in v.zdValue">
-                                                <input type="radio" value="{{vv.id}}"  placeholder="{{v.title}}" ng-model="$parent.returnValue[v.field]"  name="postdbltag{{v.field}}rtag" ng-pattern="{{v.pattern}}" ng-minlength="v.minlength" ng-maxlength="v.maxlength" ng-required='v.required' > {{vv.name}}
+                                                <input type="radio" value="{{vv.value}}"  placeholder="{{v.title}}" ng-model="$parent.returnValue[v.field]"  name="postdbltag{{v.field}}rtag" ng-pattern="{{v.pattern}}" ng-minlength="v.minlength" ng-maxlength="v.maxlength" ng-required='v.required' > {{vv.text}}
                                             </label>
 
 
@@ -106,14 +108,31 @@
                                 <div class="form-group">
                                     <label  class="col-sm-3 control-label"><i class="fa fa-asterisk" ng-show="v.required" style="color: red;"></i> {{v.title}}</label>
                                     <div class="col-sm-8">
-                                        <select id="input4" select2 class="form-control" placeholder="{{v.title}}" ng-model="$parent.returnValue[v.field]" name="postdbltag{{v.field}}rtag" ng-pattern="{{v.pattern}}" ng-minlength="v.minlength" ng-maxlength="v.maxlength" ng-required='v.required'>
-                                            <option value="0">顶级分组</option>
+                                        <select id="input4" select2 class="form-control" placeholder="{{v.title}}" ng-model="$parent.returnValue[v.field]" ng-if="!v.relation" name="postdbltag{{v.field}}rtag" ng-pattern="{{v.pattern}}" ng-minlength="v.minlength" ng-maxlength="v.maxlength" ng-required='v.required'>
+                                            <option value="0">---请选择---</option>
+                                            <option value="{{ vvv.id }}" ng-repeat="(kkk,vvv) in v.zdValue">{{ vvv.name }}</option>
+                                        </select>
+
+                                        <select id="input4" select2 class="form-control" placeholder="{{v.title}}" ng-model="$parent.relationValue[v.relation.table][v.relation.primarykey][v.relation.foreigekey][v.field]" ng-if="v.relation" name="postdbltag{{v.field}}rtag" ng-pattern="{{v.pattern}}" ng-minlength="v.minlength" ng-maxlength="v.maxlength" ng-required='v.required'>
+                                            <option value="0">---请选择---</option>
                                             <option value="{{ vvv.id }}" ng-repeat="(kkk,vvv) in v.zdValue">{{ vvv.name }}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <!-- select2 end -->
+
+
+                            <!-- textarea -->
+                            <div ng-switch-when="textarea">
+                                <div class="form-group">
+                                    <label  class="col-sm-3 control-label"><i class="fa fa-asterisk" ng-show="v.required" style="color: red;"></i> {{v.title}}</label>
+                                    <div class="col-sm-8">
+                                        <textarea name="" id="" cols="30" rows="10" class="form-control"  placeholder="{{v.title}}" ng-model="$parent.returnValue[v.field]" name="postdbltag{{v.field}}rtag" ng-pattern="{{v.pattern}}" ng-minlength="v.minlength" ng-maxlength="v.maxlength" ng-required='v.required'></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- textarea end -->
 
 
 

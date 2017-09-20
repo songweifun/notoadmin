@@ -1,0 +1,10 @@
+[ 2017-05-29T18:46:54+08:00 ] ::1 /notoadmin/index.php/Admin/FileManage/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000245s ]
+
+[ 2017-05-29T21:18:33+08:00 ] ::1 /notoadmin/index.php/Admin/FileManage/getFileList
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000983s ]
+
